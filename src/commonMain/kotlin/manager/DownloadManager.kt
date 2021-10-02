@@ -47,6 +47,7 @@ class DownloadManager(private val scene: Level) {
                 minDistance = distance
             }
         }
+//        println("${downloaded.roundToInt()} percent downloaded")
         return nearestRouter;
     }
 

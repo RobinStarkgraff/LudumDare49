@@ -1,4 +1,4 @@
-package classes
+package objects
 
 import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.SolidRect

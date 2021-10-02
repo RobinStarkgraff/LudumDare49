@@ -1,14 +1,19 @@
-import scene.Level
+package objects
+
 import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import scene.Level
 
 class Player(private val scene: Level) {
     companion object {
         const val SPEED = 3
         const val SIZE = 50
+
+        var inventoryObject: PickupItem? = null
     }
 
     private var playerImage: SolidRect =
@@ -17,6 +22,7 @@ class Player(private val scene: Level) {
     init {
         movement()
         deathZoneCallback()
+        inventoryItemCallbacks()
         download()
     }
 
@@ -24,6 +30,33 @@ class Player(private val scene: Level) {
         playerImage.onCollision({ scene.deathZoneList.contains(it) }) {
             die()
         }
+    }
+
+    private fun inventoryItemCallbacks() {
+        if (inventoryObject != null) {
+            return
+        }
+
+        playerImage.addUpdater {
+            for (pickUpItem in scene.pickupItemList) {
+                val distanceToObject = Vector2D.distance(pickUpItem.image.globalXY(), playerImage.globalXY())
+                if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
+                    continue
+                }
+
+                //TODO: Give Pickup speechbubble
+
+                if (scene.views.keys.pressing(Key.E)) {
+                    inventoryObject = pickUpItem
+                    inventoryObject?.putIntoInventory()
+                }
+            }
+        }
+    }
+
+    private fun removeInventoryItem() {
+        inventoryObject?.image?.removeFromParent()
+        inventoryObject = null
     }
 
     private fun download() {
