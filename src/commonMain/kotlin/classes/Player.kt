@@ -1,3 +1,5 @@
+package classes
+
 import Scenes.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
@@ -46,7 +48,6 @@ class Player(private val scene: Level) {
                 xy(x + movement.x, y + movement.y)
             }
         }
-
         playerImage.onCollision({scene.collisionList.contains(it)}) {
             if (movement.x != 0.0) {
                 playerImage.x -= movement.x
