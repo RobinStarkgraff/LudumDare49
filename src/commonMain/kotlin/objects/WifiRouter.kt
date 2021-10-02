@@ -4,8 +4,6 @@ import com.soywiz.korge.view.Circle
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.xy
 import com.soywiz.korim.color.RGBA
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 import kotlin.math.sqrt
 
 class WifiRouter(private val x: Double, private val y: Double, radius: Double, private val wifiRouterImg: Image) {
@@ -25,10 +23,10 @@ class WifiRouter(private val x: Double, private val y: Double, radius: Double, p
 
         val section: Double = circle.radius / 4
 
-        val xDifference: Double = circle.x.absoluteValue - playerX.absoluteValue
-        val yDifference: Double = circle.y.absoluteValue - playerY.absoluteValue
+        val xDifference: Double = circle.x - playerX
+        val yDifference: Double = circle.y - playerY
 
-        var hypotenuse = xDifference.pow(2) + yDifference.pow(2)
+        var hypotenuse = xDifference * xDifference + yDifference * yDifference
         hypotenuse = sqrt(hypotenuse)
 
         return if (hypotenuse >= circle.radius) 0   // outside the wifi signal
