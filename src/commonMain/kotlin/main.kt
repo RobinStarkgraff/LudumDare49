@@ -15,3 +15,4 @@ object ConfigModule : Module() {
 		mapPrototype { MenuScene() }
 	}
 }
+
