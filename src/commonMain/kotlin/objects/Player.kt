@@ -1,4 +1,6 @@
-import Scenes.Level
+package objects
+
+import scene.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
@@ -20,6 +22,7 @@ class Player(private val scene: Level) {
         playerImage.onCollision({scene.deathZoneList.contains(it)}) {
             die()
         }
+
     }
 
     private fun die() {
