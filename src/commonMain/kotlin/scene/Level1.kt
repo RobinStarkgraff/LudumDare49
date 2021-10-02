@@ -5,6 +5,7 @@ import classes.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
+import kotlin.reflect.typeOf
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
@@ -21,8 +22,13 @@ class Level1 : Level() {
         deathZoneList.add(movingObject.image)
     }
 
+    override suspend fun sceneDestroy() {
+
+    }
+
     override suspend fun nextScene() {
         println("Level2")
         sceneContainer.changeTo<Level2>()
+        sceneDestroy()
     }
 }

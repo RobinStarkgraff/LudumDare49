@@ -3,6 +3,7 @@ package scene
 import Player
 import classes.MovingObject
 import com.soywiz.korge.view.Container
+import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
 
@@ -14,10 +15,11 @@ class Level2 : Level() {
             50.0,
             25.0,
             5.0,
-            listOf(Vector2D(0, 0), Vector2D(300, 0), Vector2D(300, 300), Vector2D(0, 300)),
+            listOf(Vector2D(100, 100), Vector2D(400, 100), Vector2D(300, 300), Vector2D(100, 300)),
             true,
             this@Level2
         )
+        movingObject.image.xy(100, 100)
         deathZoneList.add(movingObject.image)
     }
 

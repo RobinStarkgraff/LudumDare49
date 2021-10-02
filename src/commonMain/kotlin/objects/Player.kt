@@ -18,9 +18,11 @@ class Player(var scene: Level) {
     private lateinit var playerImage: Sprite
 
     init {
+        play()
         movement()
         deathZoneCallback()
         download()
+
     }
 
     fun play(){

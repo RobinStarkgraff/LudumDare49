@@ -11,12 +11,13 @@ class DownloadManager(private val scene: Level) {
     }
 
     private var downloaded: Double = 0.0
+    private var downloadComplete = false
 
-    suspend fun download(connectionBars: Int) {
+     fun download(connectionBars: Int) {
 
-        if (downloaded >= MAX_DOWNLOAD) {
-            scene.player?.die()
-            scene.nextScene()
+        if (downloaded >= MAX_DOWNLOAD && !downloadComplete) {
+            downloadComplete = true
+            GlobalScope.launch {scene.nextScene() }
             return
         }
 
