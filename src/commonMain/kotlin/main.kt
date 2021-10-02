@@ -1,18 +1,20 @@
-import scenes.MenuScene
+import scene.MenuScene
 import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korinject.AsyncInjector
+import scene.GameScene
 import kotlin.reflect.KClass
 
 suspend fun main() = Korge(Korge.Config(module = ConfigModule))
 
 object ConfigModule : Module() {
 
-	override val mainScene: KClass<out Scene> = scenes.MenuScene::class
+	override val mainScene: KClass<out Scene> = scene.MenuScene::class
 
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MenuScene() }
+		mapPrototype { GameScene() }
 	}
 }
 

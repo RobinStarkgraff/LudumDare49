@@ -20,6 +20,7 @@ class Player(private val scene: Level) {
         playerImage.onCollision({scene.deathZoneList.contains(it)}) {
             die()
         }
+
     }
 
     private fun die() {
