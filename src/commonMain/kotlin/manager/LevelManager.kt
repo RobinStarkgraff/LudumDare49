@@ -1,3 +1,5 @@
+package manager
+
 import kotlin.math.roundToInt
 
 class LevelManager {

@@ -1,3 +1,5 @@
+package `object`
+
 import scene.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
