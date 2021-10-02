@@ -1,5 +1,6 @@
 package scenes
 
+import Player
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.SolidRect
 import com.soywiz.korma.geom.Vector2D
