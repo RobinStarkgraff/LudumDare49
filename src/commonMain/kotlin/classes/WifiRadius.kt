@@ -8,7 +8,7 @@ import com.soywiz.korim.color.RGBA
 class WifiRadius(private val x: Double, private val y: Double, radius: Double, private val wifiRouterImg: Image) {
 
     companion object {
-       var wifiRouters: List<WifiRadius>? = null
+       lateinit var wifiRouters: List<WifiRadius>
     }
 
     private val circle = Circle(radius, fill = RGBA(255, 44, 52, 1))
