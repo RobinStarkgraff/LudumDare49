@@ -1,12 +1,12 @@
 package classes
 
-import Scenes.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.SolidRect
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
+import scenes.Level
 
 class MovingObject(
     private val width: Double,
