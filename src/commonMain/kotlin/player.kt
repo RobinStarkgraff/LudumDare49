@@ -9,16 +9,17 @@ const val SIZE = 100
 
 class Player(private val scene : Scene) {
     init {
-        val image = scene.sceneView.solidRect(SIZE, SIZE)
-        movement(image)
 
+        val image = scene.sceneView.solidRect(SIZE, SIZE).xy(200, 200)
+        movement(image)
     }
 
-    private fun movement(player: SolidRect){
-            player.addUpdater { dt ->
-                val input = scene.views.input
-                val scale = dt / 16.milliseconds
-                var movement = Vector2D(0, 0)
+
+    private fun movement(player: SolidRect) {
+        player.addUpdater { dt ->
+            val input = scene.views.input
+            val scale = dt / 16.milliseconds
+            var movement = Vector2D(0, 0)
 
                 if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) movement.x -= 1.0
                 if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) movement.x += 1.0
@@ -30,6 +31,16 @@ class Player(private val scene : Scene) {
                     movement *= SPEED
                     movement *= scale
                     xy(x + movement.x, y + movement.y)
+            }
+
+            val collisionList = listOf(player)
+            player.onCollision({collisionList.contains(it)}) {
+                if (movement.x != 0.0) {
+                    player.x -= movement.x
+                }
+                if (movement.y != 0.0) {
+                    player.y -= movement.y
+                }
             }
         }
     }
