@@ -1,7 +1,6 @@
 package manager
 
 import scene.Level
-import kotlin.math.roundToInt
 
 class DownloadManager(private val scene: Level) {
     companion object {
@@ -25,7 +24,7 @@ class DownloadManager(private val scene: Level) {
             3 -> downloaded += 0.075
             4 -> downloaded += 0.2
         }
-        println("${downloaded.roundToInt()} percent downloaded")
+//        println("${downloaded.roundToInt()} percent downloaded")
     }
 }
 
