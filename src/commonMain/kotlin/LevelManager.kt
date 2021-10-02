@@ -12,6 +12,7 @@ class LevelManager {
         if (downloaded >= MAX_DOWNLOAD) {
             return
         }
+
         when (connectionBars) {
             0 -> downloaded += 0.0
             1 -> downloaded += 0.005
