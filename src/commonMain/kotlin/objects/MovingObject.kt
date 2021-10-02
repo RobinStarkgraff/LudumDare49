@@ -6,7 +6,7 @@ import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
-import scenes.Level
+import scene.Level
 
 class MovingObject(
     private val width: Double,

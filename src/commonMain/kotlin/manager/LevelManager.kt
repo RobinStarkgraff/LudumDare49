@@ -1,6 +1,6 @@
 package manager
 
-import scenes.Level
+import scene.Level
 import kotlin.math.roundToInt
 
 class LevelManager(private val scene: Level) {

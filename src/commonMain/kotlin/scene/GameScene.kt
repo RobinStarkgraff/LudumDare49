@@ -4,7 +4,6 @@ import Player
 import classes.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korma.geom.Vector2D
-import scenes.Level
 
 class GameScene : Level() {
     override suspend fun Container.sceneInit() {
