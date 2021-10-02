@@ -1,4 +1,4 @@
-import Scenes.MenuScene
+import scenes.MenuScene
 import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
@@ -9,7 +9,7 @@ suspend fun main() = Korge(Korge.Config(module = ConfigModule))
 
 object ConfigModule : Module() {
 
-	override val mainScene: KClass<out Scene> = Scenes.MenuScene::class
+	override val mainScene: KClass<out Scene> = scenes.MenuScene::class
 
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MenuScene() }
