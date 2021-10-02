@@ -12,7 +12,14 @@ class MenuScene() : Level() {
     override suspend fun Container.sceneInit() {
 
         player = Player(this@MenuScene)
-        val movingObject = MovingObject(25.0, 25.0, 5.0, listOf(Vector2D(0, 0), Vector2D(300, 0), Vector2D(300, 300), Vector2D(0, 300)), true, this@MenuScene)
+        val movingObject = MovingObject(
+            25.0,
+            25.0,
+            5.0,
+            listOf(Vector2D(0, 0), Vector2D(300, 0), Vector2D(300, 300), Vector2D(0, 300)),
+            true,
+            this@MenuScene
+        )
         deathZoneList.add(movingObject.image)
     }
 }
