@@ -1,4 +1,6 @@
 import Scenes.MenuScene
+import com.soywiz.klock.hr.hrMilliseconds
+import com.soywiz.korev.Key
 import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
@@ -15,3 +17,4 @@ object ConfigModule : Module() {
 		mapPrototype { MenuScene() }
 	}
 }
+
