@@ -10,20 +10,27 @@ class Player(private val scene: Level) {
         const val SIZE = 50
     }
 
-    private var playerImage : SolidRect = scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y);
+    private var playerImage: SolidRect = scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y)
+
     init {
         movement()
         deathZoneCallback()
+        download()
     }
 
     private fun deathZoneCallback() {
-        playerImage.onCollision({scene.deathZoneList.contains(it)}) {
+        playerImage.onCollision({ scene.deathZoneList.contains(it) }) {
             die()
         }
-
     }
 
-    private fun die() {
+    private fun download() {
+        playerImage.addUpdater {
+            scene.levelManager?.download(3)
+        }
+    }
+
+    public fun die() {
         //reset all stuff
         playerImage.xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
@@ -48,7 +55,7 @@ class Player(private val scene: Level) {
             }
         }
 
-        playerImage.onCollision({scene.collisionList.contains(it)}) {
+        playerImage.onCollision({ scene.collisionList.contains(it) }) {
             if (movement.x != 0.0) {
                 playerImage.x -= movement.x
             }
