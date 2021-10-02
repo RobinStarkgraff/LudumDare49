@@ -1,6 +1,5 @@
 package Scenes
 
-import LevelManager
 import Player
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Container
