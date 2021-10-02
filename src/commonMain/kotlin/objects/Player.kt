@@ -10,7 +10,9 @@ class Player(private val scene: Level) {
         const val SIZE = 50
     }
 
-    private var playerImage : SolidRect = scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y);
+    private var playerImage: SolidRect =
+        scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y)
+
     init {
         movement()
         deathZoneCallback()
