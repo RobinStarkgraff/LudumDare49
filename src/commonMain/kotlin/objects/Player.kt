@@ -26,14 +26,13 @@ class Player(private val scene: Level) {
         }
     }
 
-    fun download() {
+    private fun download() {
         playerImage.addUpdater {
-            GlobalScope.launch {scene.downloadManager?.download(4)}
+            GlobalScope.launch {scene.downloadManager?.download(x, y)}
         }
     }
 
     public fun die() {
-        //reset all stuff
         playerImage.xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
