@@ -5,6 +5,7 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.SolidRect
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
+import objects.WifiRouter
 
 abstract class Level : Scene() {
     var downloadManager : DownloadManager? = null
