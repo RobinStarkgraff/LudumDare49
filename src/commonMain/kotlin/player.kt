@@ -12,6 +12,10 @@ class Player(private val scene: Scene) {
 
         val image = scene.sceneView.solidRect(SIZE, SIZE).xy(200, 200)
         movement(image)
+        val levelManager = LevelManager()
+        image.addUpdater{
+            levelManager.download(4)
+        }
     }
 
 
