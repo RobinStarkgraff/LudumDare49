@@ -1,4 +1,4 @@
-package Scenes
+package scenes
 
 import Player
 import com.soywiz.korge.scene.Scene

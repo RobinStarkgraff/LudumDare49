@@ -1,4 +1,4 @@
-import Scenes.Level
+import scenes.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
