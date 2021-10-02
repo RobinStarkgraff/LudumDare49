@@ -7,6 +7,7 @@ import scenes.Level
 
 class GameScene : Level() {
     override suspend fun Container.sceneInit() {
-        val player = Player(this@GameScene)
+        levelManager = LevelManager(this@GameScene)
+        player = Player(this@GameScene)
     }
 }

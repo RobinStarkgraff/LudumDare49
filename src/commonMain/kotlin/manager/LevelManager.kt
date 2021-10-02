@@ -3,7 +3,7 @@ package manager
 import scenes.Level
 import kotlin.math.roundToInt
 
-class LevelManager {
+class LevelManager(private val scene: Level) {
     companion object {
         const val MAX_DOWNLOAD: Double = 99.0
     }
@@ -13,6 +13,7 @@ class LevelManager {
     fun download(connectionBars: Int) {
 
         if (downloaded >= MAX_DOWNLOAD) {
+            scene.player?.die()
             return
         }
 
