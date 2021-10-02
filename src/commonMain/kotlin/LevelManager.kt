@@ -7,12 +7,12 @@ class LevelManager {
 
     private var downloaded: Double = 0.0
 
-    fun download(internet: Int) {
+    fun download(connectionBars: Int) {
 
         if (downloaded >= MAX_DOWNLOAD) {
             return
         }
-        when (internet) {
+        when (connectionBars) {
             0 -> downloaded += 0.0
             1 -> downloaded += 0.005
             2 -> downloaded += 0.01
