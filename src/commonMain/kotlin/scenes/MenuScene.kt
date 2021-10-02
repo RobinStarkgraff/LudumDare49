@@ -1,4 +1,4 @@
-package Scenes
+package scenes
 
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Container
