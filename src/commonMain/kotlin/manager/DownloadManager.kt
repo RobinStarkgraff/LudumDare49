@@ -1,5 +1,7 @@
 package manager
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import scene.Level
 import kotlin.math.roundToInt
 

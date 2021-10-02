@@ -1,18 +1,21 @@
 import scene.Level
 import com.soywiz.klock.milliseconds
+import com.soywiz.korge.*
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Vector2D
+import helper.SpriteLibrary
 import kotlinx.coroutines.*
 
-class Player(private val scene: Level) {
+class Player(var scene: Level) {
     companion object {
         const val SPEED = 3
         const val SIZE = 50
     }
 
-    private var playerImage: SolidRect =
-        scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y)
+    private lateinit var playerImage: Sprite
 
     init {
         movement()
@@ -20,12 +23,23 @@ class Player(private val scene: Level) {
         download()
     }
 
+    fun play(){
+        val idleAnimation = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_IDLE,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 10,
+            rows = 1,
+        )
+        playerImage = scene.sceneView.sprite(idleAnimation)
+        playerImage.playAnimation()
+    }
+
     private fun deathZoneCallback() {
         playerImage.onCollision({ scene.deathZoneList.contains(it) }) {
             die()
         }
     }
-
     fun download() {
         playerImage.addUpdater {
             GlobalScope.launch {scene.downloadManager?.download(4)}
