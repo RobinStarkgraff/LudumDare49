@@ -6,6 +6,7 @@ import com.soywiz.korge.view.Container
 
 class MenuScene() : Scene() {
     override suspend fun Container.sceneInit() {
-        sceneContainer.changeTo<GameScene>()
+        println("Level1")
+        sceneContainer.changeTo<Level1>()
     }
 }

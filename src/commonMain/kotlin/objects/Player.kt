@@ -24,9 +24,9 @@ class Player(private val scene: Level) {
         }
     }
 
-    private fun download() {
+    fun download() {
         playerImage.addUpdater {
-            scene.levelManager?.download(3)
+            GlobalScope.launch {scene.downloadManager?.download(4)}
         }
     }
 
@@ -65,3 +65,4 @@ class Player(private val scene: Level) {
         }
     }
 }
+

@@ -3,7 +3,7 @@ package manager
 import scene.Level
 import kotlin.math.roundToInt
 
-class LevelManager(private val scene: Level) {
+class DownloadManager(private val scene: Level) {
     companion object {
         const val MAX_DOWNLOAD: Double = 99.0
     }

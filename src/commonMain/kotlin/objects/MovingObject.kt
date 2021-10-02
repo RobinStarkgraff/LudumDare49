@@ -40,6 +40,6 @@ class MovingObject(
     }
 
     private fun reachedWaypoint(): Boolean {
-        return Vector2D.distance(image.pos, waypoints[currentWaypoint]) <= 1
+        return Vector2D.distance(image.pos, waypoints[currentWaypoint]) <= speed/2
     }
 }

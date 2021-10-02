@@ -3,7 +3,8 @@ import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korinject.AsyncInjector
-import scene.GameScene
+import scene.Level1
+import scene.Level2
 import kotlin.reflect.KClass
 
 suspend fun main() = Korge(Korge.Config(module = ConfigModule))
