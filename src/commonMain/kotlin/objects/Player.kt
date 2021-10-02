@@ -33,11 +33,15 @@ class Player(private val scene: Level) {
     }
 
     private fun inventoryItemCallbacks() {
+        if (inventoryObject != null) {
+            return
+        }
+
         playerImage.addUpdater {
             for (pickUpItem in scene.pickupItemList) {
                 val distanceToObject = Vector2D.distance(pickUpItem.image.globalXY(), playerImage.globalXY())
-                if (distanceToObject > PickupItem.INTERACTION_DISTANCE || inventoryObject != null) {
-                    break
+                if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
+                    continue
                 }
 
                 //TODO: Give Pickup speechbubble
