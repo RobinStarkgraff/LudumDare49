@@ -15,7 +15,8 @@ object ConfigModule : Module() {
 
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MenuScene() }
-		mapPrototype { GameScene() }
+		mapPrototype { Level1() }
+		mapPrototype { Level2() }
 	}
 }
 

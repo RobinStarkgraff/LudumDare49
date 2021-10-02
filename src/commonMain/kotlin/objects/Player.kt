@@ -3,6 +3,7 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
+import kotlinx.coroutines.*
 
 class Player(private val scene: Level) {
     companion object {
@@ -10,7 +11,8 @@ class Player(private val scene: Level) {
         const val SIZE = 50
     }
 
-    private var playerImage: SolidRect = scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y)
+    private var playerImage: SolidRect =
+        scene.sceneView.solidRect(SIZE, SIZE).xy(scene.spawnpoint.x, scene.spawnpoint.y)
 
     init {
         movement()

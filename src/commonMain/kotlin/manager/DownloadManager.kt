@@ -10,10 +10,11 @@ class DownloadManager(private val scene: Level) {
 
     private var downloaded: Double = 0.0
 
-    fun download(connectionBars: Int) {
+    suspend fun download(connectionBars: Int) {
 
         if (downloaded >= MAX_DOWNLOAD) {
             scene.player?.die()
+            scene.nextScene()
             return
         }
 
