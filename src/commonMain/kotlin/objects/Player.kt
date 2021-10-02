@@ -1,4 +1,4 @@
-package `object`
+package objects
 
 import scene.Level
 import com.soywiz.klock.milliseconds

@@ -1,6 +1,6 @@
 package scene
 
-import `object`.Player
+import objects.Player
 import com.soywiz.korge.view.Container
 
 class GameScene : Level() {

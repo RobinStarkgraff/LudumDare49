@@ -1,4 +1,4 @@
-package `object`
+package objects
 
 import com.soywiz.korge.view.Circle
 import com.soywiz.korge.view.Image
