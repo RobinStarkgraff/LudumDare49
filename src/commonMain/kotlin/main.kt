@@ -11,7 +11,7 @@ suspend fun main() = Korge(Korge.Config(module = ConfigModule))
 
 object ConfigModule : Module() {
 
-	override val mainScene: KClass<out Scene> = scene.MenuScene::class
+	override val mainScene: KClass<out Scene> = MenuScene::class
 
 	override suspend fun AsyncInjector.configure() {
 		mapPrototype { MenuScene() }

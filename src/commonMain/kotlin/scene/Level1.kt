@@ -5,6 +5,7 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
 import objects.MovingObject
+import objects.Phone
 import objects.WifiRouter
 
 class Level1 : Level() {
@@ -21,6 +22,8 @@ class Level1 : Level() {
             this@Level1
         )
         deathZoneList.add(movingObject.image)
+        val phone = Phone()
+        addChild(phone.container)
     }
 
     override suspend fun nextScene() {

@@ -3,7 +3,6 @@ package manager
 import com.soywiz.korma.geom.Vector2D
 import objects.WifiRouter
 import scene.Level
-import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 class DownloadManager(private val scene: Level) {
