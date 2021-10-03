@@ -16,10 +16,6 @@ class Level1 : Level() {
         deathZoneList.add(death)
     }
 
-    override suspend fun sceneDestroy() {
-
-    }
-
     override suspend fun nextScene() {
         println("Level2")
         sceneContainer.changeTo<Level2>()

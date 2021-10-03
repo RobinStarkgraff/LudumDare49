@@ -18,41 +18,6 @@ class Player(var scene: Level) {
         val COLLISION_POS = Vector2D(16, 20)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 8
-        val IDLE = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_IDLE,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 8,
-            rows = 1,
-        )
-        val RIGHT = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_WALK_RIGHT,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 10,
-            rows = 1,
-        )
-        val LEFT = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_WALK_LEFT,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 10,
-            rows = 1,
-        )
-        val UP = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_WALK_UP,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 10,
-            rows = 1,
-        )
-        val DOWN = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_WALK_DOWN,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 10,
-            rows = 1,
-        )
     }
 
     private var playerParent = Container()
@@ -62,7 +27,7 @@ class Player(var scene: Level) {
     init {
         createContainer()
         createSprite()
-        changeSprite(IDLE, IDLE_FPS)
+        changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
         createCollisionShape()
         movement()
         deathZoneCallback()
@@ -125,11 +90,11 @@ class Player(var scene: Level) {
                 xy(x + movement.x, y + movement.y)
             }
 
-            if(movement.x > 0) changeSprite(RIGHT)
-            else if (movement.x < 0) changeSprite(LEFT)
-            else if (movement.y < 0) changeSprite(UP)
-            else if (movement.y > 0) changeSprite(DOWN)
-            else changeSprite(IDLE, IDLE_FPS)
+            if(movement.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
+            else if (movement.x < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_LEFT_ANIM)
+            else if (movement.y < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_UP_ANIM)
+            else if (movement.y > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_DOWN_ANIM)
+            else changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
         }
 
         collisionShape.onCollision({ scene.collisionList.contains(it) }) {
