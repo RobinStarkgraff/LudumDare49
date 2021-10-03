@@ -14,7 +14,7 @@ class SoundPlayer {
         const val SAMPLE_SOUND = "sample_sound.mp3"
         const val SAMPLE_MUSIC = "sample_music.mp3"
 
-        const val FOOTSTEPS = "footsteps.mp3"
+        const val FOOTSTEPS = "footsteps2long.mp3"
 
         var volume = 0.75
 
