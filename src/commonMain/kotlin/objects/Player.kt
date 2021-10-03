@@ -4,7 +4,6 @@ package objects
 import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
-import com.soywiz.korau.sound.Sound
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
@@ -36,14 +35,13 @@ class Player(var scene: Level) {
     init {
         createContainer()
         createSprite()
-        changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
+        changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         createCollisionShape()
         setupStepSound()
         movement()
         deathZoneCallback()
         inventoryItemCallbacks()
         download()
-
     }
 
     private fun createContainer() {
@@ -59,7 +57,7 @@ class Player(var scene: Level) {
 
     private fun createSprite(){
         playerImage = playerParent.sprite().anchor(0.5, 0.8)
-        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
+        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ ANIMATION_FPS))
     }
 
     private fun changeSprite(animation: SpriteAnimation, speed: Int = ANIMATION_FPS) {
@@ -136,11 +134,11 @@ class Player(var scene: Level) {
             if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
             else SoundPlayer.stopContinuousSound(walkingSound)
 
-            if (movement.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
-            else if (movement.x < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_LEFT_ANIM)
-            else if (movement.y < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_UP_ANIM)
-            else if (movement.y > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_DOWN_ANIM)
-            else changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
+            if (movement.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
+            else if (movement.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
+            else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
+            else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
+            else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         }
 
         collisionShape.onCollision({ scene.collisionList.contains(it) }) {

@@ -1,6 +1,5 @@
 package objects
 
-import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.View
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Point

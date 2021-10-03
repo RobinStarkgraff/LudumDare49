@@ -6,8 +6,7 @@ import helper.SpriteLibrary
 
 class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
-        val spriteLibrary = SpriteLibrary()
-		spriteLibrary.init()
+		SpriteLibrary.init()
 		sceneContainer.changeTo<MenuScene>()
     }
 }
