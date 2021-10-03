@@ -1,6 +1,7 @@
 package scene
 
 import com.soywiz.korge.view.*
+import com.soywiz.korim.color.Colors
 import objects.Player
 import objects.MovingObject
 import com.soywiz.korma.geom.Vector2D
@@ -21,6 +22,7 @@ class Level1 : Level() {
     override suspend fun drawImages() {
         super.drawImages()
         val backgroundImage = ImageLibrary.loadImage(this, ImageLibrary.BACKGROUND_IMAGE_FLAT, 0.5, 0.5)
+
     }
 
     override suspend fun nextScene() {

@@ -2,7 +2,10 @@ import scene.MenuScene
 import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
+import com.soywiz.korim.color.Colors
+import com.soywiz.korim.color.RGBA
 import com.soywiz.korinject.AsyncInjector
+import com.soywiz.korma.geom.SizeInt
 import helper.SpriteLibrary
 import scene.Level1
 import scene.Level2
@@ -12,6 +15,9 @@ import kotlin.reflect.KClass
 suspend fun main() = Korge(Korge.Config(module = ConfigModule))
 
 object ConfigModule : Module() {
+	override val bgcolor = Colors["161824"]
+	override val size = SizeInt(1280,720)
+	val virtualSize = SizeInt(640,320)
 
 	override val mainScene: KClass<out Scene> = LoadingScene::class
 
