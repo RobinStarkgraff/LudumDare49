@@ -7,15 +7,15 @@ import objects.Player
 
 class SpriteLibrary {
     companion object {
-        lateinit var static : SpriteLibrary
+        lateinit var static: SpriteLibrary
     }
 
 
-    lateinit var PLAYER_IDLE_ANIM : SpriteAnimation
-    lateinit var PLAYER_WALK_RIGHT_ANIM : SpriteAnimation
-    lateinit var PLAYER_WALK_LEFT_ANIM : SpriteAnimation
-    lateinit var PLAYER_WALK_UP_ANIM : SpriteAnimation
-    lateinit var PLAYER_WALK_DOWN_ANIM : SpriteAnimation
+    lateinit var PLAYER_IDLE_ANIM: SpriteAnimation
+    lateinit var PLAYER_WALK_RIGHT_ANIM: SpriteAnimation
+    lateinit var PLAYER_WALK_LEFT_ANIM: SpriteAnimation
+    lateinit var PLAYER_WALK_UP_ANIM: SpriteAnimation
+    lateinit var PLAYER_WALK_DOWN_ANIM: SpriteAnimation
 
 
     suspend fun init() {
@@ -28,10 +28,15 @@ class SpriteLibrary {
         PLAYER_WALK_DOWN_ANIM = loadAnim("bitmap/Walk_Down.png", Player.SCALE, 32, 10)
     }
 
-    suspend fun loadAnim(path: String, scale: Double, size: Int, frameCount: Int, flip: Boolean = false): SpriteAnimation{
+    suspend fun loadAnim(
+        path: String,
+        scale: Double,
+        size: Int,
+        frameCount: Int,
+        flip: Boolean = false
+    ): SpriteAnimation {
         var bmp = resourcesVfs[path].readBitmapOptimized(premultiplied = false)
-        if(flip)
-            bmp = bmp.flipX()
+        if (flip) bmp = bmp.flipX()
         bmp = bmp.toBMP32().scaleLinear(scale, scale)
 
         return SpriteAnimation(
