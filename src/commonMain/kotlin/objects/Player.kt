@@ -13,6 +13,7 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import objects.interactables.PickupItem
 
 
 class Player(var scene: Level) {
@@ -40,7 +41,7 @@ class Player(var scene: Level) {
         setupStepSound()
         movement()
         deathZoneCallback()
-        inventoryItemCallbacks()
+        interactableCallbacks()
         download()
 
     }
@@ -86,19 +87,18 @@ class Player(var scene: Level) {
         GlobalScope.launch { walkingSound = SoundPlayer.setContinuousSound(SoundPlayer.FOOTSTEPS) }
     }
 
-    private fun inventoryItemCallbacks() {
-        if (inventoryObject != null) {
-            return
-        }
-
+    private fun interactableCallbacks() {
         playerImage.addUpdater {
             for (interactableItem in scene.interactableList) {
-                val distanceToObject = Vector2D.distance(interactableItem.image.globalXY(), playerImage.globalXY())
+                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - collisionShape.pos)
                 if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
                     continue
                 }
 
-                //TODO: Give Pickup speechbubble
+                //TODO: Give speechbubble
+                if (scene.views.keys.justPressed(Key.E)) {
+                    interactableItem.interact()
+                }
             }
         }
     }

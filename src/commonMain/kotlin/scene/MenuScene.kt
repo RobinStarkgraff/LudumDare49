@@ -59,7 +59,6 @@ class MenuScene : Scene() {
                 key.fill = grey
                 SoundPlayer.changeVolume(0.0)
             }
-
         }
 
         for ((key, value) in volumeMap.entries){

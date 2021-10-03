@@ -1,15 +1,17 @@
 package scene
 
 import com.soywiz.korge.view.*
-import objects.Player
-import objects.MovingObject
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
+import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import manager.DownloadManager
+import objects.MovingObject
 import objects.Phone
+import objects.Player
 import objects.WifiRouter
+import objects.interactables.StateSwapItem
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
@@ -30,6 +32,7 @@ class Level1 : Level() {
         deathZoneList.add(movingObject.image)
         val phone = Phone()
         addChild(phone.container)
+        StateSwapItem(this@Level1, sprite(anchorX = 0.0, anchorY = 1.0).xy(200.0,200.0), SpriteLibrary.static.DOOR_SWING_LEFT)
 
         GlobalScope.launch { SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1) }
         sceneView.addUpdater {

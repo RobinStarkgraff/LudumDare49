@@ -18,7 +18,6 @@ class Phone() {
             // Please don't question it :)
             val calcValue = (700000000000000.0).pow(-0.0001 * secondsPast)
             val minutesToDisplay = 60 * (1-(calcValue))
-            println(minutesToDisplay)
         }
     }
 }

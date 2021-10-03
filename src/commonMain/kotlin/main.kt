@@ -3,7 +3,6 @@ import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korinject.AsyncInjector
-import helper.SpriteLibrary
 import scene.Level1
 import scene.Level2
 import scene.LoadingScene
