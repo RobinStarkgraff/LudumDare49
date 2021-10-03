@@ -78,7 +78,6 @@ class MenuScene : Scene() {
             volumeiii.fill = Colors["949494"]
             volumeiiii.fill = Colors["949494"]
             SoundPlayer.changeVolume(0.45)
-
         }
         volumeiii.onClick{
             volume.fill = Colors["00CD00"]
