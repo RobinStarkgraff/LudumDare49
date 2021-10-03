@@ -4,11 +4,16 @@ package objects
 import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
+import com.soywiz.korau.sound.Sound
+import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.RGBA
+import com.soywiz.korio.async.launch
 import com.soywiz.korma.geom.Vector2D
+import helper.SoundPlayer
 import helper.SpriteLibrary
+import kotlinx.coroutines.GlobalScope
 
 
 class Player(var scene: Level) {
@@ -24,13 +29,16 @@ class Player(var scene: Level) {
 
     private var playerParent = Container()
     private var playerImage = Sprite()
-    private lateinit var collisionShape : SolidRect
+    private lateinit var collisionShape: SolidRect
+
+    private lateinit var walkingSound: SoundChannel
 
     init {
         createContainer()
         createSprite()
         changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
         createCollisionShape()
+        setupStepSound()
         movement()
         deathZoneCallback()
         inventoryItemCallbacks()
@@ -54,12 +62,12 @@ class Player(var scene: Level) {
         playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
     }
 
-    private fun changeSprite(animation: SpriteAnimation, speed : Int = ANIMATION_FPS){
-        playerImage.playAnimationLooped(animation, spriteDisplayTime = TimeSpan(1000.0/speed))
+    private fun changeSprite(animation: SpriteAnimation, speed: Int = ANIMATION_FPS) {
+        playerImage.playAnimationLooped(animation, spriteDisplayTime = TimeSpan(1000.0 / speed))
     }
 
     private fun deathZoneCallback() {
-        collisionShape.onCollision({scene.deathZoneList.contains(it)}) {
+        collisionShape.onCollision({ scene.deathZoneList.contains(it) }) {
             die()
         }
     }
@@ -73,6 +81,10 @@ class Player(var scene: Level) {
     private fun die() {
         //reset all stuff
         playerParent.xy(scene.spawnpoint.x, scene.spawnpoint.y)
+    }
+
+    private fun setupStepSound() {
+        GlobalScope.launch { walkingSound = SoundPlayer.setContinuousSound(SoundPlayer.FOOTSTEPS) }
     }
 
     private fun inventoryItemCallbacks() {
@@ -121,7 +133,10 @@ class Player(var scene: Level) {
                 xy(x + movement.x, y + movement.y)
             }
 
-            if(movement.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
+            if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
+            else SoundPlayer.stopContinuousSound(walkingSound)
+
+            if (movement.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
             else if (movement.x < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_LEFT_ANIM)
             else if (movement.y < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_UP_ANIM)
             else if (movement.y > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_DOWN_ANIM)
