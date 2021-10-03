@@ -13,7 +13,7 @@ open class MovingObject(
     private val loop: Boolean,
     private val scene: Level
 ) {
-    var image: SolidRect = scene.sceneView.solidRect(width, height)
+    var image: SolidRect = scene.sceneView.container().solidRect(width, height)
     var velocity = Vector2D(0, 0)
     var currentWaypoint = 0
 

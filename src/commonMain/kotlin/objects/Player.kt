@@ -15,7 +15,7 @@ class Player(var scene: Level) {
     companion object {
         const val SPEED = 3
         const val SCALE = 3.0
-        val COLLISION_SIZE = Vector2D(30, 20)
+        val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 6
@@ -134,13 +134,12 @@ class Player(var scene: Level) {
 
             val dir = playerParent.pos + collisionShape.pos - it.pos
             val normal = getNormal(it.rotation, dir)
-            println(normal)
 
-            val tanUp = normal.rotate((1.57079632679).radians)
-            val tanUpAngle = Vector2D.angle(dir, tanUp)
+            val tanUp = normal.rotate((kotlin.math.PI/2).radians)
+            val tanUpAngle = Vector2D.angle(velocity, tanUp)
 
-            val tanDown = normal.rotate((-1.57079632679).radians)
-            val tanDownAngle = Vector2D.angle(dir, tanUp)
+            val tanDown = normal.rotate((kotlin.math.PI/-2).radians)
+            val tanDownAngle = Vector2D.angle(velocity, tanUp)
 
             var tan = Vector2D()
 
@@ -150,13 +149,16 @@ class Player(var scene: Level) {
                 tan = tanDown.normalized
             }
 
+            tan = (tan + normal * 10E-2).normalized
+
+
             var scalar = scalar(velocity, tan)
 
             if(scalar < 10E-5) {
                 scalar = 0.0
             }
 
-            var vel = (tan * scalar - velocity)
+            val vel = (tan * scalar - velocity)
 
             playerParent.xy(playerParent.x +vel.x,playerParent.y + vel.y)
         }
@@ -168,6 +170,7 @@ class Player(var scene: Level) {
             for (movingObject in scene.movingObjectsList) movingObjects.add(movingObject.image)
             if(!movingObjects.contains(it)) return@onCollision
             val movingObject = scene.movingObjectsList[movingObjects.indexOf(it)]
+            velocity = movingObject.velocity
             playerParent.xy(playerParent.pos.x + movingObject.velocity.x, playerParent.pos.y + movingObject.velocity.y)
         }
     }
