@@ -14,11 +14,11 @@ import helper.SpriteLibrary
 class Player(var scene: Level) {
     companion object {
         const val SPEED = 3
-        const val SIZE = 3
+        const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(30, 20)
         val COLLISION_POS = Vector2D(16, 20)
         const val ANIMATION_FPS = 12
-        const val IDLE_FPS = 8
+        const val IDLE_FPS = 6
         var inventoryObject: PickupItem? = null
     }
 
@@ -46,11 +46,11 @@ class Player(var scene: Level) {
     private fun createCollisionShape() {
         collisionShape = playerParent.solidRect(COLLISION_SIZE.x, COLLISION_SIZE.y, RGBA(0, 0, 0, 0))
         collisionShape.anchor(0.5, 0.5)
-        collisionShape.xy(COLLISION_POS.x * SIZE, COLLISION_POS.y * SIZE)
+        collisionShape.xy(COLLISION_POS.x * SCALE, COLLISION_POS.y * SCALE)
     }
 
     private fun createSprite(){
-        playerImage = playerParent.sprite().scale(SIZE, SIZE)
+        playerImage = playerParent.sprite()
         playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
     }
 
