@@ -17,7 +17,7 @@ class SoundPlayer {
 
         const val FOOTSTEPS = "footsteps2long.mp3"
 
-        var volume = 0.75
+        var volume = 0.45
 
         private var musicChannel: SoundChannel? = null
 
