@@ -1,22 +1,20 @@
 package objects
 
 import com.soywiz.klock.milliseconds
-import com.soywiz.korge.view.SolidRect
-import com.soywiz.korge.view.addUpdater
-import com.soywiz.korge.view.solidRect
-import com.soywiz.korge.view.xy
+import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import scene.Level
 
-class MovingObject(
-    private val width: Double,
-    private val height: Double,
-    private val speed: Double,
+open class MovingObject(
+    var width: Double,
+    var height: Double,
+    private val moveSpeed: Double,
     private var waypoints: List<Vector2D>,
     private val loop: Boolean,
     private val scene: Level
 ) {
     var image: SolidRect = scene.sceneView.solidRect(width, height)
+    var velocity = Vector2D(0, 0)
     var currentWaypoint = 0
 
     init {
@@ -35,11 +33,11 @@ class MovingObject(
 
     private fun move(scale: Double) {
         val dir = (waypoints[currentWaypoint] - image.pos).normalized
-        val movement = dir * speed * scale
-        image.xy(image.pos.x + movement.x, image.pos.y + movement.y)
+        velocity = dir * moveSpeed * scale
+        image.xy(image.pos.x + velocity.x, image.pos.y + velocity.y)
     }
 
     private fun reachedWaypoint(): Boolean {
-        return Vector2D.distance(image.pos, waypoints[currentWaypoint]) <= speed/2
+        return Vector2D.distance(image.pos, waypoints[currentWaypoint]) <= moveSpeed/2
     }
 }

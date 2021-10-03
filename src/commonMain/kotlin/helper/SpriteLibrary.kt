@@ -28,7 +28,7 @@ class SpriteLibrary {
         PLAYER_WALK_DOWN_ANIM = loadAnim("bitmap/Walk_Down.png", Player.SCALE, 32, 10)
     }
 
-    suspend fun loadAnim(
+    private suspend fun loadAnim(
         path: String,
         scale: Double,
         size: Int,

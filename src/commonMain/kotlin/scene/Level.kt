@@ -5,6 +5,7 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.SolidRect
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
+import objects.MovingObject
 import objects.PickupItem
 
 abstract class Level : Scene() {
@@ -13,6 +14,7 @@ abstract class Level : Scene() {
     open val spawnpoint = Vector2D(0, 0)
     val collisionList = mutableListOf<SolidRect>()
     val deathZoneList = mutableListOf<SolidRect>()
+    val movingObjectsList = mutableListOf<MovingObject>()
     val pickupItemList = mutableListOf<PickupItem>()
 
     open suspend fun nextScene() {
