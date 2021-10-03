@@ -22,9 +22,9 @@ class MenuScene : Scene() {
 
         val volumeiiii = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 500)
         val volumeiii = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 526)
-        val volumeii = roundRect(50.0, 25.0, 5.0,fill = Colors["00CD00"],).xy(1100, 552)
-        val volumei = roundRect(50.0, 25.0, 5.0,fill = Colors["00CD00"],).xy(1100, 578)
-        val volume = roundRect(50.0, 25.0, 5.0,fill = Colors["00CD00"],).xy(1100, 604)
+        val volumeii = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 552)
+        val volumei = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 578)
+        val volume = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 604)
         val mute = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 630)
         val mutetext = text ("Mute", textSize = 10.0, color = RGBA(100,0,0,255)).xy(1114,637)
 
