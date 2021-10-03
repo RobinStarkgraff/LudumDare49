@@ -1,11 +1,10 @@
 package scene
 
-import Player
+import objects.Player
 import classes.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
-import kotlin.reflect.typeOf
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {

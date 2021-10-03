@@ -1,40 +1,73 @@
+package objects
+
+import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
-import com.soywiz.korge.*
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
-import com.soywiz.korim.format.readBitmap
-import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
-import kotlinx.coroutines.*
 
 class Player(var scene: Level) {
     companion object {
         const val SPEED = 3
-        const val SIZE = 50
+        const val SIZE = 3
+        const val ANIMATION_FPS = 10
+        val IDLE = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_IDLE,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 8,
+            rows = 1,
+        )
+        val RIGHT = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_WALK_RIGHT,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 10,
+            rows = 1,
+        )
+        val LEFT = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_WALK_LEFT,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 10,
+            rows = 1,
+        )
+        val UP = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_WALK_UP,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 10,
+            rows = 1,
+        )
+        val DOWN = SpriteAnimation(
+            spriteMap = SpriteLibrary.static.PLAYER_WALK_DOWN,
+            spriteWidth = 32,
+            spriteHeight = 32,
+            columns = 10,
+            rows = 1,
+        )
     }
 
-    private lateinit var playerImage: Sprite
+    private var playerImage = Sprite()
 
     init {
-        play()
+        createSprite()
+        changeSprite(IDLE)
         movement()
         deathZoneCallback()
         download()
 
     }
 
-    fun play(){
-        val idleAnimation = SpriteAnimation(
-            spriteMap = SpriteLibrary.static.PLAYER_IDLE,
-            spriteWidth = 32,
-            spriteHeight = 32,
-            columns = 10,
-            rows = 1,
-        )
-        playerImage = scene.sceneView.sprite(idleAnimation)
-        playerImage.playAnimation()
+    private fun createSprite(){
+        playerImage = scene.sceneView.sprite().scale(SIZE, SIZE)
+        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
+    }
+
+    private fun changeSprite(animation: SpriteAnimation){
+        playerImage.playAnimationLooped(animation)
     }
 
     private fun deathZoneCallback() {
@@ -42,13 +75,13 @@ class Player(var scene: Level) {
             die()
         }
     }
-    fun download() {
+    private fun download() {
         playerImage.addUpdater {
-            GlobalScope.launch {scene.downloadManager?.download(4)}
+            scene.downloadManager?.download(0)
         }
     }
 
-    public fun die() {
+    private fun die() {
         //reset all stuff
         playerImage.xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
@@ -71,6 +104,12 @@ class Player(var scene: Level) {
                 movement *= scale
                 xy(x + movement.x, y + movement.y)
             }
+
+            if(movement.x > 0) changeSprite(RIGHT)
+            else if (movement.x < 0) changeSprite(LEFT)
+            else if (movement.y < 0) changeSprite(UP)
+            else if (movement.y > 0) changeSprite(DOWN)
+            else changeSprite(IDLE)
         }
 
         playerImage.onCollision({ scene.collisionList.contains(it) }) {

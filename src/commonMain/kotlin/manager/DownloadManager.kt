@@ -28,7 +28,6 @@ class DownloadManager(private val scene: Level) {
             3 -> downloaded += 0.075
             4 -> downloaded += 0.2
         }
-        println("${downloaded.roundToInt()} percent downloaded")
     }
 }
 

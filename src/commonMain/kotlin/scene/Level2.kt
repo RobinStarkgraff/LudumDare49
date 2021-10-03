@@ -1,6 +1,6 @@
 package scene
 
-import Player
+import objects.Player
 import classes.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.xy
