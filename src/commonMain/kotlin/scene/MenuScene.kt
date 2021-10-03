@@ -28,6 +28,8 @@ class MenuScene : Scene() {
         val mute = roundRect(50.0, 25.0, 5.0,fill = Colors["949494"],).xy(1100, 630)
         val mutetext = text ("Mute", textSize = 10.0, color = RGBA(100,0,0,255)).xy(1114,637)
 
+        val volumeMap = mapOf(volume to 0.2, volumei to 0.4, volumeii to 0.6, volumeiii to 0.8, volumeiiii to 1.0)
+
 
         donate.onClick {
             eric.color = RGBA(255,255,255,255)
