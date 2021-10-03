@@ -1,5 +1,7 @@
 package manager
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import com.soywiz.korma.geom.Vector2D
 import objects.WifiRouter
 import scene.Level
@@ -12,14 +14,16 @@ class DownloadManager(private val scene: Level) {
     }
 
     private var downloaded: Double = 0.0
+    private var downloadComplete = false
 
     val wifiRouterList = mutableListOf<WifiRouter>()
 
-    suspend fun download(x: Double, y: Double) {
+    fun download(x: Double, y: Double) {
 
-        if (downloaded >= MAX_DOWNLOAD) {
-            scene.player?.die()
-            scene.nextScene()
+
+        if (downloaded >= MAX_DOWNLOAD && !downloadComplete) {
+            downloadComplete = true
+            GlobalScope.launch {scene.nextScene() }
             return
         }
 
@@ -46,7 +50,6 @@ class DownloadManager(private val scene: Level) {
                 minDistance = distance
             }
         }
-//        println("${downloaded.roundToInt()} percent downloaded")
         return nearestRouter;
     }
 

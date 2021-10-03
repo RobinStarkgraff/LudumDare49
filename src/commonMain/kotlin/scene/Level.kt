@@ -8,8 +8,8 @@ import manager.DownloadManager
 import objects.PickupItem
 
 abstract class Level : Scene() {
-    var downloadManager : DownloadManager? = null
     var player : Player? = null
+    var downloadManager : DownloadManager? = null
     open val spawnpoint = Vector2D(0, 0)
     val collisionList = mutableListOf<SolidRect>()
     val deathZoneList = mutableListOf<SolidRect>()
