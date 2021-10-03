@@ -1,7 +1,6 @@
 package scene
 
 import objects.Player
-import classes.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D

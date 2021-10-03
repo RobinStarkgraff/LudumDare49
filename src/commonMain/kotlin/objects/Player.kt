@@ -9,9 +9,6 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import scene.Level
 
 
 class Player(var scene: Level) {
@@ -69,13 +66,14 @@ class Player(var scene: Level) {
 
     private fun download() {
         playerImage.addUpdater {
-            scene.downloadManager?.download(0)
+            scene.downloadManager?.download(playerParent.pos.x, playerParent.pos.y);
         }
     }
 
     private fun die() {
         //reset all stuff
         playerParent.xy(scene.spawnpoint.x, scene.spawnpoint.y)
+    }
 
     private fun inventoryItemCallbacks() {
         if (inventoryObject != null) {

@@ -1,13 +1,12 @@
 package scene
 
 import objects.Player
-import classes.MovingObject
+import objects.MovingObject
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
-import objects.MovingObject
 import objects.WifiRouter
 
 class Level1 : Level() {
