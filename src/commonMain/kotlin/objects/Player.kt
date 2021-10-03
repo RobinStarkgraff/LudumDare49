@@ -4,7 +4,6 @@ package objects
 import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
-import com.soywiz.korau.sound.Sound
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
@@ -93,18 +92,13 @@ class Player(var scene: Level) {
         }
 
         playerImage.addUpdater {
-            for (pickUpItem in scene.pickupItemList) {
-                val distanceToObject = Vector2D.distance(pickUpItem.image.globalXY(), playerImage.globalXY())
+            for (interactableItem in scene.interactableList) {
+                val distanceToObject = Vector2D.distance(interactableItem.image.globalXY(), playerImage.globalXY())
                 if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
                     continue
                 }
 
                 //TODO: Give Pickup speechbubble
-
-                if (scene.views.keys.pressing(Key.E)) {
-                    inventoryObject = pickUpItem
-                    inventoryObject?.putIntoInventory()
-                }
             }
         }
     }
