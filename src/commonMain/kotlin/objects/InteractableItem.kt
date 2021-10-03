@@ -8,6 +8,6 @@ open class InteractableItem(val image: View) {
         const val INTERACTION_DISTANCE = 50.0
     }
 
-    fun interact(scene: Level) {
+    open fun interact(scene: Level) {
     }
 }
