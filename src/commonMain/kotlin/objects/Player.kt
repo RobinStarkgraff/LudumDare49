@@ -1,5 +1,6 @@
 package objects
 
+
 import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
@@ -8,16 +9,20 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import scene.Level
+
 
 class Player(var scene: Level) {
     companion object {
         const val SPEED = 3
         const val SIZE = 3
-
         val COLLISION_SIZE = Vector2D(30, 20)
         val COLLISION_POS = Vector2D(16, 20)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 8
+        var inventoryObject: PickupItem? = null
     }
 
     private var playerParent = Container()
@@ -31,6 +36,7 @@ class Player(var scene: Level) {
         createCollisionShape()
         movement()
         deathZoneCallback()
+        inventoryItemCallbacks()
         download()
 
     }
@@ -60,6 +66,7 @@ class Player(var scene: Level) {
             die()
         }
     }
+
     private fun download() {
         playerImage.addUpdater {
             scene.downloadManager?.download(0)
@@ -69,6 +76,32 @@ class Player(var scene: Level) {
     private fun die() {
         //reset all stuff
         playerParent.xy(scene.spawnpoint.x, scene.spawnpoint.y)
+
+    private fun inventoryItemCallbacks() {
+        if (inventoryObject != null) {
+            return
+        }
+
+        playerImage.addUpdater {
+            for (pickUpItem in scene.pickupItemList) {
+                val distanceToObject = Vector2D.distance(pickUpItem.image.globalXY(), playerImage.globalXY())
+                if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
+                    continue
+                }
+
+                //TODO: Give Pickup speechbubble
+
+                if (scene.views.keys.pressing(Key.E)) {
+                    inventoryObject = pickUpItem
+                    inventoryObject?.putIntoInventory()
+                }
+            }
+        }
+    }
+
+    private fun removeInventoryItem() {
+        inventoryObject?.image?.removeFromParent()
+        inventoryObject = null
     }
 
     private fun movement() {

@@ -6,6 +6,7 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
+import objects.MovingObject
 
 class Level2 : Level() {
     override suspend fun Container.sceneInit() {
