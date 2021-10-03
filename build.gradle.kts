@@ -2,6 +2,7 @@ import com.soywiz.korge.gradle.*
 
 buildscript {
 	val korgePluginVersion: String by project
+	val exposedVersion: String by project
 
 	repositories {
 		mavenLocal()
@@ -11,6 +12,10 @@ buildscript {
 	}
 	dependencies {
 		classpath("com.soywiz.korlibs.korge.plugins:korge-gradle-plugin:$korgePluginVersion")
+		classpath("org.jetbrains.exposed:exposed-core:$exposedVersion")
+		classpath("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+		classpath("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+		classpath("org.postgresql:postgresql:42.2.2")
 	}
 }
 
