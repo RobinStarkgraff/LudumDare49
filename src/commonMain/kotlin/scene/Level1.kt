@@ -1,11 +1,12 @@
 package scene
 
+import com.soywiz.korge.view.*
 import objects.Player
 import objects.MovingObject
-import com.soywiz.korge.view.Container
-import com.soywiz.korge.view.solidRect
-import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
+import helper.SoundPlayer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import manager.DownloadManager
 import objects.Phone
 import objects.WifiRouter
@@ -15,7 +16,8 @@ class Level1 : Level() {
         player = Player(this@Level1)
         downloadManager = DownloadManager(this@Level1)
         val death = solidRect(50, 50).xy(200, 200)
-        deathZoneList.add(death)
+        death.anchor(0.5, 1.0)
+        //collisionList.add(death)
         val router = WifiRouter(500.0, 500.0, 300.0, null, this@Level1)
         val movingObject = MovingObject(
             25.0,
@@ -28,6 +30,13 @@ class Level1 : Level() {
         deathZoneList.add(movingObject.image)
         val phone = Phone()
         addChild(phone.container)
+
+        GlobalScope.launch { SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1) }
+        sceneView.addUpdater {
+            sceneView.children.sortBy {
+                it.pos.y
+            }
+        }
     }
 
     override suspend fun nextScene() {
