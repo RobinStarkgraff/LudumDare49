@@ -4,6 +4,9 @@ import com.soywiz.korge.view.*
 import objects.Player
 import objects.MovingObject
 import com.soywiz.korma.geom.Vector2D
+import helper.SoundPlayer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import manager.DownloadManager
 import objects.Phone
 import objects.WifiRouter
@@ -28,6 +31,7 @@ class Level1 : Level() {
         val phone = Phone()
         addChild(phone.container)
 
+        GlobalScope.launch { SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1) }
         sceneView.addUpdater {
             sceneView.children.sortBy {
                 it.pos.y
