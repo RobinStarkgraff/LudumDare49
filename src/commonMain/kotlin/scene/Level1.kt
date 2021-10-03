@@ -4,6 +4,7 @@ import com.soywiz.korge.view.*
 import objects.Player
 import objects.MovingObject
 import com.soywiz.korma.geom.Vector2D
+import helper.ImageLibrary
 import helper.SoundPlayer
 import manager.DownloadManager
 import objects.Phone
@@ -13,29 +14,13 @@ class Level1 : Level() {
     override suspend fun Container.sceneInit() {
         player = Player(this@Level1)
         downloadManager = DownloadManager(this@Level1)
-        val death = solidRect(50, 50).xy(200, 200)
-        death.anchor(0.5, 1.0)
-        //collisionList.add(death)
-        val router = WifiRouter(500.0, 500.0, 300.0, null, this@Level1)
-        val movingObject = MovingObject(
-            25.0,
-            25.0,
-            5.0,
-            listOf(Vector2D(0, 0), Vector2D(300, 0), Vector2D(300, 300), Vector2D(0, 300)),
-            true,
-            this@Level1
-        )
-        deathZoneList.add(movingObject.image)
-        val phone = Phone()
-        addChild(phone.container)
-
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
+        drawImages()
+    }
 
-        sceneView.addUpdater {
-            sceneView.children.sortBy {
-                it.pos.y
-            }
-        }
+    override suspend fun drawImages() {
+        super.drawImages()
+        val backgroundImage = ImageLibrary.loadImage(this, ImageLibrary.BACKGROUND_IMAGE_FLAT, 0.5, 0.5)
     }
 
     override suspend fun nextScene() {

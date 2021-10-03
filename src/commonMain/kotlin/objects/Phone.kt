@@ -4,7 +4,7 @@ import com.soywiz.korge.view.*
 import helper.StaticData
 import kotlin.math.pow
 
-class Phone() {
+class Phone {
 
     val container = Container()
 
