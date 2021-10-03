@@ -16,7 +16,7 @@ class Player(var scene: Level) {
         const val SPEED = 3
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(30, 20)
-        val COLLISION_POS = Vector2D(16, 20)
+        val COLLISION_POS = Vector2D(0.0, -2.5)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 6
         var inventoryObject: PickupItem? = null
@@ -44,13 +44,13 @@ class Player(var scene: Level) {
 
 
     private fun createCollisionShape() {
-        collisionShape = playerParent.solidRect(COLLISION_SIZE.x, COLLISION_SIZE.y, RGBA(0, 0, 0, 0))
+        collisionShape = playerParent.solidRect(COLLISION_SIZE.x, COLLISION_SIZE.y, RGBA(255, 0, 0, 0))
         collisionShape.anchor(0.5, 0.5)
         collisionShape.xy(COLLISION_POS.x * SCALE, COLLISION_POS.y * SCALE)
     }
 
     private fun createSprite(){
-        playerImage = playerParent.sprite()
+        playerImage = playerParent.sprite().anchor(0.5, 0.8)
         playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
     }
 
