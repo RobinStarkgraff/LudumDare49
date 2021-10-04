@@ -71,9 +71,9 @@ class Player(var scene: Level) {
         }
     }
 
-    private fun die() {
-        //reset all stuff
-        playerParent.xy(scene.spawnpoint.x, scene.spawnpoint.y)
+    public fun die() {
+        scene.phone?.downloaded = 0.0
+        physicsBody.position = Vector2D(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
     private fun setupStepSound() {
