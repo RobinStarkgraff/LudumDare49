@@ -67,13 +67,6 @@ class Level2 : Level() {
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_THREE).anchor(0.0,0.8).xy(860, 265),level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_ONE).anchor(0.0,0.8).xy(806, 386),level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_ONE).anchor(0.0,0.8).xy(768, 1352),level)
-
-
-
-
-
-
-
     }
 
     override suspend fun nextScene() {

@@ -7,11 +7,13 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import helper.SoundPlayer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MenuScene : Scene() {
     override suspend fun Container.sceneInit() {
-        SoundPlayer.playBackgroundMusic("sample_music.mp3")
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGMMENU)
 
 
         val start = roundRect(300.0, 50.0, 5.0, fill = Colors["#b9aea0"]).xy(500, 300)
@@ -36,9 +38,11 @@ class MenuScene : Scene() {
 
 
         donate.onClick {
+            GlobalScope.launch {SoundPlayer.playSound(SoundPlayer.MENUCLICK)}
             eric.color = RGBA(255, 255, 255, 255)
         }
         start.onClick {
+            GlobalScope.launch {SoundPlayer.playSound(SoundPlayer.MENUCLICK)}
             sceneContainer.changeTo<Level1>()
         }
 
@@ -60,6 +64,7 @@ class MenuScene : Scene() {
 
         mute.onClick {
             for ((key, value) in volumeMap.entries) {
+                GlobalScope.launch {SoundPlayer.playSound(SoundPlayer.MENUCLICK)}
                 key.fill = grey
                 SoundPlayer.changeVolume(0.0)
             }
@@ -67,6 +72,7 @@ class MenuScene : Scene() {
 
         for ((key, value) in volumeMap.entries) {
             key.onClick {
+                GlobalScope.launch {SoundPlayer.playSound(SoundPlayer.MENUCLICK)}
                 volumeColorChange(key)
             }
         }

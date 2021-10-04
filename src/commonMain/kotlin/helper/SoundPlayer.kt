@@ -15,10 +15,17 @@ class SoundPlayer {
         const val SAMPLE_MUSIC = "sample_music.mp3"
         const val BGM1 = "bgm_08.mp3"
 
+        const val BGMMENU = "bgm_menu_01.mp3"
+
         const val FOOTSTEPS = "footsteps2long.mp3"
 
         const val DOOROPEN = "door_open.wav"
         const val DOORCLOSE = "door_close.wav"
+
+        const val SWITCHON = "switch_on.mp3"
+        const val SWITCHOFF = "switch_off.mp3"
+
+        const val MENUCLICK = "menuclick.mp3"
 
         var volume = 0.0
 
@@ -32,8 +39,8 @@ class SoundPlayer {
             return channel
         }
 
-        fun startContinuousSound(channel: SoundChannel) {
-            if (channel.playing) {
+        fun startContinuousSound(channel: SoundChannel?) {
+            if (channel == null || channel.playing) {
                 return
             }
 
@@ -41,8 +48,8 @@ class SoundPlayer {
             channel.togglePaused()
         }
 
-        fun stopContinuousSound(channel: SoundChannel) {
-            if (!channel.playing) {
+        fun stopContinuousSound(channel: SoundChannel?) {
+            if (channel == null || !channel.playing) {
                 return
             }
 
@@ -60,6 +67,12 @@ class SoundPlayer {
             val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
             musicChannel = music.playForever()
             musicChannel?.volume = volume
+        }
+        suspend fun playBackgroundMusic(musicPath: String, volumeadjust: Double) {
+            musicChannel?.stop()
+            val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
+            musicChannel = music.playForever()
+            if (volume == 0.0) musicChannel?.volume = volume else musicChannel?.volume = volume + volumeadjust
         }
 
         fun changeVolume(volume: Double) {

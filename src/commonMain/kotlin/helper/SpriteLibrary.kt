@@ -33,6 +33,7 @@ class SpriteLibrary {
         lateinit var LEVEL1_ROUTER_TABLE: Bitmap
         lateinit var LEVEL1_ROUTER: SpriteAnimation
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
+        lateinit var LEVEL1_LAMP: SpriteAnimation
 
         lateinit var PARK_PARK: Bitmap
         lateinit var PARK_CROCUP: SpriteAnimation
@@ -55,6 +56,7 @@ class SpriteLibrary {
 
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
+        lateinit var PHONE: SpriteAnimation
 
 
         suspend fun init() {
@@ -81,6 +83,7 @@ class SpriteLibrary {
             LEVEL1_ROUTER_TABLE = loadBitmap("art/furniture/router_table.png", 3.0)
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
+            LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
 
             PARK_PARK = loadBitmap("park/background/park.png", 3.0)
             PARK_LANDINGSTAGE = loadBitmap("park/background/landingstage.png", 3.0)
@@ -102,6 +105,7 @@ class SpriteLibrary {
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
+            PHONE = loadAnim("art/bitmap/Phone.png", Player.SCALE, Vector2D(64, 109), 5)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {
