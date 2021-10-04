@@ -1,6 +1,7 @@
 package physics.primitives
 
 import COLLISION_COLOR
+import com.soywiz.korge.view.RectBase
 import com.soywiz.korge.view.anchor
 import com.soywiz.korge.view.solidRect
 import com.soywiz.korge.view.xy
@@ -15,6 +16,9 @@ import kotlin.math.sign
 
 
 class BoxCollider(var position: Vector2D, var width: Double = 1.0, var height: Double = 1.0, owner: PhysicsBody) : Collider(position, owner) {
+
+
+    constructor(rect: RectBase, physicsBody: PhysicsBody) : this(Vector2D(rect.pos.x + (0.5 - rect.anchorX)*rect.width, rect.pos.y + (0.5 - rect.anchorY)*rect.height), rect.width, rect.height, physicsBody)
 
     override fun getCollisionInfo(other: Collider): CollisionManifold {
         if (other is BoxCollider)
