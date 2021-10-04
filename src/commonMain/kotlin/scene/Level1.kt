@@ -12,6 +12,8 @@ import helper.SpriteLibrary
 import objects.Phone
 import objects.WifiRouter
 import objects.interactables.StateSwapItem
+import physics.PhysicsBody
+import physics.primitives.BoxCollider
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
@@ -53,7 +55,17 @@ class Level1 : Level() {
         il.sprite(SpriteLibrary.LEVEL1_ROUTER).anchor(0, 1).xy(850, 554).playAnimationLooped(spriteDisplayTime = 200.milliseconds)
 
         //Colliders
-        collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 650))
+        val level = PhysicsBody()
+        BoxCollider(Vector2D(650, 660), 700.0, 5.0, level)
+        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
+        BoxCollider(Vector2D(330, 490), 5.0, 700.0, level)
+        BoxCollider(Vector2D(947, 490), 5.0, 700.0, level)
+        BoxCollider(Vector2D(850, 340), 300.0, 30.0, level)
+        BoxCollider(Vector2D(705, 325), 10.0, 120.0, level)
+        BoxCollider(Vector2D(850, 520), 300.0, 30.0, level)
+        BoxCollider(Vector2D(705, 490), 10.0, 80.0, level)
+        BoxCollider(Vector2D(705, 160), 10.0, 60.0, level)
+        /*collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 650))
         collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 140))
         collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(325, 140))
         collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(947, 140))
@@ -61,7 +73,7 @@ class Level1 : Level() {
         collisionList.add(fg.solidRect(10, 120, COLLISION_COLOR).xy(700, 270))
         collisionList.add(fg.solidRect(300, 30, COLLISION_COLOR).xy(700, 495))
         collisionList.add(fg.solidRect(10, 80, COLLISION_COLOR).xy(700, 450))
-        collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))
+        collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))*/
     }
 
     override suspend fun nextScene() {
