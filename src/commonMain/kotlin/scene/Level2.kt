@@ -76,11 +76,6 @@ class Level2 : Level() {
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_THREE).anchor(0.0, 0.8).xy(860, 265), level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_ONE).anchor(0.0, 0.8).xy(806, 386), level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_TREE_ONE).anchor(0.0, 0.8).xy(768, 1352), level)
-    }
-
-    override val objective: ObjectiveItem
-        get() = TODO("Not yet implemented")
-
         BoxCollider(il.sprite(SpriteLibrary.PARK_WALL).xy(-107, 420),level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_WALL_BOTTOM).anchor(0.0, 0.5).xy(517, 1755),level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_WIFI_STONE).anchor(0.0,0.5).xy(-30, 775),level)
@@ -171,6 +166,12 @@ class Level2 : Level() {
         BoxCollider(Vector2D(50, 630), 50.0, 100.0, level)
         BoxCollider(Vector2D(80, 680), 50.0, 100.0, level)
         BoxCollider(Vector2D(130, 730), 50.0, 100.0, level)
+    }
+
+    override val objective: ObjectiveItem
+        get() = TODO("Not yet implemented")
+
+
 
     override fun downloadComplete() {
         TODO("Not yet implemented")
