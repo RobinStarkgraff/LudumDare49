@@ -16,7 +16,7 @@ open class Car(
     private val loop: Boolean,
     private val scene: Level
 ) {
-    var physicsBody = PhysicsBody(sprite.pos)
+    var physicsBody = PhysicsBody(sprite.pos, dynamic = true)
     var boxTrigger = BoxTrigger(sprite.pos, sprite.width - 10, sprite.height - 10)  {
         if(it == scene.player?.physicsBody) {
             scene.player?.die()
@@ -41,8 +41,10 @@ open class Car(
     }
 
     private fun move() {
+        println("move")
         val dir = (waypoints[currentWaypoint] - sprite.pos).normalized
         physicsBody.velocity = dir * moveSpeed
+        println(physicsBody.velocity)
         sprite.xy(physicsBody.position)
         boxTrigger.position = sprite.pos + Vector2D(0.0, (sprite.height)/2)
     }
