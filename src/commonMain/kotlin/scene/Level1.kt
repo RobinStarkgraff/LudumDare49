@@ -9,6 +9,7 @@ import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import manager.DownloadManager
+import objects.interactables.StateSwapItem
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
@@ -30,6 +31,10 @@ class Level1 : Level() {
         val bed = il.sprite(SpriteLibrary.LEVEL1_BED).xy(340, 130)
         collisionList.add(bed)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
+        val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
+        StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT)
+        val bathroomDoor = il.sprite(anchorY = 1.0).xy(700, 478)
+        StateSwapItem(this, bathroomDoor, SpriteLibrary.DOOR_SWING_LEFT)
         collisionList.add(il.sprite(SpriteLibrary.LEVEL1_NIGHT_STAND).xy(410, 160))
         collisionList.add(il.sprite(SpriteLibrary.LEVEL1_DESK).xy(550, 130))
         il.sprite(SpriteLibrary.LEVEL1_PLANT).xy(660, 130)
