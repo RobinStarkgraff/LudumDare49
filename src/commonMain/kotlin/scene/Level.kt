@@ -5,7 +5,6 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import objects.MovingObject
-import objects.PickupItem
 import objects.Phone
 import objects.interactables.Interactable
 

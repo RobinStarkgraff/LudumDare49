@@ -16,10 +16,10 @@ class InvisibleTrigger(scene: Level, width: Int, height: Int, x: Int, y: Int, in
         rect = SolidRect(width, height, StaticData.triggerTestColor).xy(x, y)
         scene.sceneView.addChild(rect)
 
-        rect.onCollision({it == scene.player?.collisionShape && !currentlyActive}) {
+        /*rect.onCollision({it == scene.player?.collisionShape && !currentlyActive}) {
             currentlyActive = true
             interactable.interact()
-        }
+        }*/
 
         rect.onCollisionExit {
             currentlyActive = false

@@ -7,9 +7,7 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.*
-import helper.SpriteLibrary
 import physics.primitives.BoxCollider
 import com.soywiz.korio.async.launch
 import com.soywiz.korma.geom.Vector2D
@@ -21,7 +19,7 @@ import objects.interactables.PickupItem
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 120
+        const val SPEED = 3
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
@@ -68,7 +66,7 @@ class Player(var scene: Level) {
     }
 
     private fun deathZoneCallback() {
-      
+
     }
 
     private fun download() {
@@ -90,7 +88,7 @@ class Player(var scene: Level) {
         playerImage.addUpdater {
             for (interactableItem in scene.interactableList) {
                 //Keep in mind that this needs to be properly taken care of for every object
-                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - collisionShape.pos)
+                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - playerParent.pos)
                 if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
@@ -126,31 +124,17 @@ class Player(var scene: Level) {
                 playerParent.xy(x + velocity.x, y + velocity.y)
             }
 
-            if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
-            else SoundPlayer.stopContinuousSound(walkingSound)
+            //if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
+            //else SoundPlayer.stopContinuousSound(walkingSound)
 
-            if (movement.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
-            else if (movement.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
-            else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
-            else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
+            if (velocity.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
+            else if (velocity.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
+            else if (velocity.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
+            else if (velocity.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
 
             println(playerParent.pos)
         }
-
-        collisionShape.onCollision({ scene.collisionList.contains(it) }) {
-            if (movement.x != 0.0) {
-                playerParent.x -= movement.x
-            }
-            if (movement.y != 0.0) {
-                playerParent.y -= movement.y
-            }
-        }
-        return correctNormal
-    }
-
-    private fun scalar(a: Vector2D, b: Vector2D): Double {
-        return (a.x * b.x + a.y * b.y) / a.magnitude * b.magnitude
     }
 }
 
