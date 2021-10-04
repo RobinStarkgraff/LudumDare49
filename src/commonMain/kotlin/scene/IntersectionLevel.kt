@@ -11,6 +11,8 @@ import helper.SpriteLibrary
 import objects.Phone
 import objects.WifiRouter
 import objects.interactables.StateSwapItem
+import physics.PhysicsBody
+import physics.primitives.BoxCollider
 
 class IntersectionLevel : Level() {
     override suspend fun Container.sceneInit() {
@@ -19,7 +21,7 @@ class IntersectionLevel : Level() {
         phone = Phone(this@IntersectionLevel)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
-        WifiRouter(RESOLUTION.x / 2, RESOLUTION.y / 2, 400.0, null, this@IntersectionLevel)
+        WifiRouter(RESOLUTION.x / 2, RESOLUTION.y / 2, 100.0, null, this@IntersectionLevel)
     }
 
     override suspend fun drawImages() {
@@ -41,6 +43,16 @@ class IntersectionLevel : Level() {
         //add collision
         val fence_garden_west = fg.sprite(SpriteLibrary.INTERSECTIONLEVEL_GARDEN_FENCE_WESTEAST).xy(180.0, 475.5)
         //add collision
+
+        val tree1 = fg.sprite(SpriteLibrary.INTERSECTIONLEVEL_TREE_1).xy(930.0, 30.0)
+        val tree2 = fg.sprite(SpriteLibrary.INTERSECTIONLEVEL_TREE_2).xy(820.0, 110.0)
+        val tree3 = fg.sprite(SpriteLibrary.INTERSECTIONLEVEL_TREE_3).xy(720.0, 30.0)
+
+        val level = PhysicsBody()
+        BoxCollider(Vector2D(630, 70), 1000.0, 5.0, level)
+        BoxCollider(Vector2D(630, 710), 1000.0, 5.0, level)
+        BoxCollider(Vector2D(157.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
+        BoxCollider(Vector2D(1120.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
 
 //        il.sprite(SpriteLibrary.LEVEL1_KITCHEN_WALL).anchor(0.0, .7).xy(691, 346)
 //        fg.sprite(SpriteLibrary.LEVEL1_SIDE_WALLS).anchor(0.5, 0.0).xy(RESOLUTION.x/2, -50.0)
