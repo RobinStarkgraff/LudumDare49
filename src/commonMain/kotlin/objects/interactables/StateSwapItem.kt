@@ -27,7 +27,7 @@ class StateSwapItem(
     init {
         sprite.playAnimation(animation)
         sprite.setFrame(state.toInt())
-        rectSize = if(rect == null) null else Point(rect.width, rect.height)
+        rectSize = if (rect == null) null else Point(rect.width, rect.height)
     }
 
     override fun interact() {
@@ -35,15 +35,12 @@ class StateSwapItem(
             sprite.setFrame(0)
             GlobalScope.launch { SoundPlayer.playSound(soundone) }
             rectSize?.let {
-                rect?.size(rectSize.x,rectSize.y)
-                println("getting started")
+                rect?.size(rectSize.x, rectSize.y)
             }
-            println("Now: $rect")
         } else {
             sprite.setFrame(1)
             GlobalScope.launch { SoundPlayer.playSound(soundtwo) }
-            rect?.size(0,0)
-            println("Later: $rect")
+            rect?.size(0, 0)
         }
         state = !state
     }
