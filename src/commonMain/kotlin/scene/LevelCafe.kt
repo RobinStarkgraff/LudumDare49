@@ -9,18 +9,24 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import objects.Phone
 import objects.Player
+import objects.WifiRouter
 import objects.interactables.ObjectiveItem
+import objects.interactables.PickupItem
 import objects.interactables.StateSwapItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
 class LevelCafe : Level() {
     override suspend fun Container.sceneInit() {
-        spawnpoint = Vector2D(500, 400)
+        spawnpoint = Vector2D(830, 377)
         player = Player(this@LevelCafe)
         phone = Phone(this@LevelCafe)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
+        //Specific setup
+        phone!!.downloadDisabled = true
+
+        sceneView.addUpdater { if (objective.completed) phone!!.downloadDisabled = false }
     }
 
     override fun downloadComplete() {
@@ -37,7 +43,6 @@ class LevelCafe : Level() {
         super.drawImages()
         val level = PhysicsBody()
 
-        bg.sprite(SpriteLibrary.CAFE_BACKGROUND).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
         BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR).anchor(0.5, 0.9).xy(500, 360), level).cutInHalf()
         BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR_ALT).anchor(0.5, 0.9).xy(400, 360), level).cutInHalf()
@@ -53,8 +58,28 @@ class LevelCafe : Level() {
         BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR).anchor(0.5, 0.9).xy(435, 430), level).cutInHalf()
         BoxCollider(il.sprite(SpriteLibrary.CAFE_TABLE).anchor(0.5, 0.9).xy(385, 440), level).cutInHalf()
 
-        val levelDoor = il.sprite(anchorY = 1.0).xy(808, 470)
-        StateSwapItem(this, levelDoor, SpriteLibrary.DOOR_SWING_RIGHT, SoundPlayer.DOORKEYS, SoundPlayer.DOORKEYS)
+        il.sprite(SpriteLibrary.DOOR, anchorY = 1.0).xy(808, 470)
+
+
+        val keys = PickupItem(this, il.image(SpriteLibrary.KEY_INGAME).xy(350, 244), SpriteLibrary.KEY_INVENTORY)
+
+        val hiddenBarista = bg.sprite(SpriteLibrary.KEY_INGAME).xy(820, 200)
+
+        objective = ObjectiveItem(
+            StateSwapItem(
+                this,
+                hiddenBarista,
+                SpriteLibrary.LEVEL1_LAMP,
+                null,
+                null,
+                inventoryItem = keys,
+                interactionDistance = 100.0
+            )
+        )
+
+        WifiRouter(600.0, 150.0, 200.0, this)
+
+        bg.sprite(SpriteLibrary.CAFE_BACKGROUND).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
         //Colliders
         BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
