@@ -76,8 +76,8 @@ class Level1 : Level() {
                 this,
                 levelDoor,
                 SpriteLibrary.DOOR_SWING_RIGHT,
-                SoundPlayer.DOORCLOSE,
-                SoundPlayer.DOOROPEN,
+                SoundPlayer.DOORKEYS,
+                SoundPlayer.DOORKEYS,
                 inventoryItem = keys
             )
         )
