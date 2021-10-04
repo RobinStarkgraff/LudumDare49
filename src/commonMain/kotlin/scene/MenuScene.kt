@@ -39,7 +39,7 @@ class MenuScene : Scene() {
             eric.color = RGBA(255, 255, 255, 255)
         }
         start.onClick {
-            sceneContainer.changeTo<Level1>()
+            sceneContainer.changeTo<Level2>()
         }
 
         val grey = Colors["949494"]

@@ -60,7 +60,7 @@ class Level1 : Level() {
     }
 
     override suspend fun nextScene() {
-        println("Level2")
+        println("park")
         sceneContainer.changeTo<Level2>()
         sceneDestroy()
     }
