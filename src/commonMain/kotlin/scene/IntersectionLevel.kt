@@ -34,10 +34,10 @@ class IntersectionLevel() : Level() {
         bg.sprite(SpriteLibrary.INTERSECTIONLEVEL_BASE).anchor(0.5, 0.5).xy(RESOLUTION.x/2, RESOLUTION.y/2)
         val level = PhysicsBody()
 
-        BoxCollider(Vector2D(RESOLUTION.x/2, 240.0), 1500.0, 5.0, level).render()
-        BoxCollider(Vector2D(630, 710), 1000.0, 5.0, level).render()
-        BoxCollider(Vector2D(157.0, (RESOLUTION.y/2)), 5.0, 700.0, level).render()
-        BoxCollider(Vector2D(1120.0, (RESOLUTION.y/2)), 5.0, 700.0, level).render()
+        BoxCollider(Vector2D(RESOLUTION.x/2, 240.0), 1500.0, 5.0, level)
+        BoxCollider(Vector2D(630, 710), 1000.0, 5.0, level)
+        BoxCollider(Vector2D(157.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
+        BoxCollider(Vector2D(1120.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
 
         val car1sprite = il.sprite(SpriteLibrary.INTERSECTIONLEVEL_CAR).anchor(0.5, 0.0).xy(300.0, 420.0)
         val car2sprite = il.sprite(SpriteLibrary.INTERSECTIONLEVEL_CAR).anchor(0.5, 0.0).xy(300.0, 520.0)
