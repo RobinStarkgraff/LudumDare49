@@ -8,14 +8,14 @@ import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
-import manager.DownloadManager
+import objects.Phone
 import objects.interactables.StateSwapItem
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level1)
-        downloadManager = DownloadManager(this@Level1)
+        phone = Phone(this@Level1)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
     }

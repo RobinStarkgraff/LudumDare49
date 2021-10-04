@@ -4,12 +4,12 @@ import objects.Player
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
-import manager.DownloadManager
+import objects.Phone
 import objects.interactables.Interactable
 
 abstract class Level : Scene() {
     var player : Player? = null
-    var downloadManager : DownloadManager? = null
+    var phone : Phone? = null
     open var spawnpoint = Vector2D(0, 0)
     val collisionList = mutableListOf<RectBase>()
     val deathZoneList = mutableListOf<SolidRect>()
@@ -17,11 +17,13 @@ abstract class Level : Scene() {
     var bg = Container()
     var il = Container()
     var fg = Container()
+    var ui = Container()
 
     open suspend fun drawImages() {
         sceneView.addChild(bg)
         sceneView.addChild(il)
         sceneView.addChild(fg)
+        sceneView.addChild(ui)
         sceneView.addUpdater {
             il.children.sortBy {
                 it.pos.y

@@ -73,7 +73,7 @@ class Player(var scene: Level) {
 
     private fun download() {
         playerImage.addUpdater {
-            scene.downloadManager?.download(playerParent.pos.x, playerParent.pos.y);
+            scene.phone?.download(playerParent.pos.x, playerParent.pos.y);
         }
     }
 
