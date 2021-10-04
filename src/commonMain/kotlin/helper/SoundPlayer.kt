@@ -18,7 +18,7 @@ class SoundPlayer {
 
         const val BGMMENU = "bgm_menu_01.mp3"
 
-        const val FOOTSTEPS = "footsteps2long.mp3"
+        const val FOOTSTEPS = "footsteps_long.mp3"
 
         const val DOOROPEN = "door_open.wav"
         const val DOORCLOSE = "door_close.wav"
@@ -28,7 +28,7 @@ class SoundPlayer {
 
         const val MENUCLICK = "menuclick.mp3"
 
-        const val KEYUP = "keys-pickup.mp3"
+        const val KEYUP = "keys_pickup.mp3"
         const val DOORKEYS = "door_keys.mp3"
 
         var volume = 0.0
