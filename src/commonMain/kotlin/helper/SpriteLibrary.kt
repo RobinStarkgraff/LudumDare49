@@ -35,6 +35,9 @@ class SpriteLibrary {
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
         lateinit var LEVEL1_LAMP: SpriteAnimation
 
+        lateinit var KEY_INGAME: Bitmap
+        lateinit var KEY_INVENTORY: Bitmap
+
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
         lateinit var PHONE: SpriteAnimation
@@ -65,6 +68,9 @@ class SpriteLibrary {
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
             LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
+
+            KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
+            KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)

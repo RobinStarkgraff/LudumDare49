@@ -19,15 +19,15 @@ import objects.interactables.PickupItem
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 120
+        const val SPEED = 120 * 5
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 6
-        var inventoryObject: PickupItem? = null
     }
 
+    var inventoryObject: PickupItem? = null
     private var playerParent = Container()
     private var playerImage = Sprite()
     var physicsBody = physics.PhysicsBody(dynamic = true)
@@ -86,7 +86,6 @@ class Player(var scene: Level) {
             for (interactableItem in scene.interactableList) {
                 //Keep in mind that this needs to be properly taken care of for every object
                 val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos)
-                println(distanceToObject)
                 if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
@@ -99,8 +98,8 @@ class Player(var scene: Level) {
         }
     }
 
-    private fun removeInventoryItem() {
-        inventoryObject?.image?.removeFromParent()
+    fun removeInventoryItem() {
+        inventoryObject?.destroySelf()
         inventoryObject = null
     }
 
@@ -132,8 +131,6 @@ class Player(var scene: Level) {
             else if (velocity.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
             else if (velocity.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
-
-            println(playerParent.pos)
         }
     }
 }

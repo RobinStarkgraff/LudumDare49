@@ -5,6 +5,8 @@ import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
 import objects.MovingObject
+import objects.interactables.Interactable
+import objects.interactables.ObjectiveItem
 
 class Level2 : Level() {
     override suspend fun Container.sceneInit() {
@@ -19,6 +21,13 @@ class Level2 : Level() {
                 this@Level2
         )
         movingObject.image.xy(100, 100)
+    }
+
+    override val objective: ObjectiveItem
+        get() = TODO("Not yet implemented")
+
+    override fun downloadComplete() {
+        TODO("Not yet implemented")
     }
 
     override suspend fun nextScene() {

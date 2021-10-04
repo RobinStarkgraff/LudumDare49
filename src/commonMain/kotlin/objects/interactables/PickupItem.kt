@@ -2,21 +2,41 @@ package objects.interactables
 
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.xy
+import com.soywiz.korim.bitmap.Bitmap
+import com.soywiz.korim.bitmap.slice
 import com.soywiz.korma.geom.Point
-import objects.Player
 import scene.Level
 
-class PickupItem(scene: Level, val image: Image, override val interactionDistance: Double = 100.0) : Interactable(scene, image.pos) {
+class PickupItem(override var scene: Level, val imageMap: Image, private val imageInventory: Bitmap, override var interactionDistance: Double = 100.0) : Interactable() {
     companion object {
-        private val INVENTORY_LOCATION = Point(255, 255)
+        private val INVENTORY_LOCATION = Point(0, 0)
     }
 
-    override fun interact() {
-        Player.inventoryObject = this
-        Player.inventoryObject?.putIntoInventory()
+    override var pos = imageMap.pos
+
+    private var destroy = false
+
+    init {
+        scene.interactableList.add(this)
+    }
+
+    override fun interact(): Boolean {
+        if (destroy) {
+            return false
+        }
+
+        scene.player?.inventoryObject = this
+        scene.player?.inventoryObject?.putIntoInventory()
+        return true
     }
 
     private fun putIntoInventory() {
-        image.xy(INVENTORY_LOCATION)
+        imageMap.bitmap = imageInventory.slice()
+        imageMap.xy(INVENTORY_LOCATION)
+    }
+
+    fun destroySelf() {
+        imageMap.scale = 0.0
+        destroy = true
     }
 }
