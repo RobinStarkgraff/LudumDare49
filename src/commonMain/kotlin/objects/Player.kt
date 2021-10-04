@@ -49,6 +49,7 @@ class Player(var scene: Level) {
     private fun createContainer() {
         playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
         physicsBody.position = playerParent.pos
+
     }
 
 

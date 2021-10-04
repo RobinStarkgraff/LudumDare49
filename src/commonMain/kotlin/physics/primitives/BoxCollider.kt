@@ -1,20 +1,29 @@
 package physics.primitives
 
+import COLLISION_COLOR
+import com.soywiz.korge.view.anchor
+import com.soywiz.korge.view.solidRect
+import com.soywiz.korge.view.xy
 import com.soywiz.korio.lang.unexpected
 import com.soywiz.korma.geom.Vector2D
 import physics.*
 import physics.util.abs
 import physics.util.rotationMatrix2x2
 import physics.util.unaryMinus
+import scene.Level
 import kotlin.math.sign
 
 
-class BoxCollider(position: Vector2D, var width: Double = 1.0, var height: Double = 1.0, owner: PhysicsBody) : Collider(position, owner) {
+class BoxCollider(var position: Vector2D, var width: Double = 1.0, var height: Double = 1.0, owner: PhysicsBody) : Collider(position, owner) {
 
     override fun getCollisionInfo(other: Collider): CollisionManifold {
         if (other is BoxCollider)
             return getCollisionWithBox(other);
         throw unexpected("cant handle collision with $other")
+    }
+
+    fun render() {
+        val solidRect = Level.SCENE_CONTAINER.currentScene?.sceneView?.solidRect(width, height, COLLISION_COLOR)?.anchor(0.5, 0.5)?.xy(position.x, position.y)
     }
 
     private fun getCollisionWithBox(other: BoxCollider): CollisionManifold {
