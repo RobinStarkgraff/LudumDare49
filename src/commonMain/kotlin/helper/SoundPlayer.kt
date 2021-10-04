@@ -39,8 +39,8 @@ class SoundPlayer {
             return channel
         }
 
-        fun startContinuousSound(channel: SoundChannel) {
-            if (channel.playing) {
+        fun startContinuousSound(channel: SoundChannel?) {
+            if (channel == null || channel.playing) {
                 return
             }
 
@@ -48,8 +48,8 @@ class SoundPlayer {
             channel.togglePaused()
         }
 
-        fun stopContinuousSound(channel: SoundChannel) {
-            if (!channel.playing) {
+        fun stopContinuousSound(channel: SoundChannel?) {
+            if (channel == null || !channel.playing) {
                 return
             }
 
