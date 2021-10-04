@@ -7,9 +7,12 @@ import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import objects.*
+import objects.Car
+import objects.Phone
+import objects.Player
+import objects.WifiRouter
 import objects.interactables.ObjectiveItem
-import objects.interactables.StateSwapItem
+import objects.interactables.PickupItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
@@ -65,33 +68,20 @@ class IntersectionLevel() : Level() {
             true,
             this
         )
-        // Take out after first upload
-        val levelDoor = il.sprite(anchorY = 1.0).xy(811, 655)
-        objective = ObjectiveItem(
-                StateSwapItem(
-                        this,
-                        levelDoor,
-                        SpriteLibrary.DOOR_SWING_RIGHT,
-                        SoundPlayer.DOORKEYS,
-                        SoundPlayer.DOORKEYS,
-                )
-        )
+
+        objective = ObjectiveItem(PickupItem(this, Image(SpriteLibrary.KEY_INVENTORY), SpriteLibrary.KEY_INVENTORY))
+        objective.completed = true
     }
 
     override fun downloadComplete() {
-        //TODO("Not yet implemented")
-        //Just for first upload
         sceneView.addUpdater {
-            if (objective.completed) {
-                GlobalScope.launch { nextScene() }
-            }
+            GlobalScope.launch { nextScene() }
         }
     }
 
     override suspend fun nextScene() {
-        println("Level3")
-        sceneDestroy()
-        sceneContainer.changeTo<MenuScene>()
+        super.nextScene()
+        sceneContainer.changeTo<LevelCafe>()
 
     }
 }

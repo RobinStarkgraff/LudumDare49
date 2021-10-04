@@ -16,7 +16,7 @@ open class Car(
     private val loop: Boolean,
     private val scene: Level
 ) {
-    var physicsBody = PhysicsBody(sprite.pos)
+    var physicsBody = PhysicsBody(sprite.pos, dynamic = true)
     var boxTrigger = BoxTrigger(sprite.pos, sprite.width - 10, sprite.height - 10)  {
         if(it == scene.player?.physicsBody) {
             scene.player?.die()

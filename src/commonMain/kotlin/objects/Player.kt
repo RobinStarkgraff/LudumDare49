@@ -136,6 +136,7 @@ class Player(var scene: Level) {
         playerParent.addUpdater { dt ->
             var velocity = Vector2D(0, 0)
             val scale = dt / 16.milliseconds
+            //println("Physicsbody is: ${physicsBody.dynamic}")
             if(physicsBody.dynamic)
             {
                 if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x = -1.0
