@@ -13,10 +13,11 @@ class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
 		SpriteLibrary.init()
         Level.SCENE_CONTAINER = sceneContainer
-		sceneContainer.changeTo<MenuScene>()
+		sceneContainer.changeTo<Level2>()
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
             PhysicsSimulation.physicsStep()
         }
         ScreenDebugger(sceneContainer)
     }
+
 }

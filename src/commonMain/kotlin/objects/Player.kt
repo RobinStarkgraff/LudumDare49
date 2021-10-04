@@ -108,18 +108,23 @@ class Player(var scene: Level) {
         playerParent.addUpdater { dt ->
             var velocity = Vector2D(0, 0)
             val scale = dt / 16.milliseconds
-            if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x -= 1.0
-            if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x += 1.0
-            if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y -= 1.0
-            if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) velocity.y += 1.0
+            if(physicsBody.dynamic)
+            {
 
-            if (velocity.length > 0) {
-                velocity.normalize()
-                velocity *= SPEED
-                velocity *= scale
+                if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x = -1.0
+                if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x = 1.0
+                if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y = -1.0
+                if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) velocity.y = 1.0
+
+                if (velocity.length > 0) {
+                    velocity.normalize()
+                    velocity *= SPEED
+                    velocity *= scale
+                }
+
+                physicsBody.velocity = velocity
             }
 
-            physicsBody.velocity = velocity
             playerParent.pos = physicsBody.position
 
             if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
