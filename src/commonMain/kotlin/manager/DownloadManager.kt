@@ -15,26 +15,26 @@ class DownloadManager(private val scene: Level) {
 
     private var downloaded: Double = 0.0
     private var downloadComplete = false
+    private var signalQuality = 0
 
     val wifiRouterList = mutableListOf<WifiRouter>()
 
     fun download(x: Double, y: Double) {
-
-
         if (downloaded >= MAX_DOWNLOAD && !downloadComplete) {
             downloadComplete = true
             GlobalScope.launch {scene.nextScene() }
             return
         }
 
-        when (getSignalQuality(x, y)) {
+        signalQuality = getSignalQuality(x, y)
+
+        when (signalQuality) {
             0 -> downloaded += 0.0 * SPEED
             1 -> downloaded += 0.005 * SPEED
             2 -> downloaded += 0.01 * SPEED
             3 -> downloaded += 0.075 * SPEED
             4 -> downloaded += 0.2 * SPEED
         }
-        //println("${downloaded.roundToInt()} percent downloaded")
     }
 
     private fun getNextRouter(x: Double, y: Double) : WifiRouter? {
