@@ -130,8 +130,6 @@ class SpriteLibrary {
 
             PARK_PARK = loadBitmap("park/background/park.png", 3.0)
             PARK_LANDINGSTAGE = loadBitmap("park/background/landingstage.png", 3.0)
-            PARK_CROCUP = loadAnim("park/objects/CrocDoc.png", 3.0, Vector2D(13, 48), 4)
-            PARK_CROCDOWN = loadAnim("park/objects/CrocDoc_Down.png", 3.0, Vector2D(13, 48), 4)
             PARK_TURTLE = loadAnim("park/objects/turtle.png", 3.0, Vector2D(26, 10), 4)
             PARK_CAULIFLOWER = loadBitmap("park/objects/cauliflower.png", 3.0)
             PARK_GATE_TOP = loadBitmap("park/objects/gate_top.png", 3.0)
@@ -142,9 +140,9 @@ class SpriteLibrary {
             PARK_WALL = loadBitmap("park/objects/wall.png", 3.0)
             PARK_WALL_BOTTOM = loadBitmap("park/objects/wall_bottom.png", 3.0)
             PARK_WIFI_STONE = loadBitmap("park/objects/wifi_stone.png", 3.0)
-            PARK_TREE_ONE = loadBitmap("park/objects/tree1.png", 3.0)
-            PARK_TREE_TWO = loadBitmap("park/objects/tree2.png", 3.0)
-            PARK_TREE_THREE = loadBitmap("park/objects/tree3.png", 3.0)
+            PARK_TREE_ONE = loadBitmap("park/objects/tree_one.png", 3.0)
+            PARK_TREE_TWO = loadBitmap("park/objects/tree_two.png", 3.0)
+            PARK_TREE_THREE = loadBitmap("park/objects/tree_three.png", 3.0)
 
             CAFE_BACKGROUND = loadBitmap("art/background/cafe_background.png", 3.0)
             CAFE_CHAIR = loadBitmap("art/furniture/chair.png", 3.0)
