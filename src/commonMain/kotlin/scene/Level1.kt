@@ -57,7 +57,6 @@ class Level1 : Level() {
         collisionList.add(fg.solidRect(300, 30, COLLISION_COLOR).xy(700, 495))
         collisionList.add(fg.solidRect(10, 80, COLLISION_COLOR).xy(700, 450))
         collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))
-
     }
 
     override suspend fun nextScene() {

@@ -81,6 +81,7 @@ class SpriteLibrary {
         ): SpriteAnimation {
             return loadAnim(path, scale, size, size, frameCount, flip)
         }
+    }
 
         private suspend fun loadAnim(
             path: String,

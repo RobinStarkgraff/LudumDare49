@@ -2,3 +2,7 @@
 /.gradle
 /build
 *.iml
+.vscode/settings.json
+.project
+.settings/org.eclipse.buildship.core.prefs
+.classpath
