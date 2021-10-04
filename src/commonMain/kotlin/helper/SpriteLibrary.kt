@@ -75,6 +75,8 @@ class SpriteLibrary {
 
         lateinit var KEY_INGAME: Bitmap
         lateinit var KEY_INVENTORY: Bitmap
+        lateinit var COIN_INGAME: Bitmap
+        lateinit var COIN_INVENTORY: Bitmap
 
         lateinit var DOOR: Bitmap
 
@@ -148,6 +150,9 @@ class SpriteLibrary {
 
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
+
+            KEY_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
+            KEY_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
 
             DOOR = loadBitmap("art/objects/door.png", 3.0)
 

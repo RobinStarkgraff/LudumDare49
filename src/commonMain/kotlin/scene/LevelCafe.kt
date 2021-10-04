@@ -70,8 +70,8 @@ class LevelCafe : Level() {
                 this,
                 hiddenBarista,
                 SpriteLibrary.LEVEL1_LAMP,
-                SoundPlayer.DOORKEYS,
-                SoundPlayer.DOORKEYS,
+                null,
+                null,
                 inventoryItem = keys,
                 interactionDistance = 100.0
             )
