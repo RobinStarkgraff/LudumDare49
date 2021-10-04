@@ -39,8 +39,8 @@ class SoundPlayer {
             return channel
         }
 
-        fun startContinuousSound(channel: SoundChannel) {
-            if (channel.playing) {
+        fun startContinuousSound(channel: SoundChannel?) {
+            if (channel == null || channel.playing) {
                 return
             }
 
@@ -48,8 +48,8 @@ class SoundPlayer {
             channel.togglePaused()
         }
 
-        fun stopContinuousSound(channel: SoundChannel) {
-            if (!channel.playing) {
+        fun stopContinuousSound(channel: SoundChannel?) {
+            if (channel == null || !channel.playing) {
                 return
             }
 
@@ -72,7 +72,7 @@ class SoundPlayer {
             musicChannel?.stop()
             val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
             musicChannel = music.playForever()
-            musicChannel?.volume = volume + volumeadjust
+            if (volume == 0.0) musicChannel?.volume = volume else musicChannel?.volume = volume + volumeadjust
         }
 
         fun changeVolume(volume: Double) {

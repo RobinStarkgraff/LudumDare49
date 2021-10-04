@@ -9,6 +9,7 @@ import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
+import helper.StaticData
 import objects.Phone
 import objects.WifiRouter
 import objects.interactables.StateSwapItem
@@ -32,30 +33,31 @@ class Level1 : Level() {
         il.sprite(SpriteLibrary.LEVEL1_BATH_WALL).anchor(0.0, 0.9).xy(691, 537)
         il.sprite(SpriteLibrary.LEVEL1_KITCHEN_WALL).anchor(0.0, .7).xy(691, 346)
         fg.sprite(SpriteLibrary.LEVEL1_SIDE_WALLS).anchor(0.5, 0.0).xy(RESOLUTION.x/2, -50.0)
-
+        val level = PhysicsBody()
         val bed = il.sprite(SpriteLibrary.LEVEL1_BED).xy(340, 130)
-        collisionList.add(bed)
+        BoxCollider(bed, level)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
         val lamp = il.sprite(anchorY = 1.0).xy(450, 190)
         StateSwapItem(this, lamp, SpriteLibrary.LEVEL1_LAMP, SoundPlayer.SWITCHOFF, SoundPlayer.SWITCHON)
         val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
-        StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
+        val kitchenDoorCol = BoxCollider(Vector2D(kitchenDoor.pos.x, kitchenDoor.pos.y - 100), 10.0, 150.0, level)
+        StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN, collider = kitchenDoorCol)
         val bathroomDoor = il.sprite(anchorY = 1.0).xy(700, 478)
-        StateSwapItem(this, bathroomDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_NIGHT_STAND).xy(410, 160))
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_DESK).xy(550, 130))
+        val bathroomDoorCol = BoxCollider(Vector2D(bathroomDoor.pos.x, bathroomDoor.pos.y - 100), 10.0, 150.0, level)
+        StateSwapItem(this, bathroomDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN, collider = bathroomDoorCol)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_NIGHT_STAND).xy(410, 160), level)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_DESK).xy(550, 130), level)
         il.sprite(SpriteLibrary.LEVEL1_PLANT).xy(660, 130)
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_COUCH).xy(340, 450))
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_COUCH_TABLE).xy(420, 490))
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_BOOK_SHELF).anchor(0.0, 0.9).xy(335, 400))
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_KITCHEN).xy(780, 130))
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_BATHTUB).anchor(0, 1).xy(808, 400))
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_COUCH).xy(340, 450), level)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_COUCH_TABLE).xy(420, 490), level)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_BOOK_SHELF).anchor(0.0, 0.9).xy(335, 400), level)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_KITCHEN).xy(780, 130), level)
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_BATHTUB).anchor(0, 1).xy(808, 400), level)
         il.sprite(SpriteLibrary.LEVEL1_KITCHEN_SHELF).xy(925, 219)
-        collisionList.add(il.sprite(SpriteLibrary.LEVEL1_ROUTER_TABLE).anchor(0, 1).xy(850, 554))
+        BoxCollider(il.sprite(SpriteLibrary.LEVEL1_ROUTER_TABLE).anchor(0, 1).xy(850, 554), level)
         il.sprite(SpriteLibrary.LEVEL1_ROUTER).anchor(0, 1).xy(850, 554).playAnimationLooped(spriteDisplayTime = 200.milliseconds)
 
         //Colliders
-        val level = PhysicsBody()
         BoxCollider(Vector2D(650, 660), 700.0, 5.0, level)
         BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
         BoxCollider(Vector2D(330, 490), 5.0, 700.0, level)
