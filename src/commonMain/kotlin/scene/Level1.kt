@@ -18,9 +18,9 @@ class Level1 : Level() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level1)
         phone = Phone(this@Level1)
-        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
-        //WifiRouter(400.0, 300.0, 400.0, null, this@Level1)
+        //WifiRouter(400.0, 300.0, 400.0, null, this@Level1)S
     }
 
     override suspend fun drawImages() {
@@ -35,7 +35,7 @@ class Level1 : Level() {
         collisionList.add(bed)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
         val lamp = il.sprite(anchorY = 1.0).xy(450, 190)
-        StateSwapItem(this, lamp, SpriteLibrary.LEVEL1_LAMP, null, null)
+        StateSwapItem(this, lamp, SpriteLibrary.LEVEL1_LAMP, SoundPlayer.SWITCHOFF, SoundPlayer.SWITCHON)
         val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
         StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
         val bathroomDoor = il.sprite(anchorY = 1.0).xy(700, 478)

@@ -22,6 +22,11 @@ class SoundPlayer {
         const val DOOROPEN = "door_open.wav"
         const val DOORCLOSE = "door_close.wav"
 
+        const val SWITCHON = "switch_on.mp3"
+        const val SWITCHOFF = "switch_off.mp3"
+
+        const val MENUCLICK = "menuclick.mp3"
+
         var volume = 0.0
 
         private var musicChannel: SoundChannel? = null
@@ -62,6 +67,12 @@ class SoundPlayer {
             val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
             musicChannel = music.playForever()
             musicChannel?.volume = volume
+        }
+        suspend fun playBackgroundMusic(musicPath: String, volumeadjust: Double) {
+            musicChannel?.stop()
+            val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
+            musicChannel = music.playForever()
+            musicChannel?.volume = volume + volumeadjust
         }
 
         fun changeVolume(volume: Double) {
