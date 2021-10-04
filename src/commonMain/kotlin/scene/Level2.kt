@@ -8,6 +8,7 @@ import objects.MovingObject
 
 class Level2 : Level() {
     override suspend fun Container.sceneInit() {
+        spawnpoint = Vector2D(430, 250)
         player = Player(this@Level2)
         val movingObject = MovingObject(
             50.0,

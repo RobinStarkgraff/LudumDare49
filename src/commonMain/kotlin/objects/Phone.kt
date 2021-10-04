@@ -2,6 +2,7 @@ package objects
 
 import RESOLUTION
 import com.soywiz.korge.view.*
+import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
 import helper.StaticData
@@ -17,10 +18,13 @@ class Phone(val scene: Level) {
         const val MARGIN = 50;
         const val MAX_DOWNLOAD = 99.0
         const val SPEED = 1.0
+        const val DOWNLOAD_BAR_WIDTH = 138
+        val DOWNLOAD_BAR_COLOR = RGBA(0, 100, 0, 255)
     }
 
     private var container = Container()
     private lateinit var phoneImage: Sprite
+    private lateinit var downloadBar: SolidRect
 
     init {
         createPhone()
@@ -31,12 +35,13 @@ class Phone(val scene: Level) {
         container = scene.ui.container()
         phoneImage = container.sprite(SpriteLibrary.PHONE)
         phoneImage.setFrame(0)
-        phoneImage.xy(RESOLUTION.x - phoneImage.width - MARGIN, RESOLUTION.y - phoneImage.height - MARGIN)
+        container.xy(RESOLUTION.x - phoneImage.width - MARGIN, RESOLUTION.y - phoneImage.height - MARGIN)
         createDownloadBar()
     }
 
     private fun createDownloadBar() {
-
+        container.solidRect(DOWNLOAD_BAR_WIDTH, 9).xy(27, 132)
+        downloadBar = container.solidRect(DOWNLOAD_BAR_WIDTH, 9, DOWNLOAD_BAR_COLOR).xy(27, 132)
     }
 
     private fun timeMeasurement() {
@@ -70,6 +75,13 @@ class Phone(val scene: Level) {
             3 -> downloaded += 0.075 * SPEED
             4 -> downloaded += 0.2 * SPEED
         }
+
+        updateUI()
+    }
+
+    fun updateUI() {
+        downloadBar.width = DOWNLOAD_BAR_WIDTH * 0.01 * downloaded
+        phoneImage.setFrame(signalQuality)
     }
 
     private fun getNextRouter(x: Double, y: Double) : WifiRouter? {

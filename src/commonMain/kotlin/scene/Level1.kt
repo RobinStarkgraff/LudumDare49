@@ -9,6 +9,7 @@ import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import objects.Phone
+import objects.WifiRouter
 import objects.interactables.StateSwapItem
 
 class Level1 : Level() {
@@ -18,6 +19,7 @@ class Level1 : Level() {
         phone = Phone(this@Level1)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
+        WifiRouter(400.0, 300.0, 400.0, null, this@Level1)
     }
 
     override suspend fun drawImages() {
@@ -61,7 +63,8 @@ class Level1 : Level() {
 
     override suspend fun nextScene() {
         println("Level2")
-        sceneContainer.changeTo<Level2>()
         sceneDestroy()
+        sceneContainer.changeTo<Level2>()
+
     }
 }
