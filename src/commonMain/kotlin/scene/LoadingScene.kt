@@ -14,7 +14,6 @@ class LoadingScene() : Scene() {
         SpriteLibrary.init()
         Level.SCENE_CONTAINER = sceneContainer
 		    sceneContainer.changeTo<IntersectionLevel>()
-
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
             PhysicsSimulation.physicsStep()
         }

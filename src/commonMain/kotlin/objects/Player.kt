@@ -135,6 +135,7 @@ class Player(var scene: Level) {
         playerParent.addUpdater { dt ->
             var velocity = Vector2D(0, 0)
             val scale = dt / 16.milliseconds
+            //println("Physicsbody is: ${physicsBody.dynamic}")
             if(physicsBody.dynamic)
             {
                 if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x = -1.0
@@ -162,6 +163,8 @@ class Player(var scene: Level) {
             else if (velocity.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
             else if (velocity.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
+
+            println(playerParent.pos)
         }
     }
 }
