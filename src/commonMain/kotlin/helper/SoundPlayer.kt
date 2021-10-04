@@ -72,7 +72,7 @@ class SoundPlayer {
             musicChannel?.stop()
             val music = resourcesVfs[MUSIC_FOLDER + musicPath].readMusic()
             musicChannel = music.playForever()
-            musicChannel?.volume = volume + volumeadjust
+            if (volume == 0.0) musicChannel?.volume = volume else musicChannel?.volume = volume + volumeadjust
         }
 
         fun changeVolume(volume: Double) {
