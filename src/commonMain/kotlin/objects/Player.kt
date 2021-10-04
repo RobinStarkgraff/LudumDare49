@@ -28,7 +28,7 @@ class Player(var scene: Level) {
         var inventoryObject: PickupItem? = null
     }
 
-    private var playerParent = Container()
+    var playerParent = Container()
     private var playerImage = Sprite()
     var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
@@ -86,7 +86,6 @@ class Player(var scene: Level) {
             for (interactableItem in scene.interactableList) {
                 //Keep in mind that this needs to be properly taken care of for every object
                 val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos)
-                println(distanceToObject)
                 if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
@@ -110,18 +109,23 @@ class Player(var scene: Level) {
         playerParent.addUpdater { dt ->
             var velocity = Vector2D(0, 0)
             val scale = dt / 16.milliseconds
-            if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x -= 1.0
-            if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x += 1.0
-            if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y -= 1.0
-            if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) velocity.y += 1.0
+            if(physicsBody.dynamic)
+            {
 
-            if (velocity.length > 0) {
-                velocity.normalize()
-                velocity *= SPEED
-                velocity *= scale
+                if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x = -1.0
+                if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x = 1.0
+                if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y = -1.0
+                if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) velocity.y = 1.0
+
+                if (velocity.length > 0) {
+                    velocity.normalize()
+                    velocity *= SPEED
+                    velocity *= scale
+                }
+
+                physicsBody.velocity = velocity
             }
 
-            physicsBody.velocity = velocity
             playerParent.pos = physicsBody.position
 
             if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
