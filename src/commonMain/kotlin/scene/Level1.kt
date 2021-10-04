@@ -24,6 +24,7 @@ class Level1 : Level() {
         phone = Phone(this@Level1)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
+
     }
 
     override fun downloadComplete() {
@@ -35,7 +36,6 @@ class Level1 : Level() {
     }
 
     override lateinit var objective: ObjectiveItem
-
     override suspend fun drawImages() {
         super.drawImages()
         bg.sprite(SpriteLibrary.LEVEL1_FLAT).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
@@ -92,6 +92,7 @@ class Level1 : Level() {
         BoxCollider(Vector2D(850, 520), 300.0, 30.0, level)
         BoxCollider(Vector2D(705, 490), 10.0, 80.0, level)
         BoxCollider(Vector2D(705, 160), 10.0, 60.0, level)
+
     }
 
     override suspend fun nextScene() {

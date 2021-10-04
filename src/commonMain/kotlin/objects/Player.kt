@@ -18,7 +18,7 @@ import scene.Level
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 120 * 5
+        const val SPEED = 120
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
