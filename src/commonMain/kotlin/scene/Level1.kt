@@ -22,6 +22,7 @@ class Level1 : Level() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level1)
         phone = Phone(this@Level1)
+
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
 
