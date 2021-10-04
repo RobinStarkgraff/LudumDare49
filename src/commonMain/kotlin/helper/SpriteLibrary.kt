@@ -73,6 +73,9 @@ class SpriteLibrary {
         lateinit var CAFE_TABLE_ALT: Bitmap
 
         lateinit var LOFTYPEAKS_BACKGROUND: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_A: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_B: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_C: Bitmap
 
         lateinit var KEY_INGAME: Bitmap
         lateinit var KEY_INVENTORY: Bitmap
@@ -150,6 +153,9 @@ class SpriteLibrary {
             CAFE_TABLE_ALT = loadBitmap("art/furniture/table_alt.png", 3.0)
 
             LOFTYPEAKS_BACKGROUND = loadBitmap("loftypeaks/loftypeaks_base.png", 4.0);
+            LOFTYPEAKS_PILGRIM_A = loadBitmap("loftypeaks/pilgrim_a.png", 3.0);
+            LOFTYPEAKS_PILGRIM_B = loadBitmap("loftypeaks/pilgrim_b.png", 3.0);
+            LOFTYPEAKS_PILGRIM_C = loadBitmap("loftypeaks/pilgrim_c.png", 3.0);
 
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)

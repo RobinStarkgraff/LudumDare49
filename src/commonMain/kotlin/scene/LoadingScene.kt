@@ -13,7 +13,7 @@ class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
         SpriteLibrary.init()
         Level.SCENE_CONTAINER = sceneContainer
-		    sceneContainer.changeTo<IntersectionLevel>()
+		    sceneContainer.changeTo<LoftyPeaks>()
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
             PhysicsSimulation.physicsStep()
         }
