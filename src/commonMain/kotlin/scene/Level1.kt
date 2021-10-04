@@ -18,7 +18,7 @@ class Level1 : Level() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level1)
         phone = Phone(this@Level1)
-        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
         //WifiRouter(400.0, 300.0, 400.0, null, this@Level1)S
     }
