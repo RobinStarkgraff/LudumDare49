@@ -19,7 +19,7 @@ import objects.interactables.PickupItem
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 120
+        const val SPEED = 120*3
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
