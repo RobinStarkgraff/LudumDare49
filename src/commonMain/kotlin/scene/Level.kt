@@ -8,6 +8,8 @@ import com.soywiz.korma.geom.Vector2D
 import objects.Phone
 import objects.interactables.Interactable
 import objects.interactables.ObjectiveItem
+import physics.PhysicsSimulation
+import physics.primitives.BoxCollider
 
 abstract class Level : Scene() {
     companion object {
@@ -17,7 +19,6 @@ abstract class Level : Scene() {
     var player : Player? = null
     var phone : Phone? = null
     open var spawnpoint = Vector2D(0, 0)
-    val collisionList = mutableListOf<RectBase>()
     val deathZoneList = mutableListOf<SolidRect>()
     val interactableList = mutableListOf<Interactable>()
     abstract val objective: ObjectiveItem
@@ -40,5 +41,8 @@ abstract class Level : Scene() {
 
     abstract fun downloadComplete()
 
-    abstract suspend fun nextScene()
+    open suspend fun nextScene() {
+        PhysicsSimulation.clearPhysicsSimulation()
+        sceneDestroy()
+    }
 }

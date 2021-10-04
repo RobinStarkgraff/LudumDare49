@@ -9,6 +9,12 @@ class PhysicsSimulation {
         var prePhysicsCallbacks = mutableListOf<(() -> Unit)?>()
         var postPhysicsCallbacks = mutableListOf<(() -> Unit)?>()
 
+        fun clearPhysicsSimulation() {
+            physicsBodies.clear()
+            triggers.clear()
+            prePhysicsCallbacks.clear()
+            postPhysicsCallbacks.clear()
+        }
 
         fun physicsStep() {
             prePhysicsCallbacks.forEach { it?.invoke() }
