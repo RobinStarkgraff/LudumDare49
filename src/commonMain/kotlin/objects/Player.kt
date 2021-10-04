@@ -28,7 +28,7 @@ class Player(var scene: Level) {
         var inventoryObject: PickupItem? = null
     }
 
-    private var playerParent = Container()
+    var playerParent = Container()
     private var playerImage = Sprite()
     var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
@@ -133,6 +133,9 @@ class Player(var scene: Level) {
             else if (velocity.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         }
+
+
+
     }
 }
 

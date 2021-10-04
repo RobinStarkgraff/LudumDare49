@@ -16,8 +16,8 @@ val COLLISION_COLOR = RGBA(255, 0, 0, 255)
 
 object ConfigModule : Module() {
 	override val bgcolor = Colors["161824"]
-	override val size = SizeInt(1280,720)
-	val virtualSize = SizeInt(640,320)
+	override val size = SizeInt(1280, 720)
+	val virtualSize = SizeInt(1280, 720)
 
 	override val mainScene: KClass<out Scene> = LoadingScene::class
 
