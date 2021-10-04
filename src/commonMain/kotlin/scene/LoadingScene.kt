@@ -17,7 +17,6 @@ class LoadingScene() : Scene() {
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
             PhysicsSimulation.physicsStep()
         }
-        //ScreenDebugger(sceneContainer)
     }
 }
 

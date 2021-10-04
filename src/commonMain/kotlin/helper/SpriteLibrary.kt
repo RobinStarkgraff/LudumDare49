@@ -151,8 +151,8 @@ class SpriteLibrary {
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
 
-            KEY_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
-            KEY_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
+            COIN_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
+            COIN_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
 
             DOOR = loadBitmap("art/objects/door.png", 3.0)
 
