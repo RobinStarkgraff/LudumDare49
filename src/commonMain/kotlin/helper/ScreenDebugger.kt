@@ -12,11 +12,11 @@ class ScreenDebugger (var container: Container){
     private var text : Text = Text("test",50.0,RGBA.float(1,1,1),alignment = TextAlignment.CENTER).xy(200,50)
 
     init {
-        container.addChild(text)
-        container.mouse.onMoveAnywhere { updateText() }
+        //container.addChild(text)
+        //container.mouse.onMoveAnywhere { updateText() }
     }
     
     suspend fun updateText(){
-        text.text = "${round(com.soywiz.korge.view.views().globalMouseX)}, ${round(views().globalMouseY)}"
+        //text.text = "${round(com.soywiz.korge.view.views().globalMouseX)}, ${round(views().globalMouseY)}"
     }
 }
