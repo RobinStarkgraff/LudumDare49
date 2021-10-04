@@ -7,7 +7,7 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import physics.PhysicsSimulation
-import helper.ScreenDebugger
+//import helper.ScreenDebugger
 import helper.SpriteLibrary
 
 class LoadingScene() : Scene() {

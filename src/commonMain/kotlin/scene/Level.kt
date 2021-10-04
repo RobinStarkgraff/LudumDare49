@@ -9,6 +9,7 @@ import objects.Phone
 import objects.interactables.Interactable
 import objects.interactables.ObjectiveItem
 import physics.PhysicsSimulation
+import objects.interactables.MenuButton
 import physics.primitives.BoxCollider
 
 abstract class Level : Scene() {
@@ -28,6 +29,9 @@ abstract class Level : Scene() {
     var ui = Container()
 
     open suspend fun drawImages() {
+        MenuButton(ui)
+
+
         sceneView.addChild(bg)
         sceneView.addChild(il)
         sceneView.addChild(fg)
