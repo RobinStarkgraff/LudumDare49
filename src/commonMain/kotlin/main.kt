@@ -6,6 +6,7 @@ import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korinject.AsyncInjector
 import com.soywiz.korma.geom.SizeInt
+import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
 import scene.Level1
 import scene.Level2
@@ -13,6 +14,9 @@ import scene.LoadingScene
 import kotlin.reflect.KClass
 
 suspend fun main() = Korge(Korge.Config(module = ConfigModule))
+
+val RESOLUTION = Vector2D(1280, 720)
+val COLLISION_COLOR = RGBA(255, 0, 0, 0)
 
 object ConfigModule : Module() {
 	override val bgcolor = Colors["161824"]

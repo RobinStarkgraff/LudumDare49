@@ -45,7 +45,7 @@ class Player(var scene: Level) {
     }
 
     private fun createContainer() {
-        playerParent = scene.sceneView.container()
+        playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
 
@@ -139,14 +139,16 @@ class Player(var scene: Level) {
             else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
             else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
+
+            println(playerParent.pos)
         }
 
         collisionShape.onCollision({ scene.collisionList.contains(it) }) {
             if (movement.x != 0.0) {
-                playerImage.x -= movement.x
+                playerParent.x -= movement.x
             }
             if (movement.y != 0.0) {
-                playerImage.y -= movement.y
+                playerParent.y -= movement.y
             }
         }
     }
