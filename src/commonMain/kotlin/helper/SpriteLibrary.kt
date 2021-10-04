@@ -35,6 +35,25 @@ class SpriteLibrary {
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
         lateinit var LEVEL1_LAMP: SpriteAnimation
 
+        lateinit var PARK_PARK: Bitmap
+        lateinit var PARK_CROCUP: SpriteAnimation
+        lateinit var PARK_CROCDOWN: SpriteAnimation
+        lateinit var PARK_TURTLE: SpriteAnimation
+        lateinit var PARK_CAULIFLOWER: Bitmap
+        lateinit var PARK_GATE_TOP: Bitmap
+        lateinit var PARK_LILY_PAD: Bitmap
+        lateinit var PARK_PUMPKINS:Bitmap
+        lateinit var PARK_ROCK: Bitmap
+        lateinit var PARK_TURNIPS: Bitmap
+        lateinit var PARK_WALL: Bitmap
+        lateinit var PARK_WALL_BOTTOM: Bitmap
+        lateinit var PARK_WIFI_STONE: Bitmap
+        lateinit var PARK_LANDINGSTAGE: Bitmap
+        lateinit var PARK_TREE_ONE: Bitmap
+        lateinit var PARK_TREE_TWO: Bitmap
+        lateinit var PARK_TREE_THREE: Bitmap
+
+
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
         lateinit var PHONE: SpriteAnimation
@@ -65,6 +84,24 @@ class SpriteLibrary {
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
             LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
+
+            PARK_PARK = loadBitmap("park/background/park.png", 3.0)
+            PARK_LANDINGSTAGE = loadBitmap("park/background/landingstage.png", 3.0)
+            PARK_CROCUP = loadAnim("park/objects/CrocDoc.png",3.0, Vector2D(13, 48), 4)
+            PARK_CROCDOWN = loadAnim("park/objects/CrocDoc_Down.png",3.0, Vector2D(13, 48), 4)
+            PARK_TURTLE = loadAnim("park/objects/turtle.png",3.0, Vector2D(26, 10), 4)
+            PARK_CAULIFLOWER = loadBitmap("park/objects/cauliflower.png", 3.0)
+            PARK_GATE_TOP = loadBitmap("park/objects/gate_top.png", 3.0)
+            PARK_LILY_PAD = loadBitmap("park/objects/lily_pad.png", 3.0)
+            PARK_PUMPKINS = loadBitmap("park/objects/pumpkins.png", 3.0)
+            PARK_ROCK = loadBitmap("park/objects/rock.png", 3.0)
+            PARK_TURNIPS = loadBitmap("park/objects/turnips.png", 3.0)
+            PARK_WALL = loadBitmap("park/objects/wall.png", 3.0)
+            PARK_WALL_BOTTOM = loadBitmap("park/objects/wall_bottom.png", 3.0)
+            PARK_WIFI_STONE = loadBitmap("park/objects/wifi_stone.png", 3.0)
+            PARK_TREE_ONE = loadBitmap("park/objects/tree1.png",3.0)
+            PARK_TREE_TWO = loadBitmap("park/objects/tree2.png",3.0)
+            PARK_TREE_THREE = loadBitmap("park/objects/tree3.png",3.0)
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)

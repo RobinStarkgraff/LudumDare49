@@ -67,21 +67,11 @@ class Level1 : Level() {
         BoxCollider(Vector2D(850, 520), 300.0, 30.0, level)
         BoxCollider(Vector2D(705, 490), 10.0, 80.0, level)
         BoxCollider(Vector2D(705, 160), 10.0, 60.0, level)
-        /*collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 650))
-        collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 140))
-        collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(325, 140))
-        collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(947, 140))
-        collisionList.add(fg.solidRect(300, 30, COLLISION_COLOR).xy(700, 315))
-        collisionList.add(fg.solidRect(10, 120, COLLISION_COLOR).xy(700, 270))
-        collisionList.add(fg.solidRect(300, 30, COLLISION_COLOR).xy(700, 495))
-        collisionList.add(fg.solidRect(10, 80, COLLISION_COLOR).xy(700, 450))
-        collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))*/
     }
 
     override suspend fun nextScene() {
         println("Level2")
         sceneDestroy()
         sceneContainer.changeTo<Level2>()
-
     }
 }
