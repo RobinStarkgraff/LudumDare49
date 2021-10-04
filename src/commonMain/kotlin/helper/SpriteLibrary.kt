@@ -111,7 +111,7 @@ class SpriteLibrary {
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
-            PHONE = loadAnim("art/bitmap/Phone.png", Player.SCALE, Vector2D(64, 109), 5)
+            PHONE = loadAnim("art/bitmap/phone.png", Player.SCALE, Vector2D(64, 109), 6)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {

@@ -53,6 +53,8 @@ class Phone(val scene: Level) {
         if (downloaded >= MAX_DOWNLOAD) {
             downloadComplete = true
             scene.downloadComplete()
+            downloadBar.width = DOWNLOAD_BAR_WIDTH.toDouble()
+            phoneImage.setFrame(5)
             return
         }
 
