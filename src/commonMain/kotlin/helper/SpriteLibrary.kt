@@ -11,6 +11,8 @@ import objects.Player
 class SpriteLibrary {
     companion object {
 
+        lateinit var TITLE: Bitmap
+
         lateinit var PLAYER_IDLE_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_RIGHT_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_LEFT_ANIM: SpriteAnimation
@@ -90,6 +92,8 @@ class SpriteLibrary {
 
 
         suspend fun init() {
+            TITLE = loadBitmap("art/SplashTitle.png",2.5)
+
             PLAYER_IDLE_ANIM = loadAnim("art/bitmap/Idle.png", Player.SCALE, 32, 8)
             PLAYER_WALK_RIGHT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10)
             PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10, true)
