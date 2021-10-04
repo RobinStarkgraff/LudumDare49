@@ -22,6 +22,8 @@ class SoundPlayer {
         const val DOOROPEN = "door_open.wav"
         const val DOORCLOSE = "door_close.wav"
 
+        const val SWITCHON = "switch_on.mp3"
+        const val SWITCHOFF = "switch_off.mp3"
         var volume = 0.0
 
         private var musicChannel: SoundChannel? = null
