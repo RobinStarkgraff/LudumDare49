@@ -15,11 +15,8 @@ class ScreenDebugger (var container: Container){
         container.addChild(text)
         container.mouse.onMoveAnywhere { updateText() }
     }
+    
     suspend fun updateText(){
         text.text = "${round(com.soywiz.korge.view.views().globalMouseX)}, ${round(views().globalMouseY)}"
-
-
     }
-
-
 }
