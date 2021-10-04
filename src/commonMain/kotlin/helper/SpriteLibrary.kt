@@ -55,7 +55,7 @@ class SpriteLibrary {
         lateinit var PARK_CAULIFLOWER: Bitmap
         lateinit var PARK_GATE_TOP: Bitmap
         lateinit var PARK_LILY_PAD: Bitmap
-        lateinit var PARK_PUMPKINS:Bitmap
+        lateinit var PARK_PUMPKINS: Bitmap
         lateinit var PARK_ROCK: Bitmap
         lateinit var PARK_TURNIPS: Bitmap
         lateinit var PARK_WALL: Bitmap
@@ -72,6 +72,10 @@ class SpriteLibrary {
         lateinit var CAFE_TABLE: Bitmap
         lateinit var CAFE_TABLE_ALT: Bitmap
 
+        lateinit var LOFTYPEAKS_BACKGROUND: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_A: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_B: Bitmap
+        lateinit var LOFTYPEAKS_PILGRIM_C: Bitmap
 
         lateinit var KEY_INGAME: Bitmap
         lateinit var KEY_INVENTORY: Bitmap
@@ -126,9 +130,9 @@ class SpriteLibrary {
 
             PARK_PARK = loadBitmap("park/background/park.png", 3.0)
             PARK_LANDINGSTAGE = loadBitmap("park/background/landingstage.png", 3.0)
-            PARK_CROCUP = loadAnim("park/objects/croc_doc.png",3.0, Vector2D(13, 48), 4)
-            PARK_CROCDOWN = loadAnim("park/objects/croc_doc_down.png",3.0, Vector2D(13, 48), 4)
-            PARK_TURTLE = loadAnim("park/objects/turtle.png",3.0, Vector2D(26, 10), 4)
+            PARK_CROCUP = loadAnim("park/objects/CrocDoc.png", 3.0, Vector2D(13, 48), 4)
+            PARK_CROCDOWN = loadAnim("park/objects/CrocDoc_Down.png", 3.0, Vector2D(13, 48), 4)
+            PARK_TURTLE = loadAnim("park/objects/turtle.png", 3.0, Vector2D(26, 10), 4)
             PARK_CAULIFLOWER = loadBitmap("park/objects/cauliflower.png", 3.0)
             PARK_GATE_TOP = loadBitmap("park/objects/gate_top.png", 3.0)
             PARK_LILY_PAD = loadBitmap("park/objects/lily_pad.png", 3.0)
@@ -138,15 +142,20 @@ class SpriteLibrary {
             PARK_WALL = loadBitmap("park/objects/wall.png", 3.0)
             PARK_WALL_BOTTOM = loadBitmap("park/objects/wall_bottom.png", 3.0)
             PARK_WIFI_STONE = loadBitmap("park/objects/wifi_stone.png", 3.0)
-            PARK_TREE_ONE = loadBitmap("park/objects/tree_one.png",3.0)
-            PARK_TREE_TWO = loadBitmap("park/objects/tree_two.png",3.0)
-            PARK_TREE_THREE = loadBitmap("park/objects/tree_three.png",3.0)
+            PARK_TREE_ONE = loadBitmap("park/objects/tree1.png", 3.0)
+            PARK_TREE_TWO = loadBitmap("park/objects/tree2.png", 3.0)
+            PARK_TREE_THREE = loadBitmap("park/objects/tree3.png", 3.0)
 
-            CAFE_BACKGROUND = loadBitmap("art/background/cafe_background.png",3.0)
-            CAFE_CHAIR = loadBitmap("art/furniture/chair.png",3.0)
-            CAFE_CHAIR_ALT = loadBitmap("art/furniture/chair_alt.png",3.0)
-            CAFE_TABLE = loadBitmap("art/furniture/table.png",3.0)
-            CAFE_TABLE_ALT = loadBitmap("art/furniture/table_alt.png",3.0)
+            CAFE_BACKGROUND = loadBitmap("art/background/cafe_background.png", 3.0)
+            CAFE_CHAIR = loadBitmap("art/furniture/chair.png", 3.0)
+            CAFE_CHAIR_ALT = loadBitmap("art/furniture/chair_alt.png", 3.0)
+            CAFE_TABLE = loadBitmap("art/furniture/table.png", 3.0)
+            CAFE_TABLE_ALT = loadBitmap("art/furniture/table_alt.png", 3.0)
+
+            LOFTYPEAKS_BACKGROUND = loadBitmap("loftypeaks/loftypeaks_base.png", 4.0);
+            LOFTYPEAKS_PILGRIM_A = loadBitmap("loftypeaks/pilgrim_a.png", 3.0);
+            LOFTYPEAKS_PILGRIM_B = loadBitmap("loftypeaks/pilgrim_b.png", 3.0);
+            LOFTYPEAKS_PILGRIM_C = loadBitmap("loftypeaks/pilgrim_c.png", 3.0);
 
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
@@ -168,32 +177,32 @@ class SpriteLibrary {
         }
 
         private suspend fun loadAnim(
-            path: String,
-            scale: Double,
-            size: Int,
-            frameCount: Int,
-            flip: Boolean = false
+                path: String,
+                scale: Double,
+                size: Int,
+                frameCount: Int,
+                flip: Boolean = false
         ): SpriteAnimation {
             return loadAnim(path, scale, Vector2D(size, size), frameCount, flip)
         }
 
         suspend fun loadAnim(
-            path: String,
-            scale: Double,
-            size: Vector2D,
-            frameCount: Int,
-            flip: Boolean = false
+                path: String,
+                scale: Double,
+                size: Vector2D,
+                frameCount: Int,
+                flip: Boolean = false
         ): SpriteAnimation {
             var bmp = resourcesVfs[path].readBitmapOptimized(premultiplied = false)
             if (flip) bmp = bmp.flipX()
             bmp = bmp.toBMP32().scaleLinear(scale, scale)
 
             return SpriteAnimation(
-                spriteMap = bmp,
-                spriteWidth = (size.x * scale).toInt(),
-                spriteHeight = (size.y * scale).toInt(),
-                columns = frameCount,
-                rows = 1
+                    spriteMap = bmp,
+                    spriteWidth = (size.x * scale).toInt(),
+                    spriteHeight = (size.y * scale).toInt(),
+                    columns = frameCount,
+                    rows = 1
             )
         }
     }
