@@ -2,6 +2,7 @@ package scene
 
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
+import helper.InvisibleTrigger
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
@@ -33,6 +34,8 @@ class Level1 : Level() {
         val phone = Phone()
         addChild(phone.container)
         StateSwapItem(this@Level1, sprite(anchorX = 0.0, anchorY = 1.0).xy(200.0,200.0), SpriteLibrary.static.DOOR_SWING_LEFT)
+        val swap = StateSwapItem(this@Level1, sprite(anchorX = 0.0, anchorY = 1.0).xy(400.0,400.0), SpriteLibrary.static.DOOR_SWING_RIGHT, 0.0)
+        InvisibleTrigger(this@Level1, 10,10,50,50, swap)
 
         GlobalScope.launch { SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1) }
         sceneView.addUpdater {

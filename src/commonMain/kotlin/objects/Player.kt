@@ -29,7 +29,7 @@ class Player(var scene: Level) {
 
     private var playerParent = Container()
     private var playerImage = Sprite()
-    private lateinit var collisionShape: SolidRect
+    lateinit var collisionShape: SolidRect
 
     private lateinit var walkingSound: SoundChannel
 
@@ -90,8 +90,9 @@ class Player(var scene: Level) {
     private fun interactableCallbacks() {
         playerImage.addUpdater {
             for (interactableItem in scene.interactableList) {
+                //Keep in mind that this needs to be properly taken care of for every object
                 val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - collisionShape.pos)
-                if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
+                if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
 

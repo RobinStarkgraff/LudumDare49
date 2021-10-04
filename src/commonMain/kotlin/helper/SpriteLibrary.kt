@@ -30,7 +30,7 @@ class SpriteLibrary {
         PLAYER_WALK_UP_ANIM = loadAnim("bitmap/Walk_Up.png", Player.SCALE, 32, 10)
         PLAYER_WALK_DOWN_ANIM = loadAnim("bitmap/Walk_Down.png", Player.SCALE, 32, 10)
 
-        DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2)
+        DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 3)
         DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2, true)
     }
 
