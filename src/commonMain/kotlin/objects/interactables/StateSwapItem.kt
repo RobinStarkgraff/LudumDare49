@@ -4,10 +4,14 @@ import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.SpriteAnimation
 import scene.Level
 
-class StateSwapItem(scene: Level, val sprite: Sprite, val animation: SpriteAnimation) :
+class StateSwapItem(
+    scene: Level,
+    private val sprite: Sprite,
+    animation: SpriteAnimation,
+    override val interactionDistance: Double = 100.0
+) :
     Interactable(scene, sprite.pos) {
     companion object {
-        const val INTERACTION_DISTANCE = Interactable.INTERACTION_DISTANCE
         private var initialState = false
     }
 

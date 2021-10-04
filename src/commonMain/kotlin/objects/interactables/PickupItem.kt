@@ -6,9 +6,8 @@ import com.soywiz.korma.geom.Point
 import objects.Player
 import scene.Level
 
-class PickupItem(scene: Level, val image: Image) : Interactable(scene, image.pos) {
+class PickupItem(scene: Level, val image: Image, override val interactionDistance: Double = 100.0) : Interactable(scene, image.pos) {
     companion object {
-        const val INTERACTION_DISTANCE = Interactable.INTERACTION_DISTANCE
         private val INVENTORY_LOCATION = Point(255, 255)
     }
 
