@@ -5,8 +5,11 @@ import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import objects.*
 import objects.interactables.ObjectiveItem
+import objects.interactables.StateSwapItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
@@ -62,16 +65,33 @@ class IntersectionLevel() : Level() {
             true,
             this
         )
+        // Take out after first upload
+        val levelDoor = il.sprite(anchorY = 1.0).xy(811, 655)
+        objective = ObjectiveItem(
+                StateSwapItem(
+                        this,
+                        levelDoor,
+                        SpriteLibrary.DOOR_SWING_RIGHT,
+                        SoundPlayer.DOORKEYS,
+                        SoundPlayer.DOORKEYS,
+                )
+        )
     }
 
     override fun downloadComplete() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
+        //Just for first upload
+        sceneView.addUpdater {
+            if (objective.completed) {
+                GlobalScope.launch { nextScene() }
+            }
+        }
     }
 
     override suspend fun nextScene() {
         println("Level3")
         sceneDestroy()
-        sceneContainer.changeTo<Level2>()
+        sceneContainer.changeTo<MenuScene>()
 
     }
 }
