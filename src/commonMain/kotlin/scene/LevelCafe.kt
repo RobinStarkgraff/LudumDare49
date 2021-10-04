@@ -57,13 +57,13 @@ class LevelCafe : Level() {
         StateSwapItem(this, levelDoor, SpriteLibrary.DOOR_SWING_RIGHT, SoundPlayer.DOORKEYS, SoundPlayer.DOORKEYS)
 
         //Colliders
-        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
-        BoxCollider(Vector2D(650, 470), 700.0, 5.0, level)
-        BoxCollider(Vector2D(337, 490), 15.0, 700.0, level)
-        BoxCollider(Vector2D(933, 490), 15.0, 700.0, level)
+        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level).render()
+        BoxCollider(Vector2D(650, 470), 700.0, 5.0, level).render()
+        BoxCollider(Vector2D(337, 490), 15.0, 700.0, level).render()
+        BoxCollider(Vector2D(933, 490), 15.0, 700.0, level).render()
 
-        BoxCollider(Vector2D(867, 156), 350.0, 230.0, level)
-        BoxCollider(Vector2D(353, 160), 350.0, 330.0, level)
+        BoxCollider(Vector2D(867, 156), 350.0, 230.0, level).render()
+        BoxCollider(Vector2D(353, 160), 350.0, 330.0, level).render()
     }
 
     override suspend fun nextScene() {

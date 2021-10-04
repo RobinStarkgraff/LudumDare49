@@ -5,6 +5,8 @@ import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import objects.*
 import objects.interactables.ObjectiveItem
 import physics.PhysicsBody
@@ -28,10 +30,10 @@ class IntersectionLevel() : Level() {
         bg.sprite(SpriteLibrary.INTERSECTIONLEVEL_BASE).anchor(0.5, 0.5).xy(RESOLUTION.x/2, RESOLUTION.y/2)
         val level = PhysicsBody()
 
-        BoxCollider(Vector2D(RESOLUTION.x/2, 240.0), 1500.0, 5.0, level)
-        BoxCollider(Vector2D(630, 710), 1000.0, 5.0, level)
-        BoxCollider(Vector2D(157.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
-        BoxCollider(Vector2D(1120.0, (RESOLUTION.y/2)), 5.0, 700.0, level)
+        BoxCollider(Vector2D(RESOLUTION.x/2, 240.0), 1500.0, 5.0, level).render()
+        BoxCollider(Vector2D(630, 710), 1000.0, 5.0, level).render()
+        BoxCollider(Vector2D(157.0, (RESOLUTION.y/2)), 5.0, 700.0, level).render()
+        BoxCollider(Vector2D(1120.0, (RESOLUTION.y/2)), 5.0, 700.0, level).render()
 
         val car1sprite = il.sprite(SpriteLibrary.INTERSECTIONLEVEL_CAR).anchor(0.5, 0.0).xy(300.0, 420.0)
         val car2sprite = il.sprite(SpriteLibrary.INTERSECTIONLEVEL_CAR).anchor(0.5, 0.0).xy(300.0, 520.0)
@@ -65,10 +67,11 @@ class IntersectionLevel() : Level() {
     }
 
     override fun downloadComplete() {
-        TODO("Not yet implemented")
+        GlobalScope.launch {  nextScene()}
     }
 
     override suspend fun nextScene() {
+        super.nextScene()
         println("Level3")
         sceneDestroy()
         sceneContainer.changeTo<Level2>()

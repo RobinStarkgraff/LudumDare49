@@ -107,6 +107,6 @@ class Level1 : Level() {
     override suspend fun nextScene() {
         super.nextScene()
         sceneDestroy()
-        sceneContainer.changeTo<Level2>()
+        sceneContainer.changeTo<IntersectionLevel>()
     }
 }

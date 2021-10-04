@@ -10,6 +10,8 @@ import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
+import objects.Phone
+import objects.WifiRouter
 import objects.interactables.ObjectiveItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
@@ -22,17 +24,33 @@ class Level2 : Level() {
 
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(430, 250)
-        player = Player(this@Level2)
-        val sprite = sceneView.sprite(SpriteLibrary.LEVEL1_COUCH).xy(100, 100)
-        val movingObject = Ferry(
-                sprite,
-                mutableListOf(Vector2D(100, 100), Vector2D(100, 400)),
-                1.0,
-                this@Level2
-        )
+
+        var router = WifiRouter(22.0, 834.0, 100.0, this@Level2)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM2, - 0.3)
         drawImages()
+        phone = Phone(this@Level2)
         moveContainer(520.0, 400.0, 760.0, 1460.0)
+        val turtleSprite = bg.sprite(SpriteLibrary.PARK_TURTLE).xy(410, 1640)
+        val turtle = Ferry(
+            turtleSprite,
+            mutableListOf(Vector2D(410, 1640), Vector2D(300, 1600)),
+            1.0,
+            this@Level2,
+            1800
+        )
+        interactableList.add(turtle)
+
+        val crocodileSprite = bg.sprite(SpriteLibrary.PARK_CROCUP).xy(125, 1250)
+        val crocodile = Ferry(
+            crocodileSprite,
+            mutableListOf( Vector2D(100, 1250), Vector2D(69, 800)),
+            1.0,
+            this@Level2,
+            5500
+        )
+        crocodile.interactionDistance = 200.0
+        interactableList.add(crocodile)
+        player = Player(this@Level2)
     }
 
     fun moveContainer(minX: Double, minY: Double, maxX: Double, maxY: Double) {
