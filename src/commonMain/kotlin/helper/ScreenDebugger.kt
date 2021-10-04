@@ -1,4 +1,4 @@
-package helper
+/*package helper
 
 import ConfigModule.size
 import com.soywiz.korge.input.mouse
@@ -20,3 +20,4 @@ class ScreenDebugger (var container: Container){
         text.text = "${round(com.soywiz.korge.view.views().globalMouseX)}, ${round(views().globalMouseY)}"
     }
 }
+*/
