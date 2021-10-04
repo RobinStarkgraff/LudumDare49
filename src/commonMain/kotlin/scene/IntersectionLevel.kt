@@ -7,8 +7,12 @@ import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import objects.*
+import objects.Car
+import objects.Phone
+import objects.Player
+import objects.WifiRouter
 import objects.interactables.ObjectiveItem
+import objects.interactables.PickupItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
@@ -64,15 +68,19 @@ class IntersectionLevel() : Level() {
             true,
             this
         )
+
+        objective = ObjectiveItem(PickupItem(this, Image(SpriteLibrary.KEY_INVENTORY), SpriteLibrary.KEY_INVENTORY))
+        objective.completed = true
     }
 
     override fun downloadComplete() {
-        GlobalScope.launch {  nextScene()}
+        sceneView.addUpdater {
+            GlobalScope.launch { nextScene() }
+        }
     }
 
     override suspend fun nextScene() {
         super.nextScene()
-        println("Level3")
         sceneDestroy()
         sceneContainer.changeTo<Level2>()
 
