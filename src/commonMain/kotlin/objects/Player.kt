@@ -28,7 +28,7 @@ class Player(var scene: Level) {
     }
 
     var inventoryObject: PickupItem? = null
-    private var playerParent = Container()
+    var playerParent = Container()
     private var playerImage = Sprite()
     var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)

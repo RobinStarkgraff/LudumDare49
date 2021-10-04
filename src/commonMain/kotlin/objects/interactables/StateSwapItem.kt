@@ -1,11 +1,13 @@
 package objects.interactables
 
+import com.soywiz.korge.view.SolidRect
 import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.SpriteAnimation
 import com.soywiz.korma.geom.Point
 import helper.SoundPlayer
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import physics.primitives.BoxCollider
 import scene.Level
 
 class StateSwapItem(
@@ -15,6 +17,7 @@ class StateSwapItem(
     private val soundone: String?,
     private val soundtwo: String?,
     override var interactionDistance: Double = 50.0,
+    private val collider: BoxCollider? = null,
     val inventoryItem: PickupItem? = null
 ) :
     Interactable() {
@@ -22,11 +25,13 @@ class StateSwapItem(
     override var pos = sprite.pos
 
     private var state = false
+    private val rectSize: Point?
 
     init {
         scene.interactableList.add(this)
         sprite.playAnimation(animation)
         sprite.setFrame(state.toInt())
+        rectSize = if (collider == null) null else Point(collider.width, collider.height)
     }
 
     override fun interact(): Boolean {
@@ -45,12 +50,18 @@ class StateSwapItem(
     }
 
     private fun changeState() {
-        if (state){
+        if (state) {
             sprite.setFrame(0)
-            if(soundone != null) GlobalScope.launch { SoundPlayer.playSound(soundone)}
+            if(soundone != null) GlobalScope.launch { SoundPlayer.playSound(soundone) }
+            rectSize?.let {
+                collider?.width = rectSize.x
+                collider?.height = rectSize.y
+            }
         } else {
             sprite.setFrame(1)
-            if(soundtwo != null) GlobalScope.launch {SoundPlayer.playSound(soundtwo)}
+            if(soundtwo != null) GlobalScope.launch { SoundPlayer.playSound(soundtwo) }
+            collider?.width = 0.0
+            collider?.height = 0.0
         }
         state = !state
     }
