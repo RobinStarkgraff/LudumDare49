@@ -6,17 +6,21 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import objects.*
+import objects.interactables.ObjectiveItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
-class IntersectionLevel : Level() {
+class IntersectionLevel() : Level() {
+
+    override lateinit var objective: ObjectiveItem
+
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(355, 280)
         player = Player(this@IntersectionLevel)
         phone = Phone(this@IntersectionLevel)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
-        WifiRouter(605.0, 505.0, 100.0, null, this@IntersectionLevel)
+        WifiRouter(605.0, 505.0, 100.0, this@IntersectionLevel)
     }
 
     override suspend fun drawImages() {
@@ -58,6 +62,10 @@ class IntersectionLevel : Level() {
             true,
             this
         )
+    }
+
+    override fun downloadComplete() {
+        TODO("Not yet implemented")
     }
 
     override suspend fun nextScene() {

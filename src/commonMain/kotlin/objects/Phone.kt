@@ -40,7 +40,7 @@ class Phone(val scene: Level) {
     }
 
     var downloaded: Double = 0.0
-    private var downloadComplete = false
+    var downloadComplete = false
     private var signalQuality = 0
 
     val wifiRouterList = mutableListOf<WifiRouter>()
