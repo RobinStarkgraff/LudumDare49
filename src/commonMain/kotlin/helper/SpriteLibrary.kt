@@ -54,6 +54,9 @@ class SpriteLibrary {
         lateinit var PARK_TREE_THREE: Bitmap
 
 
+        lateinit var KEY_INGAME: Bitmap
+        lateinit var KEY_INVENTORY: Bitmap
+
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
         lateinit var PHONE: SpriteAnimation
@@ -102,6 +105,9 @@ class SpriteLibrary {
             PARK_TREE_ONE = loadBitmap("park/objects/tree1.png",3.0)
             PARK_TREE_TWO = loadBitmap("park/objects/tree2.png",3.0)
             PARK_TREE_THREE = loadBitmap("park/objects/tree3.png",3.0)
+
+            KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
+            KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
