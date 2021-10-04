@@ -17,6 +17,9 @@ class SoundPlayer {
 
         const val FOOTSTEPS = "footsteps2long.mp3"
 
+        const val DOOROPEN = "door_open.wav"
+        const val DOORCLOSE = "door_close.wav"
+
         var volume = 0.0
 
         private var musicChannel: SoundChannel? = null
