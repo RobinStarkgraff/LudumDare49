@@ -6,6 +6,7 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import objects.Phone
 import objects.Player
@@ -23,9 +24,9 @@ class LevelCafe : Level() {
         phone = Phone(this@LevelCafe)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
+        GlobalScope.launch { playerDialog() }
         //Specific setup
         phone!!.downloadDisabled = true
-
         sceneView.addUpdater { if (objective.completed) phone!!.downloadDisabled = false }
     }
 
@@ -35,6 +36,10 @@ class LevelCafe : Level() {
                 GlobalScope.launch { nextScene() }
             }
         }
+    }
+
+    suspend fun playerDialog() {
+        player?.say("I must have dropped my change somewhere. I have to pay to get the WiFi password!", 3)
     }
 
     override lateinit var objective: ObjectiveItem
