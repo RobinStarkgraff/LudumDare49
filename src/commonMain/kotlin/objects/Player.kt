@@ -4,12 +4,19 @@ package objects
 import com.soywiz.klock.TimeSpan
 import scene.Level
 import com.soywiz.klock.milliseconds
+import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.*
 import helper.SpriteLibrary
 import physics.primitives.BoxCollider
+import com.soywiz.korio.async.launch
+import com.soywiz.korma.geom.Vector2D
+import helper.SoundPlayer
+import helper.SpriteLibrary
+import kotlinx.coroutines.GlobalScope
+import objects.interactables.PickupItem
 
 
 class Player(var scene: Level) {
@@ -27,21 +34,22 @@ class Player(var scene: Level) {
     private var playerImage = Sprite()
     private var physicsBody = physics.PhysicsBody(position = playerParent.pos, dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
-    //private lateinit var collisionShape: SolidRect
+
+    private lateinit var walkingSound: SoundChannel
 
     init {
         createContainer()
         createSprite()
-        changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
-        //createCollisionShape()
+        changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         movementCallback()
+        setupStepSound()
         deathZoneCallback()
-        inventoryItemCallbacks()
+        interactableCallbacks()
         download()
     }
 
     private fun createContainer() {
-        playerParent = scene.sceneView.container()
+        playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
     /*private fun createCollisionShape() {
@@ -60,14 +68,12 @@ class Player(var scene: Level) {
     }
 
     private fun deathZoneCallback() {
-        /*collisionShape.onCollision({ scene.deathZoneList.contains(it) }) {
-            die()
-        }*/
+      
     }
 
     private fun download() {
         playerImage.addUpdater {
-            scene.downloadManager?.download(playerParent.pos.x, playerParent.pos.y);
+            scene.phone?.download(playerParent.pos.x, playerParent.pos.y);
         }
     }
 
@@ -76,23 +82,22 @@ class Player(var scene: Level) {
         playerParent.xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
-    private fun inventoryItemCallbacks() {
-        if (inventoryObject != null) {
-            return
-        }
+    private fun setupStepSound() {
+        GlobalScope.launch { walkingSound = SoundPlayer.setContinuousSound(SoundPlayer.FOOTSTEPS) }
+    }
 
+    private fun interactableCallbacks() {
         playerImage.addUpdater {
-            for (pickUpItem in scene.pickupItemList) {
-                val distanceToObject = Vector2D.distance(pickUpItem.image.globalXY(), playerImage.globalXY())
-                if (distanceToObject > PickupItem.INTERACTION_DISTANCE) {
+            for (interactableItem in scene.interactableList) {
+                //Keep in mind that this needs to be properly taken care of for every object
+                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - collisionShape.pos)
+                if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
 
-                //TODO: Give Pickup speechbubble
-
-                if (scene.views.keys.pressing(Key.E)) {
-                    inventoryObject = pickUpItem
-                    inventoryObject?.putIntoInventory()
+                //TODO: Give speechbubble
+                if (scene.views.keys.justPressed(Key.E)) {
+                    interactableItem.interact()
                 }
             }
         }
@@ -121,72 +126,24 @@ class Player(var scene: Level) {
                 playerParent.xy(x + velocity.x, y + velocity.y)
             }
 
-            if (velocity.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
-            else if (velocity.x < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_LEFT_ANIM)
-            else if (velocity.y < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_UP_ANIM)
-            else if (velocity.y > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_DOWN_ANIM)
-            else changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
-            physicsBody.velocity = velocity
-            playerParent.pos = physicsBody.position
+            if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
+            else SoundPlayer.stopContinuousSound(walkingSound)
+
+            if (movement.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
+            else if (movement.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
+            else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
+            else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
+            else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
+
+            println(playerParent.pos)
         }
 
-        /*collisionShape.onCollision({ scene.collisionList.contains(it) }) {
-            if (velocity.magnitude <= 0) return@onCollision
-
-            val dir = playerParent.pos + collisionShape.pos - it.pos
-            val normal = getNormal(it.rotation, dir)
-
-            val tanUp = normal.rotate((kotlin.math.PI / 2).radians)
-            val tanUpAngle = Vector2D.angle(velocity, tanUp)
-
-            val tanDown = normal.rotate((kotlin.math.PI / -2).radians)
-            val tanDownAngle = Vector2D.angle(velocity, tanUp)
-
-            var tan = Vector2D()
-
-            if (tanDownAngle > tanUpAngle) {
-                tan = tanUp.normalized
-            } else {
-                tan = tanDown.normalized
+        collisionShape.onCollision({ scene.collisionList.contains(it) }) {
+            if (movement.x != 0.0) {
+                playerParent.x -= movement.x
             }
-
-            tan = (tan + normal * 10E-2).normalized
-
-
-            var scalar = scalar(velocity, tan)
-
-            if (scalar < 10E-5) {
-                scalar = 0.0
-            }
-
-            val vel = (tan * scalar - velocity)
-
-            playerParent.xy(playerParent.x + vel.x, playerParent.y + vel.y)
-        }*/
-
-
-
-        /*collisionShape.onCollision {
-            val movingObjects = mutableListOf<SolidRect>()
-            for (movingObject in scene.movingObjectsList) movingObjects.add(movingObject.image)
-            if (!movingObjects.contains(it)) return@onCollision
-            val movingObject = scene.movingObjectsList[movingObjects.indexOf(it)]
-            velocity = movingObject.velocity
-            playerParent.xy(playerParent.pos.x + movingObject.velocity.x, playerParent.pos.y + movingObject.velocity.y)
-        }*/
-    }
-
-    private fun getNormal(rotation: Angle, dir: Vector2D): Vector2D {
-        val normals = listOf(Vector2D(0, 1), Vector2D(1, 0), Vector2D(0, -1), Vector2D(-1, 0))
-
-        var minAngle = (181).degrees
-        var correctNormal = Vector2D(0, 0)
-        for (normal in normals) {
-            val rotatedNormal = normal.rotate(rotation)
-            val angle = Vector2D.angle(dir, rotatedNormal)
-            if (angle < minAngle) {
-                minAngle = angle
-                correctNormal = rotatedNormal
+            if (movement.y != 0.0) {
+                playerParent.y -= movement.y
             }
         }
         return correctNormal
