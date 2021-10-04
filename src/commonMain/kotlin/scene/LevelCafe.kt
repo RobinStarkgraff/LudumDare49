@@ -39,7 +39,9 @@ class LevelCafe : Level() {
     }
 
     suspend fun playerDialog() {
-        player?.say("I must have dropped my change somewhere. I have to pay to get the WiFi password!", 3)
+        player?.say("I have to pay to get the WiFi password!", 4)
+        delay(4)
+        player?.say("Where do I find a coin?", 4)
     }
 
     override lateinit var objective: ObjectiveItem
@@ -66,9 +68,9 @@ class LevelCafe : Level() {
         il.sprite(SpriteLibrary.DOOR, anchorY = 1.0).xy(808, 470)
 
 
-        val keys = PickupItem(this, il.image(SpriteLibrary.KEY_INGAME).xy(350, 244), SpriteLibrary.KEY_INVENTORY)
+        val keys = PickupItem(this, il.image(SpriteLibrary.COIN_INGAME).xy(336, 225), SpriteLibrary.COIN_INVENTORY)
 
-        val hiddenBarista = bg.sprite(SpriteLibrary.KEY_INGAME).xy(820, 200)
+        val hiddenBarista = bg.sprite(SpriteLibrary.COIN_INVENTORY).xy(820, 200)
 
         objective = ObjectiveItem(
             StateSwapItem(
