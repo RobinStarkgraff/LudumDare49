@@ -1,29 +1,28 @@
 package helper
 
-import com.soywiz.korge.view.SolidRect
-import com.soywiz.korge.view.onCollision
-import com.soywiz.korge.view.onCollisionExit
-import com.soywiz.korge.view.xy
+import com.soywiz.korge.view.*
+import com.soywiz.korma.geom.Vector2D
 import objects.interactables.Interactable
+import physics.PhysicsSimulation
+import physics.trigger.BoxTrigger
 import scene.Level
 
-class InvisibleTrigger(scene: Level, width: Int, height: Int, x: Int, y: Int, interactable: Interactable) {
-    private var rect: SolidRect
+class InvisibleTrigger(scene: Level, width: Double, height: Double, x: Int, y: Int, interactable: Interactable) {
+    private var rect: BoxTrigger
 
+    var wasActive = false
     var currentlyActive = false
 
     init {
-        rect = SolidRect(width, height, StaticData.triggerTestColor).xy(x, y)
-        scene.sceneView.addChild(rect)
-
-        rect.onCollision({it == scene.player?.collisionShape && !currentlyActive}) {
+        rect = BoxTrigger(Vector2D(x, y), width, height) {
+            wasActive = currentlyActive
             currentlyActive = true
-            interactable.interact()
         }
 
-        rect.onCollisionExit {
-            currentlyActive = false
-            interactable.interact()
+        PhysicsSimulation.postPhysicsCallbacks.add {
+            if(wasActive != currentlyActive) {
+                interactable.interact()
+            }
         }
     }
 }

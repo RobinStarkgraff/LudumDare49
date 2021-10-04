@@ -11,15 +11,14 @@ class Level2 : Level() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level2)
         val movingObject = MovingObject(
-            50.0,
-            25.0,
-            5.0,
-            listOf(Vector2D(100, 100), Vector2D(400, 100), Vector2D(300, 300), Vector2D(100, 300)),
-            true,
-            this@Level2
+                50.0,
+                25.0,
+                50.0,
+                listOf(Vector2D(100, 100), Vector2D(400, 100), Vector2D(300, 300), Vector2D(100, 300)),
+                true,
+                this@Level2
         )
         movingObject.image.xy(100, 100)
-        deathZoneList.add(movingObject.image)
     }
 
     override suspend fun nextScene() {

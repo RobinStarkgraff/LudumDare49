@@ -4,6 +4,7 @@ import objects.Player
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
+import objects.MovingObject
 import objects.Phone
 import objects.interactables.Interactable
 
