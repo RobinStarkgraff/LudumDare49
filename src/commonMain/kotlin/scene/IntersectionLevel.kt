@@ -6,6 +6,7 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import objects.Car
 import objects.Phone
@@ -26,7 +27,12 @@ class IntersectionLevel() : Level() {
         phone = Phone(this@IntersectionLevel)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
+        playerDialog()
         WifiRouter(605.0, 505.0, 100.0, this@IntersectionLevel)
+    }
+
+    suspend fun playerDialog() {
+        player?.say("I used KorGe for the GameJam and hate myself for that :)", 4)
     }
 
     override suspend fun drawImages() {
