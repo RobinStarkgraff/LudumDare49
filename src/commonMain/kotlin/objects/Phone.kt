@@ -24,7 +24,7 @@ class Phone(val scene: Level) {
 
     private var container = Container()
     private lateinit var phoneImage: Sprite
-    private lateinit var downloadBar: SolidRect
+    lateinit var downloadBar: SolidRect
 
     init {
         createPhone()
@@ -53,7 +53,7 @@ class Phone(val scene: Level) {
         }
     }
 
-    private var downloaded: Double = 0.0
+    var downloaded: Double = 0.0
     private var downloadComplete = false
     private var signalQuality = 0
 
