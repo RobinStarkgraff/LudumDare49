@@ -1,7 +1,7 @@
 package helper
 
 import com.soywiz.korge.view.SpriteAnimation
-import com.soywiz.korim.bitmap.Bitmap
+import com.soywiz.korim.bitmap.*
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korim.format.readBitmapOptimized
 import com.soywiz.korio.file.std.resourcesVfs
@@ -16,6 +16,7 @@ class SpriteLibrary {
         lateinit var PLAYER_WALK_LEFT_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_UP_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_DOWN_ANIM: SpriteAnimation
+        lateinit var SPEECH_BUBBLE: NinePatchBmpSlice
         lateinit var LEVEL1_FLAT: Bitmap
         lateinit var LEVEL1_KITCHEN_WALL: Bitmap
         lateinit var LEVEL1_BATH_WALL: Bitmap
@@ -87,6 +88,7 @@ class SpriteLibrary {
             PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/Walk_Up.png", Player.SCALE, 32, 10)
             PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/Walk_Down.png", Player.SCALE, 32, 10)
 
+            SPEECH_BUBBLE = loadBitmap("art/bitmap/unknown.png", 3.0).asNinePatchSimple(18, 9, 39, 27)
             LEVEL1_FLAT = loadBitmap("art/background/frog_flat.png", 3.0)
             LEVEL1_BED = loadAnim("art/furniture/bed.png", 3.0, Vector2D(21, 43), 8)
             LEVEL1_NIGHT_STAND = loadBitmap("art/furniture/night_stand.png", 3.0)
