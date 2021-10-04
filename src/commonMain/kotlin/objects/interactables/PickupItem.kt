@@ -5,6 +5,9 @@ import com.soywiz.korge.view.xy
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.bitmap.slice
 import com.soywiz.korma.geom.Point
+import helper.SoundPlayer
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import scene.Level
 
 class PickupItem(override var scene: Level, val imageMap: Image, private val imageInventory: Bitmap, override var interactionDistance: Double = 100.0) : Interactable() {
@@ -24,7 +27,7 @@ class PickupItem(override var scene: Level, val imageMap: Image, private val ima
         if (destroy) {
             return false
         }
-
+        GlobalScope.launch { SoundPlayer.playSound(SoundPlayer.KEYUP) }
         scene.player?.inventoryObject = this
         scene.player?.inventoryObject?.putIntoInventory()
         return true

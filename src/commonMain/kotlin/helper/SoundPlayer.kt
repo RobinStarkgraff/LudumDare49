@@ -27,6 +27,8 @@ class SoundPlayer {
 
         const val MENUCLICK = "menuclick.mp3"
 
+        const val KEYUP = "keys-pickup.mp3"
+
         var volume = 0.0
 
         private var musicChannel: SoundChannel? = null
