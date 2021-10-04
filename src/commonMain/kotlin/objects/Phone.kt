@@ -5,11 +5,7 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korma.geom.Vector2D
 import helper.SpriteLibrary
-import helper.StaticData
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import scene.Level
-import kotlin.math.pow
 import kotlin.math.sqrt
 
 class Phone(val scene: Level) {
@@ -17,7 +13,7 @@ class Phone(val scene: Level) {
     companion object {
         const val MARGIN = 50;
         const val MAX_DOWNLOAD = 99.0
-        const val DOWNLOAD_SPEED = 1.0
+        const val DOWNLOAD_SPEED = 2.0
         const val DOWNLOAD_BAR_WIDTH = 138
         val DOWNLOAD_BAR_COLOR = RGBA(0, 100, 0, 255)
     }
@@ -28,7 +24,6 @@ class Phone(val scene: Level) {
 
     init {
         createPhone()
-        timeMeasurement()
     }
 
     private fun createPhone() {
@@ -60,9 +55,15 @@ class Phone(val scene: Level) {
     val wifiRouterList = mutableListOf<WifiRouter>()
 
     fun download(x: Double, y: Double) {
-        if (downloaded >= MAX_DOWNLOAD && !downloadComplete) {
+        if (downloadComplete) {
+            return
+        }
+
+        if (downloaded >= MAX_DOWNLOAD) {
             downloadComplete = true
-            GlobalScope.launch { scene.nextScene() }
+            scene.downloadComplete()
+            downloadBar.width = DOWNLOAD_BAR_WIDTH.toDouble()
+            phoneImage.setFrame(5)
             return
         }
 
@@ -79,7 +80,7 @@ class Phone(val scene: Level) {
         updateUI()
     }
 
-    fun updateUI() {
+    private fun updateUI() {
         downloadBar.width = DOWNLOAD_BAR_WIDTH * 0.01 * downloaded
         phoneImage.setFrame(signalQuality)
     }

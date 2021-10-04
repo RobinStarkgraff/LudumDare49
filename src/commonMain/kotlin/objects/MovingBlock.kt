@@ -5,7 +5,7 @@ import physics.PhysicsBody
 import physics.primitives.BoxCollider
 import scene.Level
 
-class MovingBlock(
+/*class MovingBlock(
         var platformWidth: Double,
         var platformHeight: Double,
         private val moveSpeed: Double,
@@ -18,4 +18,4 @@ class MovingBlock(
         physicsBody = PhysicsBody()
         BoxCollider(Vector2D(), platformWidth, platformHeight, physicsBody)
     }
-}
+}*/
