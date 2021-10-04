@@ -68,7 +68,7 @@ class LevelCafe : Level() {
         il.sprite(SpriteLibrary.DOOR, anchorY = 1.0).xy(808, 470)
 
 
-        val keys = PickupItem(this, il.image(SpriteLibrary.COIN_INGAME).xy(336, 225), SpriteLibrary.COIN_INVENTORY)
+        val keys = PickupItem(this, il.image(SpriteLibrary.COIN_INGAME).xy(336, 225), SpriteLibrary.COIN_INVENTORY, interactionDistance = 200.0)
 
         val hiddenBarista = bg.sprite(SpriteLibrary.COIN_INVENTORY).xy(820, 200)
 

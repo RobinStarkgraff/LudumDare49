@@ -81,7 +81,6 @@ class IntersectionLevel() : Level() {
 
     override suspend fun nextScene() {
         super.nextScene()
-        sceneDestroy()
         sceneContainer.changeTo<LevelCafe>()
 
     }
