@@ -4,15 +4,12 @@ import objects.Player
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.sprite
 import com.soywiz.korge.view.xy
-import com.soywiz.korma.geom.Vector2D
-import helper.SpriteLibrary
 import objects.Ferry
 import RESOLUTION
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
-import objects.Player
 import objects.interactables.ObjectiveItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider

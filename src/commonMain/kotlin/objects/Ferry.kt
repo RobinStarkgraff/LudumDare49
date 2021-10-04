@@ -4,24 +4,25 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.xy
+import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.Vector2D
 import objects.interactables.Interactable
 import physics.PhysicsSimulation
 import physics.trigger.BoxTrigger
 import scene.Level
 
-class Ferry(val sprite: Sprite, val waypoints : MutableList<Vector2D>, val speed: Double, scene: Level) :  Interactable(scene, sprite.pos) {
+class Ferry(val sprite: Sprite, val waypoints : MutableList<Vector2D>, val speed: Double, override var scene: Level) :  Interactable() {
 
     var canInteract = false
-
-
 
     val boxTrigger = BoxTrigger(sprite.pos + Vector2D(sprite.width/2.0, sprite.height/2), sprite.width/2, sprite.width/2) {
         canInteract = true
     }
 
-    init {
+    override var pos = sprite.pos
+    override var interactionDistance = 0.0
 
+    init {
         PhysicsSimulation.prePhysicsCallbacks.add {
             canInteract = false
         }
@@ -30,12 +31,13 @@ class Ferry(val sprite: Sprite, val waypoints : MutableList<Vector2D>, val speed
         }
     }
 
-    override fun interact() {
+    override fun interact(): Boolean {
         if(reachedWaypoint() && canInteract) {
             waypoints.reverse()
             scene.player?.physicsBody?.dynamic = false
-            println("false")
+            return true
         }
+        return false
     }
 
     fun move() {
