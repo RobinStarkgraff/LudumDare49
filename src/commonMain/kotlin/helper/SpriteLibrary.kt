@@ -35,6 +35,18 @@ class SpriteLibrary {
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
         lateinit var LEVEL1_LAMP: SpriteAnimation
 
+        lateinit var INTERSECTIONLEVEL_BASE: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_NORTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_SOUTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_WESTEAST: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE_FENCE_SOUTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE_FENCE_EAST: Bitmap
+        lateinit var INTERSECTIONLEVEL_TREE_1: Bitmap
+        lateinit var INTERSECTIONLEVEL_TREE_2: Bitmap
+        lateinit var INTERSECTIONLEVEL_TREE_3: Bitmap
+        lateinit var INTERSECTIONLEVEL_CAR: SpriteAnimation
+
         lateinit var PARK_PARK: Bitmap
         lateinit var PARK_CROCUP: SpriteAnimation
         lateinit var PARK_CROCDOWN: SpriteAnimation
@@ -53,6 +65,9 @@ class SpriteLibrary {
         lateinit var PARK_TREE_TWO: Bitmap
         lateinit var PARK_TREE_THREE: Bitmap
 
+
+        lateinit var KEY_INGAME: Bitmap
+        lateinit var KEY_INVENTORY: Bitmap
 
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
@@ -85,6 +100,18 @@ class SpriteLibrary {
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
             LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
 
+            INTERSECTIONLEVEL_BASE = loadBitmap("art/background/InnerCity.png", 3.3)
+            INTERSECTIONLEVEL_HOUSE = loadBitmap("art/background/house.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_NORTH = loadBitmap("art/background/fence_segment_1.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_SOUTH = loadBitmap("art/background/fence_segment_2.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_WESTEAST = loadBitmap("art/background/fence_segment_5.png", 3.0)
+            INTERSECTIONLEVEL_HOUSE_FENCE_SOUTH = loadBitmap("art/background/fence_segment_3.png", 3.0)
+            INTERSECTIONLEVEL_HOUSE_FENCE_EAST = loadBitmap("art/background/fence_segment_4.png", 3.0)
+            INTERSECTIONLEVEL_TREE_1 = loadBitmap("art/background/tree_1.png", 3.0)
+            INTERSECTIONLEVEL_TREE_2 = loadBitmap("art/background/tree_2.png", 3.0)
+            INTERSECTIONLEVEL_TREE_3 = loadBitmap("art/background/tree_3.png", 3.0)
+            INTERSECTIONLEVEL_CAR = loadAnim("art/bitmap/car.png", 2.0, Vector2D(40, 24), 3)
+
             PARK_PARK = loadBitmap("park/background/park.png", 3.0)
             PARK_LANDINGSTAGE = loadBitmap("park/background/landingstage.png", 3.0)
             PARK_CROCUP = loadAnim("park/objects/CrocDoc.png",3.0, Vector2D(13, 48), 4)
@@ -103,9 +130,12 @@ class SpriteLibrary {
             PARK_TREE_TWO = loadBitmap("park/objects/tree2.png",3.0)
             PARK_TREE_THREE = loadBitmap("park/objects/tree3.png",3.0)
 
+            KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
+            KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
+
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
-            PHONE = loadAnim("art/bitmap/Phone.png", Player.SCALE, Vector2D(64, 109), 5)
+            PHONE = loadAnim("art/bitmap/phone.png", Player.SCALE, Vector2D(64, 109), 6)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {

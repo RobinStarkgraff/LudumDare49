@@ -9,6 +9,12 @@ class PhysicsSimulation {
         var prePhysicsCallbacks = mutableListOf<(() -> Unit)?>()
         var postPhysicsCallbacks = mutableListOf<(() -> Unit)?>()
 
+        fun clearPhysicsSimulation() {
+            physicsBodies.clear()
+            triggers.clear()
+            prePhysicsCallbacks.clear()
+            postPhysicsCallbacks.clear()
+        }
 
         fun physicsStep() {
             prePhysicsCallbacks.forEach { it?.invoke() }
@@ -16,6 +22,14 @@ class PhysicsSimulation {
             val bodiesA = mutableListOf<PhysicsBody>()
             val bodiesB = mutableListOf<PhysicsBody>()
             val bodyCount = physicsBodies.count()
+
+            for (physicsBody in physicsBodies)
+                for(trigger in triggers)
+                    for(collider in physicsBody.colliders)
+                        if(trigger.isOverlapping(collider)) {
+                            trigger.callback.invoke(physicsBody)
+                            break
+                        }
 
             //Find ALL collisions
             if (bodyCount > 0)
@@ -49,15 +63,8 @@ class PhysicsSimulation {
                 }
 
             for (physicsBody in physicsBodies)
-                physicsBody.position = physicsBody.position + physicsBody.velocity * fixedDeltaTime
-
-            for (physicsBody in physicsBodies)
-                for(trigger in triggers)
-                    for(collider in physicsBody.colliders)
-                        if(trigger.isOverlapping(collider)) {
-                            trigger.callback.invoke(physicsBody)
-                            break
-                        }
+                if(physicsBody.dynamic)
+                    physicsBody.position = physicsBody.position + physicsBody.velocity * fixedDeltaTime
             postPhysicsCallbacks.forEach { it?.invoke() }
         }
 

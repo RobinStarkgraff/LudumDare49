@@ -9,15 +9,14 @@ import physics.PhysicsSimulation
 import scene.Level
 
 open class MovingObject(
-        var width: Double,
-        var height: Double,
+        private val sprite : Sprite,
         private val moveSpeed: Double,
         private var waypoints: List<Vector2D>,
         private val loop: Boolean,
         private val scene: Level
 ) {
 
-    var image: SolidRect = scene.sceneView.container().solidRect(width, height).anchor(.5,.5).xy(waypoints[0])
+    var image: SolidRect = scene.sceneView.container().solidRect(sprite.width, sprite.height).anchor(.5,.5).xy(waypoints[0])
     var physicsBody = PhysicsBody(image.pos)
 
     var currentWaypoint = 0
