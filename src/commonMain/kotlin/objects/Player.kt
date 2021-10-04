@@ -36,18 +36,17 @@ class Player(var scene: Level) {
     init {
         createContainer()
         createSprite()
-        changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
+        changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         createCollisionShape()
         setupStepSound()
         movement()
         deathZoneCallback()
         interactableCallbacks()
         download()
-
     }
 
     private fun createContainer() {
-        playerParent = scene.sceneView.container()
+        playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
     }
 
 
@@ -59,7 +58,7 @@ class Player(var scene: Level) {
 
     private fun createSprite(){
         playerImage = playerParent.sprite().anchor(0.5, 0.8)
-        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ANIMATION_FPS))
+        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ ANIMATION_FPS))
     }
 
     private fun changeSprite(animation: SpriteAnimation, speed: Int = ANIMATION_FPS) {
@@ -131,19 +130,21 @@ class Player(var scene: Level) {
             if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
             else SoundPlayer.stopContinuousSound(walkingSound)
 
-            if (movement.x > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_RIGHT_ANIM)
-            else if (movement.x < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_LEFT_ANIM)
-            else if (movement.y < 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_UP_ANIM)
-            else if (movement.y > 0) changeSprite(SpriteLibrary.static.PLAYER_WALK_DOWN_ANIM)
-            else changeSprite(SpriteLibrary.static.PLAYER_IDLE_ANIM, IDLE_FPS)
+            if (movement.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
+            else if (movement.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
+            else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
+            else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
+            else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
+
+            println(playerParent.pos)
         }
 
         collisionShape.onCollision({ scene.collisionList.contains(it) }) {
             if (movement.x != 0.0) {
-                playerImage.x -= movement.x
+                playerParent.x -= movement.x
             }
             if (movement.y != 0.0) {
-                playerImage.y -= movement.y
+                playerParent.y -= movement.y
             }
         }
     }
