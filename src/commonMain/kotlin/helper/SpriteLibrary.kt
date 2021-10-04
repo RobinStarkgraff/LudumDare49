@@ -36,6 +36,7 @@ class SpriteLibrary {
 
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
+        lateinit var PHONE: SpriteAnimation
 
 
         suspend fun init() {
@@ -65,6 +66,7 @@ class SpriteLibrary {
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
+            PHONE = loadAnim("art/bitmap/Phone.png", Player.SCALE, Vector2D(64, 109), 5)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {

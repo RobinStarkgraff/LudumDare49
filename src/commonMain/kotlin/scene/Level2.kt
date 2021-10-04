@@ -4,13 +4,12 @@ import objects.Player
 import com.soywiz.korge.view.Container
 import com.soywiz.korge.view.xy
 import com.soywiz.korma.geom.Vector2D
-import manager.DownloadManager
 import objects.MovingObject
 
 class Level2 : Level() {
     override suspend fun Container.sceneInit() {
+        spawnpoint = Vector2D(430, 250)
         player = Player(this@Level2)
-        downloadManager = DownloadManager(this@Level2)
         val movingObject = MovingObject(
             50.0,
             25.0,
