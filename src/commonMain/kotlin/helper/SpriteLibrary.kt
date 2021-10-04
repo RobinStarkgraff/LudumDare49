@@ -90,11 +90,11 @@ class SpriteLibrary {
 
 
         suspend fun init() {
-            PLAYER_IDLE_ANIM = loadAnim("art/bitmap/Idle.png", Player.SCALE, 32, 8)
-            PLAYER_WALK_RIGHT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10)
-            PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10, true)
-            PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/Walk_Up.png", Player.SCALE, 32, 10)
-            PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/Walk_Down.png", Player.SCALE, 32, 10)
+            PLAYER_IDLE_ANIM = loadAnim("art/bitmap/idle.png", Player.SCALE, 32, 8)
+            PLAYER_WALK_RIGHT_ANIM = loadAnim("art/bitmap/walk_right.png", Player.SCALE, 32, 10)
+            PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/walk_right.png", Player.SCALE, 32, 10, true)
+            PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/walk_up.png", Player.SCALE, 32, 10)
+            PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/walk_down.png", Player.SCALE, 32, 10)
 
             SPEECH_BUBBLE = loadBitmap("art/bitmap/unknown.png", 3.0).asNinePatchSimple(18, 9, 39, 27)
             LEVEL1_FLAT = loadBitmap("art/background/frog_flat.png", 3.0)
@@ -107,16 +107,16 @@ class SpriteLibrary {
             LEVEL1_COUCH_TABLE = loadBitmap("art/furniture/couchtable.png", 3.0)
             LEVEL1_BATHTUB = loadBitmap("art/furniture/bathtub.png", 3.0)
             LEVEL1_KITCHEN = loadBitmap("art/furniture/kitchen_assembly.png", 3.0)
-            LEVEL1_KITCHEN_WALL = loadBitmap("art/background/kitchenWalls.png", 3.0)
-            LEVEL1_BATH_WALL = loadBitmap("art/background/bathroomWalls.png", 3.0)
-            LEVEL1_LIGHT = loadBitmap("art/foreground/FrogFlat_lightOverlay.png", 3.0)
+            LEVEL1_KITCHEN_WALL = loadBitmap("art/background/kitchen_walls.png", 3.0)
+            LEVEL1_BATH_WALL = loadBitmap("art/background/bathroom_walls.png", 3.0)
+            LEVEL1_LIGHT = loadBitmap("art/foreground/frog_flat_light_overlay.png", 3.0)
             LEVEL1_KITCHEN_SHELF = loadBitmap("art/furniture/kitchen_shelf.png", 3.0)
             LEVEL1_ROUTER_TABLE = loadBitmap("art/furniture/router_table.png", 3.0)
-            LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
+            LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/side_wall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
             LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
 
-            INTERSECTIONLEVEL_BASE = loadBitmap("art/background/InnerCity.png", 3.3)
+            INTERSECTIONLEVEL_BASE = loadBitmap("art/background/Inner_city.png", 3.3)
             INTERSECTIONLEVEL_HOUSE = loadBitmap("art/background/house.png", 3.0)
             INTERSECTIONLEVEL_GARDEN_FENCE_NORTH = loadBitmap("art/background/fence_segment_1.png", 3.0)
             INTERSECTIONLEVEL_GARDEN_FENCE_SOUTH = loadBitmap("art/background/fence_segment_2.png", 3.0)
@@ -160,13 +160,13 @@ class SpriteLibrary {
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
 
-            KEY_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
-            KEY_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
+            COIN_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
+            COIN_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
 
             DOOR = loadBitmap("art/objects/door.png", 3.0)
 
-            DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
-            DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
+            DOOR_SWING_RIGHT = loadAnim("bitmap/door_sheet.png", Player.SCALE, Vector2D(18, 41), 2)
+            DOOR_SWING_LEFT = loadAnim("bitmap/door_sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
             PHONE = loadAnim("art/bitmap/phone.png", Player.SCALE, Vector2D(64, 109), 6)
         }
 
