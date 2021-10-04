@@ -17,7 +17,7 @@ class Phone(val scene: Level) {
     companion object {
         const val MARGIN = 50;
         const val MAX_DOWNLOAD = 99.0
-        const val SPEED = 1.0
+        const val DOWNLOAD_SPEED = 1.0
         const val DOWNLOAD_BAR_WIDTH = 138
         val DOWNLOAD_BAR_COLOR = RGBA(0, 100, 0, 255)
     }
@@ -69,11 +69,11 @@ class Phone(val scene: Level) {
         signalQuality = getSignalQuality(x, y)
 
         when (signalQuality) {
-            0 -> downloaded += 0.0 * SPEED
-            1 -> downloaded += 0.005 * SPEED
-            2 -> downloaded += 0.01 * SPEED
-            3 -> downloaded += 0.075 * SPEED
-            4 -> downloaded += 0.2 * SPEED
+            0 -> downloaded += 0.0 * DOWNLOAD_SPEED
+            1 -> downloaded += 0.005 * DOWNLOAD_SPEED
+            2 -> downloaded += 0.01 * DOWNLOAD_SPEED
+            3 -> downloaded += 0.075 * DOWNLOAD_SPEED
+            4 -> downloaded += 0.2 * DOWNLOAD_SPEED
         }
 
         updateUI()
