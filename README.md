@@ -12,5 +12,6 @@ To open the game in the browser you will need to add a second config only this t
 Note that it might take a while to build the application when you start it for the first time
 
 ## Deploying to Itch.io
-Executing the following command in the terminal `./gradlew jsBrowserDistribution` will generate the files for export. They can be found under following path: `build/distributions`.
+Executing the following command in the terminal `./gradlew jsBrowserDistribution` will generate the files for export. 
+They can be found under following path: `build/distributions`.
 By compressing all files in the folder, the game can now be uploaded to itch.io in the project upload section.

@@ -65,6 +65,12 @@ class SpriteLibrary {
         lateinit var PARK_TREE_TWO: Bitmap
         lateinit var PARK_TREE_THREE: Bitmap
 
+        lateinit var CAFE_BACKGROUND: Bitmap
+        lateinit var CAFE_CHAIR: Bitmap
+        lateinit var CAFE_CHAIR_ALT: Bitmap
+        lateinit var CAFE_TABLE: Bitmap
+        lateinit var CAFE_TABLE_ALT: Bitmap
+
 
         lateinit var KEY_INGAME: Bitmap
         lateinit var KEY_INVENTORY: Bitmap
@@ -129,6 +135,12 @@ class SpriteLibrary {
             PARK_TREE_ONE = loadBitmap("park/objects/tree1.png",3.0)
             PARK_TREE_TWO = loadBitmap("park/objects/tree2.png",3.0)
             PARK_TREE_THREE = loadBitmap("park/objects/tree3.png",3.0)
+
+            CAFE_BACKGROUND = loadBitmap("art/background/cafe_background.png",3.0)
+            CAFE_CHAIR = loadBitmap("art/furniture/chair.png",3.0)
+            CAFE_CHAIR_ALT = loadBitmap("art/furniture/chair_alt.png",3.0)
+            CAFE_TABLE = loadBitmap("art/furniture/table.png",3.0)
+            CAFE_TABLE_ALT = loadBitmap("art/furniture/table_alt.png",3.0)
 
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)

@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 suspend fun main() = Korge(Korge.Config(module = ConfigModule))
 
 val RESOLUTION = Vector2D(1280, 720)
-val COLLISION_COLOR = RGBA(255, 0, 0, 255)
+val COLLISION_COLOR = RGBA(255, 0, 0, 100)
 
 object ConfigModule : Module() {
 	override val bgcolor = Colors["161824"]
@@ -27,6 +27,7 @@ object ConfigModule : Module() {
 		mapPrototype { Level1() }
 		mapPrototype { Level2() }
 		mapPrototype { IntersectionLevel() }
+		mapPrototype { LevelCafe() }
 	}
 }
 
