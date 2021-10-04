@@ -30,6 +30,12 @@ class BoxCollider(var position: Vector2D, var width: Double = 1.0, var height: D
         val solidRect = Level.SCENE_CONTAINER.currentScene?.sceneView?.solidRect(width, height, COLLISION_COLOR)?.anchor(0.5, 0.5)?.xy(position.x, position.y)
     }
 
+    fun cutInHalf(): BoxCollider {
+        position.y += height / 4
+        height /= 2
+        return this
+    }
+
     private fun getCollisionWithBox(other: BoxCollider): CollisionManifold {
         val hA = Vector2D(this.width / 2.0, this.height / 2.0)
         val hB = Vector2D(other.width / 2.0, other.height / 2.0)

@@ -6,11 +6,18 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
+import com.soywiz.korim.atlas.AtlasInfo
+import com.soywiz.korim.bitmap.*
+import com.soywiz.korim.color.RGBA
+import com.soywiz.korim.format.nativeImageLoadingEnabled
 import com.soywiz.korio.async.launch
+import com.soywiz.korma.geom.Rectangle
 import com.soywiz.korma.geom.Vector2D
+import com.soywiz.korma.geom.length
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import objects.interactables.PickupItem
 import physics.primitives.BoxCollider
 import scene.Level
@@ -31,6 +38,8 @@ class Player(var scene: Level) {
     private var playerImage = Sprite()
     var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
+    var speechBubbleParent : Container? = null
+    var hasInteracted = false
 
     private var walkingSound: SoundChannel? = null
 
@@ -50,7 +59,6 @@ class Player(var scene: Level) {
         physicsBody.position = playerParent.pos
 
     }
-
 
     private fun createSprite() {
         playerImage = playerParent.sprite().anchor(0.5, 0.8)
@@ -89,7 +97,10 @@ class Player(var scene: Level) {
                     continue
                 }
 
-                //TODO: Give speechbubble
+                if(!hasInteracted) {
+                    say("E", 1)
+                    hasInteracted = true
+                }
                 if (scene.views.keys.justPressed(Key.E)) {
                     interactableItem.interact()
                 }
@@ -102,6 +113,22 @@ class Player(var scene: Level) {
         inventoryObject = null
     }
 
+    fun say(text: String, time: Long) {
+        if(speechBubbleParent != null) return
+        speechBubbleParent = scene.fg.container()
+        val ninePatch = speechBubbleParent!!.ninePatch(SpriteLibrary.SPEECH_BUBBLE, 100.0, 50.0)
+        val text = speechBubbleParent!!.text(text, 20.0, RGBA(0, 0, 0)).xy(10, 7)
+        ninePatch.width = text.width + 20
+        speechBubbleParent!!.xy(0.0, -100.0)
+        GlobalScope.launch { deleteText(time) }
+    }
+
+    suspend fun deleteText(time : Long) {
+        delay(time * 1000)
+        speechBubbleParent?.removeFromParent()
+        speechBubbleParent = null
+    }
+
     private fun movementCallback() {
         val input = scene.views.input
 
@@ -110,7 +137,6 @@ class Player(var scene: Level) {
             val scale = dt / 16.milliseconds
             if(physicsBody.dynamic)
             {
-
                 if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x = -1.0
                 if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x = 1.0
                 if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y = -1.0
@@ -126,6 +152,7 @@ class Player(var scene: Level) {
             }
 
             playerParent.pos = physicsBody.position
+            if(speechBubbleParent != null) speechBubbleParent!!.pos = physicsBody.position - Vector2D(0, 100)
 
             if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
             else SoundPlayer.stopContinuousSound(walkingSound)

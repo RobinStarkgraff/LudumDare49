@@ -7,6 +7,7 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import objects.Phone
 import objects.Player
@@ -25,15 +26,24 @@ class Level1 : Level() {
 
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
+        player?.say("Let's upload my Game!", 3)
 
     }
 
     override fun downloadComplete() {
+
         sceneView.addUpdater {
             if (objective.completed) {
                 GlobalScope.launch { nextScene() }
             }
         }
+        GlobalScope.launch { playerDialog() }
+    }
+
+    suspend fun playerDialog() {
+        player?.say("I have to find Wifi!", 3)
+        delay(3000)
+        player?.say("Where are my keys?", 3)
     }
 
     override lateinit var objective: ObjectiveItem
