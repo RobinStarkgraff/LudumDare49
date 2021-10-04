@@ -5,8 +5,14 @@ import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
-import objects.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import objects.Car
+import objects.Phone
+import objects.Player
+import objects.WifiRouter
 import objects.interactables.ObjectiveItem
+import objects.interactables.PickupItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
 
@@ -62,16 +68,21 @@ class IntersectionLevel() : Level() {
             true,
             this
         )
+
+        objective = ObjectiveItem(PickupItem(this, Image(SpriteLibrary.KEY_INVENTORY), SpriteLibrary.KEY_INVENTORY))
+        objective.completed = true
     }
 
     override fun downloadComplete() {
-        TODO("Not yet implemented")
+        sceneView.addUpdater {
+            GlobalScope.launch { nextScene() }
+        }
     }
 
     override suspend fun nextScene() {
-        println("Level3")
+        super.nextScene()
         sceneDestroy()
-        sceneContainer.changeTo<Level2>()
+        sceneContainer.changeTo<LevelCafe>()
 
     }
 }

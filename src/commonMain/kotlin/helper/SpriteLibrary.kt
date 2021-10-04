@@ -75,6 +75,10 @@ class SpriteLibrary {
 
         lateinit var KEY_INGAME: Bitmap
         lateinit var KEY_INVENTORY: Bitmap
+        lateinit var COIN_INGAME: Bitmap
+        lateinit var COIN_INVENTORY: Bitmap
+
+        lateinit var DOOR: Bitmap
 
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
@@ -146,6 +150,11 @@ class SpriteLibrary {
 
             KEY_INGAME = loadBitmap("art/inventory/key_map.png", 3.0)
             KEY_INVENTORY = loadBitmap("art/inventory/key_inventory.png", 3.0)
+
+            KEY_INGAME = loadBitmap("art/objects/coin_ingame.png", 3.0)
+            KEY_INVENTORY = loadBitmap("art/objects/coin_inventory.png", 3.0)
+
+            DOOR = loadBitmap("art/objects/door.png", 3.0)
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)

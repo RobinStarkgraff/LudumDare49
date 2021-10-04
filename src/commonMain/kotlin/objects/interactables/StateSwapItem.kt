@@ -40,10 +40,11 @@ class StateSwapItem(
             return true
         }
 
-        if (scene.player?.inventoryObject != inventoryItem || (scene.phone != null && !scene.phone!!.downloadComplete)) {
+        if (scene.player?.inventoryObject != inventoryItem || (!scene.phone!!.downloadComplete && scene.phone!!.downloadStarted)) {
+            println("Not Successfull")
             return false
         }
-
+        println("Successfull")
         changeState()
         scene.player?.removeInventoryItem()
         return true
