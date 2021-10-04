@@ -4,6 +4,7 @@ import COLLISION_COLOR
 import RESOLUTION
 import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.*
+import com.soywiz.korim.vector.Context2d
 import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
@@ -12,15 +13,17 @@ import helper.StaticData
 import objects.Phone
 import objects.WifiRouter
 import objects.interactables.StateSwapItem
+import physics.PhysicsBody
+import physics.primitives.BoxCollider
 
 class Level1 : Level() {
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level1)
         phone = Phone(this@Level1)
-        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
-        WifiRouter(400.0, 300.0, 400.0, null, this@Level1)
+        //WifiRouter(400.0, 300.0, 400.0, null, this@Level1)S
     }
 
     override suspend fun drawImages() {
@@ -34,6 +37,8 @@ class Level1 : Level() {
         val bed = il.sprite(SpriteLibrary.LEVEL1_BED).xy(340, 130)
         collisionList.add(bed)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
+        val lamp = il.sprite(anchorY = 1.0).xy(450, 190)
+        StateSwapItem(this, lamp, SpriteLibrary.LEVEL1_LAMP, SoundPlayer.SWITCHOFF, SoundPlayer.SWITCHON)
         val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
         val kitchenDoorCol = fg.solidRect(10, 80).xy(kitchenDoor.pos.x, kitchenDoor.pos.y - 100)
         collisionList.add(kitchenDoorCol)
@@ -55,7 +60,17 @@ class Level1 : Level() {
         il.sprite(SpriteLibrary.LEVEL1_ROUTER).anchor(0, 1).xy(850, 554).playAnimationLooped(spriteDisplayTime = 200.milliseconds)
 
         //Colliders
-        collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 650))
+        val level = PhysicsBody()
+        BoxCollider(Vector2D(650, 660), 700.0, 5.0, level)
+        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
+        BoxCollider(Vector2D(330, 490), 5.0, 700.0, level)
+        BoxCollider(Vector2D(947, 490), 5.0, 700.0, level)
+        BoxCollider(Vector2D(850, 340), 300.0, 30.0, level)
+        BoxCollider(Vector2D(705, 325), 10.0, 120.0, level)
+        BoxCollider(Vector2D(850, 520), 300.0, 30.0, level)
+        BoxCollider(Vector2D(705, 490), 10.0, 80.0, level)
+        BoxCollider(Vector2D(705, 160), 10.0, 60.0, level)
+        /*collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 650))
         collisionList.add(fg.solidRect(700, 10, COLLISION_COLOR).xy(300, 140))
         collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(325, 140))
         collisionList.add(fg.solidRect(10, 700, COLLISION_COLOR).xy(947, 140))
@@ -63,7 +78,7 @@ class Level1 : Level() {
         collisionList.add(fg.solidRect(10, 120, COLLISION_COLOR).xy(700, 270))
         collisionList.add(fg.solidRect(300, 30, COLLISION_COLOR).xy(700, 495))
         collisionList.add(fg.solidRect(10, 80, COLLISION_COLOR).xy(700, 450))
-        collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))
+        collisionList.add(fg.solidRect(10, 60, COLLISION_COLOR).xy(700, 130))*/
     }
 
     override suspend fun nextScene() {
