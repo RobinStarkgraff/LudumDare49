@@ -16,27 +16,24 @@ class StateSwapItem(
     override val interactionDistance: Double = 100.0
 ) :
     Interactable(scene, sprite.pos) {
-    companion object {
-        private var initialState = false
-    }
 
-    private var setupsoundone = false
-    private var setupsoundtwo = false
+    private var state = false
 
     init {
         sprite.playAnimation(animation)
-        interact()
-        interact()
+        sprite.setFrame(state.toInt())
     }
 
     override fun interact() {
-        if (initialState){
+        if (state){
             sprite.setFrame(0)
-            if (setupsoundone) GlobalScope.launch { SoundPlayer.playSound(soundone) } else setupsoundone = true
+            GlobalScope.launch { SoundPlayer.playSound(soundone)}
         } else {
             sprite.setFrame(1)
-            if (setupsoundtwo) GlobalScope.launch {SoundPlayer.playSound(soundtwo)} else setupsoundtwo = true
+            GlobalScope.launch {SoundPlayer.playSound(soundtwo)}
         }
-        initialState = !initialState
+        state = !state
     }
+
+    fun Boolean.toInt() = if (this) 1 else 0
 }
