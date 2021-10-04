@@ -12,9 +12,6 @@ abstract class Level : Scene() {
     var player : Player? = null
     var downloadManager : DownloadManager? = null
     open val spawnpoint = Vector2D(0, 0)
-    val collisionList = mutableListOf<SolidRect>()
-    val deathZoneList = mutableListOf<SolidRect>()
-    val movingObjectsList = mutableListOf<MovingObject>()
     val pickupItemList = mutableListOf<PickupItem>()
 
     open suspend fun nextScene() {
