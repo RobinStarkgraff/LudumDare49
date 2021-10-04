@@ -33,7 +33,7 @@ class Player(var scene: Level) {
     var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
 
-    private lateinit var walkingSound: SoundChannel
+    private var walkingSound: SoundChannel? = null
 
     init {
         createContainer()
@@ -123,8 +123,8 @@ class Player(var scene: Level) {
             physicsBody.velocity = velocity
             playerParent.pos = physicsBody.position
 
-            //if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
-            //else SoundPlayer.stopContinuousSound(walkingSound)
+            if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
+            else SoundPlayer.stopContinuousSound(walkingSound)
 
             if (velocity.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
             else if (velocity.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
