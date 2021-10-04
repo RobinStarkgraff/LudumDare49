@@ -31,7 +31,7 @@ class SoundPlayer {
         const val KEYUP = "keys-pickup.mp3"
         const val DOORKEYS = "door_keys.mp3"
 
-        var volume = 0.0
+        var volume = 0.4
 
         private var musicChannel: SoundChannel? = null
 

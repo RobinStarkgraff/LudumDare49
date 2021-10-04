@@ -15,6 +15,8 @@ class MenuScene : Scene() {
     override suspend fun Container.sceneInit() {
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGMMENU)
 
+        val grey = Colors["949494"]
+        val green = Colors["00CD00"]
 
         val start = roundRect(300.0, 50.0, 5.0, fill = Colors["#b9aea0"]).xy(500, 300)
         val starttext = text("Start", textSize = 34.0, color = RGBA(0, 0, 0, 255)).xy(600, 305)
@@ -26,12 +28,12 @@ class MenuScene : Scene() {
             color = RGBA(255, 255, 255, 0)
         ).xy(300, 420)
 
-        val volumeiiii = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 500)
-        val volumeiii = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 526)
-        val volumeii = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 552)
-        val volumei = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 578)
-        val volume = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 604)
-        val mute = roundRect(50.0, 25.0, 5.0, fill = Colors["949494"]).xy(1100, 630)
+        val volumeiiii = roundRect(50.0, 25.0, 5.0, fill = grey).xy(1100, 500)
+        val volumeiii = roundRect(50.0, 25.0, 5.0, fill = grey).xy(1100, 526)
+        val volumeii = roundRect(50.0, 25.0, 5.0, fill = grey).xy(1100, 552)
+        val volumei = roundRect(50.0, 25.0, 5.0, fill = green).xy(1100, 578)
+        val volume = roundRect(50.0, 25.0, 5.0, fill = green).xy(1100, 604)
+        val mute = roundRect(50.0, 25.0, 5.0, fill = grey).xy(1100, 630)
         val mutetext = text("Mute", textSize = 10.0, color = RGBA(100, 0, 0, 255)).xy(1114, 637)
 
         val volumeMap = mapOf(volume to 0.2, volumei to 0.4, volumeii to 0.6, volumeiii to 0.8, volumeiiii to 1.0)
@@ -46,8 +48,7 @@ class MenuScene : Scene() {
             sceneContainer.changeTo<Level1>()
         }
 
-        val grey = Colors["949494"]
-        val green = Colors["00CD00"]
+
 
         fun volumeColorChange(button: RoundRect) {
             for ((key, value) in volumeMap.entries) {
@@ -61,6 +62,7 @@ class MenuScene : Scene() {
                 }
             }
         }
+
 
         mute.onClick {
             for ((key, value) in volumeMap.entries) {
