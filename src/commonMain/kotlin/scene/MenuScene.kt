@@ -11,7 +11,7 @@ import helper.SoundPlayer
 
 class MenuScene : Scene() {
     override suspend fun Container.sceneInit() {
-        SoundPlayer.playBackgroundMusic("sample_music.mp3")
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGMMENU)
 
 
         val start = roundRect(300.0, 50.0, 5.0, fill = Colors["#b9aea0"]).xy(500, 300)
