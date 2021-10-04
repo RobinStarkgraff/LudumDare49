@@ -28,6 +28,7 @@ object ConfigModule : Module() {
 		mapPrototype { Level2() }
 		mapPrototype { IntersectionLevel() }
 		mapPrototype { LevelCafe() }
+		mapPrototype { LoftyPeaks() }
 	}
 }
 
