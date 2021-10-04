@@ -39,7 +39,7 @@ class LevelCafe : Level() {
 
         bg.sprite(SpriteLibrary.CAFE_BACKGROUND).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
-        val levelDoor = il.sprite(anchorY = 1.0).xy(811, 655)
+        val levelDoor = il.sprite(anchorY = 1.0).xy(808, 470)
         StateSwapItem(this, levelDoor, SpriteLibrary.DOOR_SWING_RIGHT, SoundPlayer.DOORKEYS, SoundPlayer.DOORKEYS)
 
         //Colliders
