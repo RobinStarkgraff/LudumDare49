@@ -1,9 +1,9 @@
 package helper
 
-import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.SpriteAnimation
 import com.soywiz.korim.bitmap.Bitmap
-import com.soywiz.korim.format.*
+import com.soywiz.korim.format.readBitmap
+import com.soywiz.korim.format.readBitmapOptimized
 import com.soywiz.korio.file.std.resourcesVfs
 import com.soywiz.korma.geom.Vector2D
 import objects.Player
@@ -34,6 +34,9 @@ class SpriteLibrary {
         lateinit var LEVEL1_ROUTER: SpriteAnimation
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
 
+        lateinit var DOOR_SWING_RIGHT: SpriteAnimation
+        lateinit var DOOR_SWING_LEFT: SpriteAnimation
+
 
         suspend fun init() {
             PLAYER_IDLE_ANIM = loadAnim("art/bitmap/Idle.png", Player.SCALE, 32, 8)
@@ -58,6 +61,9 @@ class SpriteLibrary {
             LEVEL1_ROUTER_TABLE = loadBitmap("art/furniture/router_table.png", 3.0)
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
+
+            DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2)
+            DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2, true)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {
@@ -66,10 +72,21 @@ class SpriteLibrary {
             return bitmap
         }
 
-        suspend fun loadAnim(
+        private suspend fun loadAnim(
             path: String,
             scale: Double,
             size: Int,
+            frameCount: Int,
+            flip: Boolean = false
+        ): SpriteAnimation {
+            return loadAnim(path, scale, size, size, frameCount, flip)
+        }
+
+        private suspend fun loadAnim(
+            path: String,
+            scale: Double,
+            sizeWidth: Int,
+            sizeHeight: Int,
             frameCount: Int,
             flip: Boolean = false
         ): SpriteAnimation {
@@ -79,8 +96,8 @@ class SpriteLibrary {
 
             return SpriteAnimation(
                 spriteMap = bmp,
-                spriteWidth = (size * scale).toInt(),
-                spriteHeight = (size * scale).toInt(),
+                spriteWidth = (sizeWidth * scale).toInt(),
+                spriteHeight = (sizeHeight * scale).toInt(),
                 columns = frameCount,
                 rows = 1
             )

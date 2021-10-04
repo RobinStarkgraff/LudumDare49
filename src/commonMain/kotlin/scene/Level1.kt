@@ -4,7 +4,6 @@ import COLLISION_COLOR
 import RESOLUTION
 import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.*
-import com.soywiz.korma.geom.Point
 import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer

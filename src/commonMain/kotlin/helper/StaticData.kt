@@ -4,6 +4,6 @@ import com.soywiz.klock.Stopwatch
 
 class StaticData {
     companion object {
-        var timeSinceStart = Stopwatch().start()
+//        var timeSinceStart = Stopwatch().start()
     }
 }

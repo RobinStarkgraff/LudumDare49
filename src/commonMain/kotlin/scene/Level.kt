@@ -5,7 +5,7 @@ import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import manager.DownloadManager
-import objects.PickupItem
+import objects.interactables.Interactable
 
 abstract class Level : Scene() {
     var player : Player? = null
@@ -13,7 +13,7 @@ abstract class Level : Scene() {
     open var spawnpoint = Vector2D(0, 0)
     val collisionList = mutableListOf<RectBase>()
     val deathZoneList = mutableListOf<SolidRect>()
-    val pickupItemList = mutableListOf<PickupItem>()
+    val interactableList = mutableListOf<Interactable>()
     var bg = Container()
     var il = Container()
     var fg = Container()

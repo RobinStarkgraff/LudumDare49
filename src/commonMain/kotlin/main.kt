@@ -7,7 +7,6 @@ import com.soywiz.korim.color.RGBA
 import com.soywiz.korinject.AsyncInjector
 import com.soywiz.korma.geom.SizeInt
 import com.soywiz.korma.geom.Vector2D
-import helper.SpriteLibrary
 import scene.Level1
 import scene.Level2
 import scene.LoadingScene
