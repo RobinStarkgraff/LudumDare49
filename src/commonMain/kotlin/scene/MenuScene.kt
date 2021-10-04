@@ -43,7 +43,7 @@ class MenuScene : Scene() {
         }
         start.onClick {
             GlobalScope.launch {SoundPlayer.playSound(SoundPlayer.MENUCLICK)}
-            sceneContainer.changeTo<Level2>()
+            sceneContainer.changeTo<Level1>()
         }
 
         val grey = Colors["949494"]
