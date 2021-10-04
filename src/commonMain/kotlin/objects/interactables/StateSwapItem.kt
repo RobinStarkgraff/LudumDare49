@@ -11,8 +11,8 @@ class StateSwapItem(
     scene: Level,
     private val sprite: Sprite,
     animation: SpriteAnimation,
-    private val soundone: String,
-    private val soundtwo: String,
+    private val soundone: String?,
+    private val soundtwo: String?,
     override val interactionDistance: Double = 100.0
 ) :
     Interactable(scene, sprite.pos) {
@@ -27,10 +27,10 @@ class StateSwapItem(
     override fun interact() {
         if (state){
             sprite.setFrame(0)
-            GlobalScope.launch { SoundPlayer.playSound(soundone)}
+            if(soundone != null) GlobalScope.launch { SoundPlayer.playSound(soundone)}
         } else {
             sprite.setFrame(1)
-            GlobalScope.launch {SoundPlayer.playSound(soundtwo)}
+            if(soundtwo != null) GlobalScope.launch {SoundPlayer.playSound(soundtwo)}
         }
         state = !state
     }

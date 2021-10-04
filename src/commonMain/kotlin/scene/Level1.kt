@@ -4,6 +4,7 @@ import COLLISION_COLOR
 import RESOLUTION
 import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.*
+import com.soywiz.korim.vector.Context2d
 import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
@@ -19,7 +20,7 @@ class Level1 : Level() {
         phone = Phone(this@Level1)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
-        WifiRouter(400.0, 300.0, 400.0, null, this@Level1)
+        //WifiRouter(400.0, 300.0, 400.0, null, this@Level1)
     }
 
     override suspend fun drawImages() {
@@ -33,6 +34,8 @@ class Level1 : Level() {
         val bed = il.sprite(SpriteLibrary.LEVEL1_BED).xy(340, 130)
         collisionList.add(bed)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
+        val lamp = il.sprite(anchorY = 1.0).xy(450, 190)
+        StateSwapItem(this, lamp, SpriteLibrary.LEVEL1_LAMP, null, null)
         val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
         StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
         val bathroomDoor = il.sprite(anchorY = 1.0).xy(700, 478)
