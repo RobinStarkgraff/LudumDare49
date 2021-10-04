@@ -82,6 +82,7 @@ class Player(var scene: Level) {
     public fun die() {
         scene.phone?.downloaded = 0.0
         physicsBody.position = Vector2D(scene.spawnpoint.x, scene.spawnpoint.y)
+        SoundPlayer.stopContinuousSound(walkingSound)
     }
 
     private fun setupStepSound() {

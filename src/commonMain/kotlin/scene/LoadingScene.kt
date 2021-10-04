@@ -23,7 +23,7 @@ class LoadingScene() : Scene() {
 
 
         sceneDestroy()
-        ScreenDebugger(sceneContainer)
+
     }
 }
 
