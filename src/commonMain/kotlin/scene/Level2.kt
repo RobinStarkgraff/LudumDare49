@@ -19,7 +19,7 @@ class Level2 : Level() {
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level2)
-        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
+        SoundPlayer.playBackgroundMusic(SoundPlayer.BGM2, - 0.3)
         drawImages()
         moveContainer(520.0, 400.0, 760.0, 1460.0)
     }

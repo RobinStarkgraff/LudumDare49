@@ -14,6 +14,7 @@ class SoundPlayer {
         const val SAMPLE_SOUND = "sample_sound.mp3"
         const val SAMPLE_MUSIC = "sample_music.mp3"
         const val BGM1 = "bgm_08.mp3"
+        const val BGM2 = "bgmlvl2.mp3"
 
         const val BGMMENU = "bgm_menu_01.mp3"
 
