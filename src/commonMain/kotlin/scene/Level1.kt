@@ -8,6 +8,7 @@ import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
+import helper.StaticData
 import objects.Phone
 import objects.WifiRouter
 import objects.interactables.StateSwapItem
@@ -34,9 +35,13 @@ class Level1 : Level() {
         collisionList.add(bed)
         bed.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
         val kitchenDoor = il.sprite(anchorY = 1.0).xy(700, 283)
-        StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
+        val kitchenDoorCol = fg.solidRect(10, 80).xy(kitchenDoor.pos.x, kitchenDoor.pos.y - 100)
+        collisionList.add(kitchenDoorCol)
+        StateSwapItem(this, kitchenDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN, rect = kitchenDoorCol)
         val bathroomDoor = il.sprite(anchorY = 1.0).xy(700, 478)
-        StateSwapItem(this, bathroomDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN)
+        val bathroomDoorCol = fg.solidRect(10, 80).xy(bathroomDoor.pos.x, bathroomDoor.pos.y - 100)
+        collisionList.add(bathroomDoorCol)
+        StateSwapItem(this, bathroomDoor, SpriteLibrary.DOOR_SWING_LEFT, SoundPlayer.DOORCLOSE, SoundPlayer.DOOROPEN, rect = bathroomDoorCol)
         collisionList.add(il.sprite(SpriteLibrary.LEVEL1_NIGHT_STAND).xy(410, 160))
         collisionList.add(il.sprite(SpriteLibrary.LEVEL1_DESK).xy(550, 130))
         il.sprite(SpriteLibrary.LEVEL1_PLANT).xy(660, 130)
