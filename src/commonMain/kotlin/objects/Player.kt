@@ -7,7 +7,8 @@ import com.soywiz.klock.milliseconds
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.RGBA
+import com.soywiz.korma.geom.*
+import physics.primitives.BoxCollider
 import com.soywiz.korio.async.launch
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
@@ -18,9 +19,9 @@ import objects.interactables.PickupItem
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 3
+        const val SPEED = 120
         const val SCALE = 3.0
-        val COLLISION_SIZE = Vector2D(30, 20)
+        val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
         const val ANIMATION_FPS = 12
         const val IDLE_FPS = 6
@@ -29,7 +30,8 @@ class Player(var scene: Level) {
 
     private var playerParent = Container()
     private var playerImage = Sprite()
-    lateinit var collisionShape: SolidRect
+    var physicsBody = physics.PhysicsBody(dynamic = true)
+    private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
 
     private lateinit var walkingSound: SoundChannel
 
@@ -37,9 +39,8 @@ class Player(var scene: Level) {
         createContainer()
         createSprite()
         changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
-        createCollisionShape()
+        movementCallback()
         setupStepSound()
-        movement()
         deathZoneCallback()
         interactableCallbacks()
         download()
@@ -47,18 +48,14 @@ class Player(var scene: Level) {
 
     private fun createContainer() {
         playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
+        physicsBody.position = playerParent.pos
+
     }
 
 
-    private fun createCollisionShape() {
-        collisionShape = playerParent.solidRect(COLLISION_SIZE.x, COLLISION_SIZE.y, RGBA(255, 0, 0, 0))
-        collisionShape.anchor(0.5, 0.5)
-        collisionShape.xy(COLLISION_POS.x * SCALE, COLLISION_POS.y * SCALE)
-    }
-
-    private fun createSprite(){
+    private fun createSprite() {
         playerImage = playerParent.sprite().anchor(0.5, 0.8)
-        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0/ ANIMATION_FPS))
+        playerImage.playAnimationLooped(spriteDisplayTime = TimeSpan(1000.0 / ANIMATION_FPS))
     }
 
     private fun changeSprite(animation: SpriteAnimation, speed: Int = ANIMATION_FPS) {
@@ -66,9 +63,7 @@ class Player(var scene: Level) {
     }
 
     private fun deathZoneCallback() {
-        collisionShape.onCollision({ scene.deathZoneList.contains(it) }) {
-            die()
-        }
+
     }
 
     private fun download() {
@@ -90,7 +85,8 @@ class Player(var scene: Level) {
         playerImage.addUpdater {
             for (interactableItem in scene.interactableList) {
                 //Keep in mind that this needs to be properly taken care of for every object
-                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - collisionShape.pos)
+                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos)
+                println(distanceToObject)
                 if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
@@ -108,44 +104,36 @@ class Player(var scene: Level) {
         inventoryObject = null
     }
 
-    private fun movement() {
+    private fun movementCallback() {
         val input = scene.views.input
 
-        var movement = Vector2D(0, 0)
         playerParent.addUpdater { dt ->
-            movement = Vector2D(0, 0)
+            var velocity = Vector2D(0, 0)
             val scale = dt / 16.milliseconds
-            if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) movement.x -= 1.0
-            if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) movement.x += 1.0
-            if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) movement.y -= 1.0
-            if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) movement.y += 1.0
+            if (input.keys.pressing(Key.LEFT) || input.keys.pressing(Key.A)) velocity.x -= 1.0
+            if (input.keys.pressing(Key.RIGHT) || input.keys.pressing(Key.D)) velocity.x += 1.0
+            if (input.keys.pressing(Key.UP) || input.keys.pressing(Key.W)) velocity.y -= 1.0
+            if (input.keys.pressing(Key.DOWN) || input.keys.pressing(Key.S)) velocity.y += 1.0
 
-            if (movement.length > 0) {
-                movement.normalize()
-                movement *= SPEED
-                movement *= scale
-                xy(x + movement.x, y + movement.y)
+            if (velocity.length > 0) {
+                velocity.normalize()
+                velocity *= SPEED
+                velocity *= scale
             }
 
-            if (movement.length > 0) SoundPlayer.startContinuousSound(walkingSound)
-            else SoundPlayer.stopContinuousSound(walkingSound)
+            physicsBody.velocity = velocity
+            playerParent.pos = physicsBody.position
 
-            if (movement.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
-            else if (movement.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
-            else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
-            else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
+            //if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
+            //else SoundPlayer.stopContinuousSound(walkingSound)
+
+            if (velocity.x > 0) changeSprite(SpriteLibrary.PLAYER_WALK_RIGHT_ANIM)
+            else if (velocity.x < 0) changeSprite(SpriteLibrary.PLAYER_WALK_LEFT_ANIM)
+            else if (velocity.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
+            else if (velocity.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
 
             println(playerParent.pos)
-        }
-
-        collisionShape.onCollision({ scene.collisionList.contains(it) }) {
-            if (movement.x != 0.0) {
-                playerParent.x -= movement.x
-            }
-            if (movement.y != 0.0) {
-                playerParent.y -= movement.y
-            }
         }
     }
 }

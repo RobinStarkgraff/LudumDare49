@@ -2,12 +2,18 @@ package scene
 
 import objects.Player
 import com.soywiz.korge.scene.Scene
+import com.soywiz.korge.scene.SceneContainer
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
+import objects.MovingObject
 import objects.Phone
 import objects.interactables.Interactable
 
 abstract class Level : Scene() {
+    companion object {
+        lateinit var SCENE_CONTAINER : SceneContainer;
+    }
+
     var player : Player? = null
     var phone : Phone? = null
     open var spawnpoint = Vector2D(0, 0)

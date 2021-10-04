@@ -33,6 +33,7 @@ class SpriteLibrary {
         lateinit var LEVEL1_ROUTER_TABLE: Bitmap
         lateinit var LEVEL1_ROUTER: SpriteAnimation
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
+        lateinit var LEVEL1_LAMP: SpriteAnimation
 
         lateinit var INTERSECTIONLEVEL_BASE: Bitmap
         lateinit var INTERSECTIONLEVEL_HOUSE: Bitmap
@@ -72,6 +73,7 @@ class SpriteLibrary {
             LEVEL1_ROUTER_TABLE = loadBitmap("art/furniture/router_table.png", 3.0)
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
+            LEVEL1_LAMP = loadAnim("art/bitmap/lamp.png", 3.0, Vector2D(14, 28), 2)
 
             INTERSECTIONLEVEL_BASE = loadBitmap("art/background/intersection_base.png", 3.0)
             INTERSECTIONLEVEL_HOUSE = loadBitmap("art/foreground/house.png", 3.0)
