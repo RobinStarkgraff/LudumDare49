@@ -19,7 +19,7 @@ import objects.interactables.PickupItem
 
 class Player(var scene: Level) {
     companion object {
-        const val SPEED = 3
+        const val SPEED = 120
         const val SCALE = 3.0
         val COLLISION_SIZE = Vector2D(20, 20)
         val COLLISION_POS = Vector2D(0.0, -2.5)
@@ -28,9 +28,9 @@ class Player(var scene: Level) {
         var inventoryObject: PickupItem? = null
     }
 
-    private var playerParent = Container().xy(20,20)
+    private var playerParent = Container()
     private var playerImage = Sprite()
-    private var physicsBody = physics.PhysicsBody(position = playerParent.pos, dynamic = true)
+    var physicsBody = physics.PhysicsBody(dynamic = true)
     private var boxCollider = BoxCollider(Vector2D(), 20.0, 20.0,  physicsBody)
 
     private lateinit var walkingSound: SoundChannel
@@ -48,13 +48,9 @@ class Player(var scene: Level) {
 
     private fun createContainer() {
         playerParent = scene.il.container().xy(scene.spawnpoint.x, scene.spawnpoint.y)
+        physicsBody.position = playerParent.pos
     }
 
-    /*private fun createCollisionShape() {
-        collisionShape = playerParent.solidRect(COLLISION_SIZE.x, COLLISION_SIZE.y, RGBA(255, 0, 0, 255))
-        collisionShape.anchor(0.5, 0.5)
-        collisionShape.xy(COLLISION_POS.x * SCALE, COLLISION_POS.y * SCALE)
-    }*/
 
     private fun createSprite() {
         playerImage = playerParent.sprite().anchor(0.5, 0.8)
@@ -88,7 +84,8 @@ class Player(var scene: Level) {
         playerImage.addUpdater {
             for (interactableItem in scene.interactableList) {
                 //Keep in mind that this needs to be properly taken care of for every object
-                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos - playerParent.pos)
+                val distanceToObject = Vector2D.distance(interactableItem.pos, playerParent.pos)
+                println(distanceToObject)
                 if (distanceToObject > interactableItem.interactionDistance) {
                     continue
                 }
@@ -121,8 +118,10 @@ class Player(var scene: Level) {
                 velocity.normalize()
                 velocity *= SPEED
                 velocity *= scale
-                playerParent.xy(x + velocity.x, y + velocity.y)
             }
+
+            physicsBody.velocity = velocity
+            playerParent.pos = physicsBody.position
 
             //if (velocity.length > 0) SoundPlayer.startContinuousSound(walkingSound)
             //else SoundPlayer.stopContinuousSound(walkingSound)

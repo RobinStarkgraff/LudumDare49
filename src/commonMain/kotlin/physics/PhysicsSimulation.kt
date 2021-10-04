@@ -6,9 +6,12 @@ class PhysicsSimulation {
         var triggers = mutableListOf<Trigger>()
         var fixedDeltaTime = 1 / 50.0
         var iterations = 16
+        var prePhysicsCallbacks = mutableListOf<(() -> Unit)?>()
+        var postPhysicsCallbacks = mutableListOf<(() -> Unit)?>()
 
 
         fun physicsStep() {
+            prePhysicsCallbacks.forEach { it?.invoke() }
             val collisions = mutableListOf<CollisionManifold>()
             val bodiesA = mutableListOf<PhysicsBody>()
             val bodiesB = mutableListOf<PhysicsBody>()
@@ -55,6 +58,7 @@ class PhysicsSimulation {
                             trigger.callback.invoke(physicsBody)
                             break
                         }
+            postPhysicsCallbacks.forEach { it?.invoke() }
         }
 
         private fun applyImpulse(a: PhysicsBody, b: PhysicsBody, c: CollisionManifold) {
