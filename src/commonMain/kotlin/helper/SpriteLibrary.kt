@@ -11,6 +11,8 @@ import objects.Player
 class SpriteLibrary {
     companion object {
 
+        lateinit var TITLE: Bitmap
+
         lateinit var PLAYER_IDLE_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_RIGHT_ANIM: SpriteAnimation
         lateinit var PLAYER_WALK_LEFT_ANIM: SpriteAnimation
@@ -90,11 +92,21 @@ class SpriteLibrary {
 
 
         suspend fun init() {
+
+            TITLE = loadBitmap("art/SplashTitle.png",2.5)
+
+            PLAYER_IDLE_ANIM = loadAnim("art/bitmap/Idle.png", Player.SCALE, 32, 8)
+            PLAYER_WALK_RIGHT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10)
+            PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10, true)
+            PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/Walk_Up.png", Player.SCALE, 32, 10)
+            PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/Walk_Down.png", Player.SCALE, 32, 10)
+
             PLAYER_IDLE_ANIM = loadAnim("art/bitmap/idle.png", Player.SCALE, 32, 8)
             PLAYER_WALK_RIGHT_ANIM = loadAnim("art/bitmap/walk_right.png", Player.SCALE, 32, 10)
             PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/walk_right.png", Player.SCALE, 32, 10, true)
             PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/walk_up.png", Player.SCALE, 32, 10)
             PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/walk_down.png", Player.SCALE, 32, 10)
+
 
             SPEECH_BUBBLE = loadBitmap("art/bitmap/unknown.png", 3.0).asNinePatchSimple(18, 9, 39, 27)
             LEVEL1_FLAT = loadBitmap("art/background/frog_flat.png", 3.0)
