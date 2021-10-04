@@ -44,7 +44,6 @@ class Ferry(val sprite: Sprite, val waypoints : MutableList<Vector2D>, val speed
             waypoints.reverse()
             scene.player?.physicsBody?.dynamic = false
             GlobalScope.launch { playerCanWalk(time) }
-            println(scene.player?.physicsBody?.dynamic)
             return true
         }
         return false

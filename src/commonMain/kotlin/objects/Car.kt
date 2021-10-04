@@ -41,10 +41,8 @@ open class Car(
     }
 
     private fun move() {
-        println("move")
         val dir = (waypoints[currentWaypoint] - sprite.pos).normalized
         physicsBody.velocity = dir * moveSpeed
-        println(physicsBody.velocity)
         sprite.xy(physicsBody.position)
         boxTrigger.position = sprite.pos + Vector2D(0.0, (sprite.height)/2)
     }

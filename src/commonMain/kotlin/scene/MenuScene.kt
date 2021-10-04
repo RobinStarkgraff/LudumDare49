@@ -19,9 +19,9 @@ class MenuScene : Scene() {
         val start = roundRect(300.0, 50.0, 5.0, fill = Colors["#b9aea0"]).xy(500, 300)
         val starttext = text("Start", textSize = 34.0, color = RGBA(0, 0, 0, 255)).xy(600, 305)
         val donate = roundRect(300.0, 50.0, 5.0, fill = Colors["#b9aea0"]).xy(500, 360)
-        val donatetext = text("Donate", textSize = 34.0, color = RGBA(0, 0, 0, 255)).xy(600, 365)
+        val donatetext = text("Credits", textSize = 34.0, color = RGBA(0, 0, 0, 255)).xy(600, 365)
         val eric = text(
-            "diese Einnahmen gehen an Eric's neuen Laptop danke!",
+            "We are not sure if we want to display our names here",
             textSize = 34.0,
             color = RGBA(255, 255, 255, 0)
         ).xy(300, 420)

@@ -14,6 +14,7 @@ import helper.SpriteLibrary
 class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
         SpriteLibrary.init()
+
         var title = sceneContainer.sprite(SpriteLibrary.TITLE).anchor(0.5,1.0).xy(RESOLUTION.x / 2,RESOLUTION.y)
         sceneContainer.mouse.onClick {
             Level.SCENE_CONTAINER = sceneContainer
@@ -22,9 +23,13 @@ class LoadingScene() : Scene() {
             sceneContainer.mouse.removeFromView()
         }
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)) {
+
+        Level.SCENE_CONTAINER = sceneContainer
+		    sceneContainer.changeTo<MenuScene>()
+        sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
+
             PhysicsSimulation.physicsStep()
         }
-        //ScreenDebugger(sceneContainer)
     }
 }
 

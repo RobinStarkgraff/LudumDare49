@@ -6,6 +6,7 @@ import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import objects.Phone
 import objects.Player
@@ -23,9 +24,9 @@ class LevelCafe : Level() {
         phone = Phone(this@LevelCafe)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1, -0.28)
         drawImages()
+        GlobalScope.launch { playerDialog() }
         //Specific setup
         phone!!.downloadDisabled = true
-
         sceneView.addUpdater { if (objective.completed) phone!!.downloadDisabled = false }
     }
 
@@ -35,6 +36,12 @@ class LevelCafe : Level() {
                 GlobalScope.launch { nextScene() }
             }
         }
+    }
+
+    suspend fun playerDialog() {
+        player?.say("I have to pay to get the WiFi password!", 4)
+        delay(4)
+        player?.say("Where do I find a coin?", 4)
     }
 
     override lateinit var objective: ObjectiveItem
@@ -61,9 +68,9 @@ class LevelCafe : Level() {
         il.sprite(SpriteLibrary.DOOR, anchorY = 1.0).xy(808, 470)
 
 
-        val keys = PickupItem(this, il.image(SpriteLibrary.KEY_INGAME).xy(350, 244), SpriteLibrary.KEY_INVENTORY)
+        val keys = PickupItem(this, il.image(SpriteLibrary.COIN_INGAME).xy(336, 225), SpriteLibrary.COIN_INVENTORY, interactionDistance = 200.0)
 
-        val hiddenBarista = bg.sprite(SpriteLibrary.KEY_INGAME).xy(820, 200)
+        val hiddenBarista = bg.sprite(SpriteLibrary.COIN_INVENTORY).xy(820, 200)
 
         objective = ObjectiveItem(
             StateSwapItem(
@@ -82,18 +89,18 @@ class LevelCafe : Level() {
         bg.sprite(SpriteLibrary.CAFE_BACKGROUND).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
         //Colliders
-        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level).render()
-        BoxCollider(Vector2D(650, 470), 700.0, 5.0, level).render()
-        BoxCollider(Vector2D(337, 490), 15.0, 700.0, level).render()
-        BoxCollider(Vector2D(933, 490), 15.0, 700.0, level).render()
+        BoxCollider(Vector2D(650, 160), 700.0, 5.0, level)
+        BoxCollider(Vector2D(650, 470), 700.0, 5.0, level)
+        BoxCollider(Vector2D(337, 490), 15.0, 700.0, level)
+        BoxCollider(Vector2D(933, 490), 15.0, 700.0, level)
 
-        BoxCollider(Vector2D(867, 156), 350.0, 230.0, level).render()
-        BoxCollider(Vector2D(353, 160), 350.0, 330.0, level).render()
+        BoxCollider(Vector2D(867, 156), 350.0, 230.0, level)
+        BoxCollider(Vector2D(353, 160), 350.0, 330.0, level)
     }
 
     override suspend fun nextScene() {
         super.nextScene()
         sceneDestroy()
-        sceneContainer.changeTo<Level2>()
+        sceneContainer.changeTo<LoftyPeaks>()
     }
 }
