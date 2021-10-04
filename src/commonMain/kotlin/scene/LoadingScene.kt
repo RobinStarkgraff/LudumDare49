@@ -11,7 +11,7 @@ import helper.SpriteLibrary
 
 class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
-		SpriteLibrary.init()
+        SpriteLibrary.init()
         Level.SCENE_CONTAINER = sceneContainer
 		sceneContainer.changeTo<MenuScene>()
         sceneContainer.addUpdater(Frequency.from(PhysicsSimulation.fixedDeltaTime.milliseconds)){
@@ -19,5 +19,5 @@ class LoadingScene() : Scene() {
         }
         ScreenDebugger(sceneContainer)
     }
-
 }
+

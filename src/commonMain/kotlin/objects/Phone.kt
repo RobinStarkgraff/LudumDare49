@@ -20,7 +20,7 @@ class Phone(val scene: Level) {
 
     private var container = Container()
     private lateinit var phoneImage: Sprite
-    private lateinit var downloadBar: SolidRect
+    lateinit var downloadBar: SolidRect
 
     init {
         createPhone()
@@ -39,8 +39,8 @@ class Phone(val scene: Level) {
         downloadBar = container.solidRect(DOWNLOAD_BAR_WIDTH, 9, DOWNLOAD_BAR_COLOR).xy(27, 132)
     }
 
+    var downloaded: Double = 0.0
     var downloadComplete = false
-    private var downloaded: Double = 0.0
     private var signalQuality = 0
 
     val wifiRouterList = mutableListOf<WifiRouter>()
