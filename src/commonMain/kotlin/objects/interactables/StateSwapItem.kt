@@ -8,6 +8,7 @@ import com.soywiz.korma.geom.Point
 import helper.SoundPlayer
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import physics.primitives.BoxCollider
 import scene.Level
 
 class StateSwapItem(
@@ -17,7 +18,7 @@ class StateSwapItem(
     private val soundone: String,
     private val soundtwo: String,
     override val interactionDistance: Double = 100.0,
-    private val rect: SolidRect? = null
+    private val collider: BoxCollider? = null
 ) :
     Interactable(scene, sprite.pos) {
 
@@ -27,7 +28,7 @@ class StateSwapItem(
     init {
         sprite.playAnimation(animation)
         sprite.setFrame(state.toInt())
-        rectSize = if (rect == null) null else Point(rect.width, rect.height)
+        rectSize = if (collider == null) null else Point(collider.width, collider.height)
     }
 
     override fun interact() {
@@ -35,12 +36,14 @@ class StateSwapItem(
             sprite.setFrame(0)
             GlobalScope.launch { SoundPlayer.playSound(soundone) }
             rectSize?.let {
-                rect?.size(rectSize.x, rectSize.y)
+                collider?.width = rectSize.x
+                collider?.height = rectSize.y
             }
         } else {
             sprite.setFrame(1)
             GlobalScope.launch { SoundPlayer.playSound(soundtwo) }
-            rect?.size(0, 0)
+            collider?.width = 0.0
+            collider?.height = 0.0
         }
         state = !state
     }
