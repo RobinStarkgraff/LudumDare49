@@ -112,6 +112,6 @@ class LevelCafe : Level() {
     override suspend fun nextScene() {
         super.nextScene()
         sceneDestroy()
-        sceneContainer.changeTo<MenuScene>()
+        sceneContainer.changeTo<LoftyPeaks>()
     }
 }
