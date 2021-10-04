@@ -135,8 +135,6 @@ class Player(var scene: Level) {
             else if (movement.y < 0) changeSprite(SpriteLibrary.PLAYER_WALK_UP_ANIM)
             else if (movement.y > 0) changeSprite(SpriteLibrary.PLAYER_WALK_DOWN_ANIM)
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
-
-            println(playerParent.pos)
         }
 
         collisionShape.onCollision({ scene.collisionList.contains(it) }) {
