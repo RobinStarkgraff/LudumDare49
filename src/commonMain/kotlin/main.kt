@@ -1,6 +1,9 @@
 import com.soywiz.korge.Korge
 import com.soywiz.korge.scene.Module
 import com.soywiz.korge.scene.Scene
+import com.soywiz.korge.view.roundRect
+import com.soywiz.korge.view.text
+import com.soywiz.korge.view.xy
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.color.RGBA
 import com.soywiz.korinject.AsyncInjector
@@ -18,6 +21,7 @@ object ConfigModule : Module() {
 	override val bgcolor = Colors["161824"]
 	override val size = SizeInt(1280, 720)
 	val virtualSize = SizeInt(1280, 720)
+
 
 	override val mainScene: KClass<out Scene> = LoadingScene::class
 
