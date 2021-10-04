@@ -7,16 +7,18 @@ import com.soywiz.korma.geom.Vector2D
 import objects.Player
 import helper.SoundPlayer
 import helper.SpriteLibrary
-import manager.DownloadManager
+
+import physics.PhysicsBody
+import physics.primitives.BoxCollider
 import kotlin.math.max
 import kotlin.math.min
 
 class Level2 : Level() {
+    val level = PhysicsBody()
 
     override suspend fun Container.sceneInit() {
         spawnpoint = Vector2D(430, 250)
         player = Player(this@Level2)
-        downloadManager = DownloadManager(this@Level2)
         SoundPlayer.playBackgroundMusic(SoundPlayer.BGM1)
         drawImages()
         moveContainer(520.0, 400.0, 760.0, 1460.0)
@@ -43,9 +45,7 @@ class Level2 : Level() {
         bg.sprite(SpriteLibrary.PARK_PARK).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
         bg.sprite(SpriteLibrary.PARK_LANDINGSTAGE).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
-        val croc = il.sprite(SpriteLibrary.PARK_CROCDOWN).xy(143, 1207)
-        BoxCollider.add(croc)
-        croc.playAnimationLooped(spriteDisplayTime = 200.milliseconds)
+
 
         BoxCollider(il.sprite(SpriteLibrary.PARK_WALL).xy(-107, 420),level)
         BoxCollider(il.sprite(SpriteLibrary.PARK_WALL_BOTTOM).anchor(0.0, 0.5).xy(517, 1755),level)

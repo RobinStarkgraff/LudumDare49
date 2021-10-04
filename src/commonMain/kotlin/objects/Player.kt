@@ -134,14 +134,8 @@ class Player(var scene: Level) {
             else changeSprite(SpriteLibrary.PLAYER_IDLE_ANIM, IDLE_FPS)
         }
 
-        collisionShape.onCollision({ scene.collisionList.contains(it) }) {
-            if (movement.x != 0.0) {
-                playerParent.x -= movement.x
-            }
-            if (movement.y != 0.0) {
-                playerParent.y -= movement.y
-            }
-        }
+
+
     }
 }
 
