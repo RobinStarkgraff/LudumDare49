@@ -34,6 +34,15 @@ class SpriteLibrary {
         lateinit var LEVEL1_ROUTER: SpriteAnimation
         lateinit var LEVEL1_SIDE_WALLS: Bitmap
 
+        lateinit var INTERSECTIONLEVEL_BASE: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_NORTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_SOUTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_GARDEN_FENCE_WESTEAST: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE_FENCE_SOUTH: Bitmap
+        lateinit var INTERSECTIONLEVEL_HOUSE_FENCE_EAST: Bitmap
+
+
         lateinit var DOOR_SWING_RIGHT: SpriteAnimation
         lateinit var DOOR_SWING_LEFT: SpriteAnimation
         lateinit var PHONE: SpriteAnimation
@@ -63,6 +72,15 @@ class SpriteLibrary {
             LEVEL1_ROUTER_TABLE = loadBitmap("art/furniture/router_table.png", 3.0)
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
+
+            INTERSECTIONLEVEL_BASE = loadBitmap("art/background/intersection_base.png", 3.0)
+            INTERSECTIONLEVEL_HOUSE = loadBitmap("art/foreground/house.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_NORTH = loadBitmap("art/foreground/fence_segment_1.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_SOUTH = loadBitmap("art/foreground/fence_segment_2.png", 3.0)
+            INTERSECTIONLEVEL_GARDEN_FENCE_WESTEAST = loadBitmap("art/foreground/fence_segment_5.png", 3.0)
+            INTERSECTIONLEVEL_HOUSE_FENCE_SOUTH = loadBitmap("art/foreground/fence_segment_3.png", 3.0)
+            INTERSECTIONLEVEL_HOUSE_FENCE_EAST = loadBitmap("art/foreground/fence_segment_4.png", 3.0)
+
 
             DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
             DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)

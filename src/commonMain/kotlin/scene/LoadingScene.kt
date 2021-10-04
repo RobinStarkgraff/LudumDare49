@@ -11,7 +11,7 @@ import kotlinx.coroutines.delay
 class LoadingScene() : Scene() {
     override suspend fun Container.sceneInit() {
 		SpriteLibrary.init()
-		sceneContainer.changeTo<MenuScene>()
+		sceneContainer.changeTo<IntersectionLevel>()
         ScreenDebugger(sceneContainer)
     }
 }
