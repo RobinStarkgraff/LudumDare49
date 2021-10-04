@@ -2,6 +2,7 @@ package scene
 
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Container
+import helper.ScreenDebugger
 import helper.SpriteLibrary
 
 class LoadingScene() : Scene() {
@@ -9,5 +10,6 @@ class LoadingScene() : Scene() {
         val spriteLibrary = SpriteLibrary()
 		spriteLibrary.init()
 		sceneContainer.changeTo<MenuScene>()
+        ScreenDebugger(sceneContainer)
     }
 }
