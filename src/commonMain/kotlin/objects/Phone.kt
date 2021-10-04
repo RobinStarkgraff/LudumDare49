@@ -32,6 +32,7 @@ class Phone(val scene: Level) {
         phoneImage.setFrame(0)
         container.xy(RESOLUTION.x - phoneImage.width - MARGIN, RESOLUTION.y - phoneImage.height - MARGIN)
         createDownloadBar()
+        updateUI()
     }
 
     private fun createDownloadBar() {
@@ -40,13 +41,15 @@ class Phone(val scene: Level) {
     }
 
     var downloaded: Double = 0.0
+    var downloadStarted = false
     var downloadComplete = false
+    var downloadDisabled = false
     private var signalQuality = 0
 
     val wifiRouterList = mutableListOf<WifiRouter>()
 
     fun download(x: Double, y: Double) {
-        if (downloadComplete) {
+        if (downloadComplete || downloadDisabled) {
             return
         }
 
@@ -66,6 +69,10 @@ class Phone(val scene: Level) {
             2 -> downloaded += 0.01 * DOWNLOAD_SPEED
             3 -> downloaded += 0.075 * DOWNLOAD_SPEED
             4 -> downloaded += 0.2 * DOWNLOAD_SPEED
+        }
+
+        if (downloaded > 0.0) {
+            downloadStarted = true
         }
 
         updateUI()
