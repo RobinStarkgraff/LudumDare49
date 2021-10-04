@@ -39,6 +39,20 @@ class LevelCafe : Level() {
 
         bg.sprite(SpriteLibrary.CAFE_BACKGROUND).anchor(0.5, 0.0).xy(RESOLUTION.x / 2, -50.0)
 
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR).anchor(0.5, 0.9).xy(500, 360), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR_ALT).anchor(0.5, 0.9).xy(400, 360), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_TABLE).anchor(0.5, 0.9).xy(450, 360), level).cutInHalf()
+
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR).anchor(0.5, 0.9).xy(650, 415), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR_ALT).anchor(0.5, 0.9).xy(550, 415), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_TABLE_ALT).anchor(0.5, 0.9).xy(600, 415), level).cutInHalf()
+
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR_ALT).anchor(0.5, 0.9).xy(550, 285), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_TABLE_ALT).anchor(0.5, 0.9).xy(590, 315), level).cutInHalf()
+
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_CHAIR).anchor(0.5, 0.9).xy(435, 430), level).cutInHalf()
+        BoxCollider(il.sprite(SpriteLibrary.CAFE_TABLE).anchor(0.5, 0.9).xy(385, 440), level).cutInHalf()
+
         val levelDoor = il.sprite(anchorY = 1.0).xy(808, 470)
         StateSwapItem(this, levelDoor, SpriteLibrary.DOOR_SWING_RIGHT, SoundPlayer.DOORKEYS, SoundPlayer.DOORKEYS)
 
