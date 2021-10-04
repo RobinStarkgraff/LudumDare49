@@ -1,7 +1,6 @@
 package scene
 
 import RESOLUTION
-import com.soywiz.klock.milliseconds
 import com.soywiz.korge.view.*
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
@@ -10,6 +9,7 @@ import objects.Player
 import objects.interactables.ObjectiveItem
 import physics.PhysicsBody
 import physics.primitives.BoxCollider
+
 import kotlin.math.max
 import kotlin.math.min
 

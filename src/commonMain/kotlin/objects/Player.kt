@@ -2,19 +2,18 @@ package objects
 
 
 import com.soywiz.klock.TimeSpan
-import scene.Level
 import com.soywiz.klock.milliseconds
 import com.soywiz.korau.sound.SoundChannel
 import com.soywiz.korev.Key
 import com.soywiz.korge.view.*
-import com.soywiz.korma.geom.*
-import physics.primitives.BoxCollider
 import com.soywiz.korio.async.launch
 import com.soywiz.korma.geom.Vector2D
 import helper.SoundPlayer
 import helper.SpriteLibrary
 import kotlinx.coroutines.GlobalScope
 import objects.interactables.PickupItem
+import physics.primitives.BoxCollider
+import scene.Level
 
 
 class Player(var scene: Level) {
