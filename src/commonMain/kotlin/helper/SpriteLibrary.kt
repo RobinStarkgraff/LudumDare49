@@ -44,6 +44,7 @@ class SpriteLibrary {
             PLAYER_WALK_LEFT_ANIM = loadAnim("art/bitmap/Walk_Right.png", Player.SCALE, 32, 10, true)
             PLAYER_WALK_UP_ANIM = loadAnim("art/bitmap/Walk_Up.png", Player.SCALE, 32, 10)
             PLAYER_WALK_DOWN_ANIM = loadAnim("art/bitmap/Walk_Down.png", Player.SCALE, 32, 10)
+
             LEVEL1_FLAT = loadBitmap("art/background/frog_flat.png", 3.0)
             LEVEL1_BED = loadAnim("art/furniture/bed.png", 3.0, Vector2D(21, 43), 8)
             LEVEL1_NIGHT_STAND = loadBitmap("art/furniture/night_stand.png", 3.0)
@@ -62,8 +63,8 @@ class SpriteLibrary {
             LEVEL1_SIDE_WALLS = loadBitmap("art/foreground/SideWall.png", 3.0)
             LEVEL1_ROUTER = loadAnim("art/furniture/router.png", 3.0, Vector2D(21, 14), 14)
 
-            DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2)
-            DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, 18, 41, 2, true)
+            DOOR_SWING_RIGHT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2)
+            DOOR_SWING_LEFT = loadAnim("bitmap/Door_Sheet.png", Player.SCALE, Vector2D(18, 41), 2, true)
         }
 
         suspend fun loadBitmap(path: String, scale: Double): Bitmap {
@@ -79,29 +80,7 @@ class SpriteLibrary {
             frameCount: Int,
             flip: Boolean = false
         ): SpriteAnimation {
-            return loadAnim(path, scale, size, size, frameCount, flip)
-        }
-    }
-
-        private suspend fun loadAnim(
-            path: String,
-            scale: Double,
-            sizeWidth: Int,
-            sizeHeight: Int,
-            frameCount: Int,
-            flip: Boolean = false
-        ): SpriteAnimation {
-            var bmp = resourcesVfs[path].readBitmapOptimized(premultiplied = false)
-            if (flip) bmp = bmp.flipX()
-            bmp = bmp.toBMP32().scaleLinear(scale, scale)
-
-            return SpriteAnimation(
-                spriteMap = bmp,
-                spriteWidth = (sizeWidth * scale).toInt(),
-                spriteHeight = (sizeHeight * scale).toInt(),
-                columns = frameCount,
-                rows = 1
-            )
+            return loadAnim(path, scale, Vector2D(size, size), frameCount, flip)
         }
 
         suspend fun loadAnim(
