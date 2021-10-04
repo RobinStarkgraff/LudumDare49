@@ -39,15 +39,6 @@ class Phone(val scene: Level) {
         downloadBar = container.solidRect(DOWNLOAD_BAR_WIDTH, 9, DOWNLOAD_BAR_COLOR).xy(27, 132)
     }
 
-    private fun timeMeasurement() {
-        container.addUpdater {
-            val secondsPast = StaticData.timeSinceStart.elapsed.seconds
-            // Please don't question it :)
-            val calcValue = (700000000000000.0).pow(-0.0001 * secondsPast)
-            val minutesToDisplay = 60 * (1-(calcValue))
-        }
-    }
-
     var downloaded: Double = 0.0
     private var downloadComplete = false
     private var signalQuality = 0
