@@ -75,7 +75,7 @@ class Level2 : Level() {
         BoxCollider(Vector2D(768, 1352), 30.0, 5.0, level)
 
         //Collider beach
-        /*BoxCollider(Vector2D(23, 100), 3000.0, 5.0, level)
+        BoxCollider(Vector2D(23, 100), 3000.0, 5.0, level)
         BoxCollider(Vector2D(-75, 100), 5.0, 3000.0, level)
         BoxCollider(Vector2D(1355, 100), 5.0, 5000.0, level)
         BoxCollider(Vector2D(485, 1800), 50.0, 245.0, level)
@@ -90,7 +90,7 @@ class Level2 : Level() {
         BoxCollider(Vector2D(100, 620), 50.0, 100.0, level)
         BoxCollider(Vector2D(0, 570), 50.0, 100.0, level)
         BoxCollider(Vector2D(50, 570), 50.0, 100.0, level)
-        BoxCollider(Vector2D(-50, 520), 50.0, 100.0, level)*/
+        BoxCollider(Vector2D(-50, 520), 50.0, 100.0, level)
 
         //zaun
         BoxCollider(Vector2D(1065, 175), 100.0, 5.0, level)
